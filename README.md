@@ -93,4 +93,20 @@ Participants initially commit only to five serious meetings. After Meeting 5 the
 - [Resources](RESOURCES.md)
 - [Shared toolkit](toolkit/)
 
+## Public site and registration
+
+The public entry point for the seminar is prepared in [`docs/`](docs/) for GitHub Pages:
+
+- Site: <https://alequisgs.github.io/etale-cohomology-seminar-2026-/>
+- Registration form: <https://alequisgs.github.io/etale-cohomology-seminar-2026-/#register>
+- Outreach invitation source: [`outreach/seminar-invitation.tex`](outreach/seminar-invitation.tex)
+
+After merging to `main`, enable Pages with:
+
+```text
+Settings → Pages → Deploy from branch → main → /docs
+```
+
+Registration submissions require a private external form endpoint. Configure it in [`docs/config.js`](docs/config.js) by setting `registrationEndpoint` to an HTTPS form URL. Schedule options are also configured in that file by editing `scheduleOptions`; leave the array empty until candidate meeting times exist.
+
 **Litt provides the curriculum. Tools help us prepare. The community verifies, digests, and decides what is worth remembering.**
