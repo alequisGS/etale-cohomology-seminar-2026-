@@ -10,8 +10,6 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="assets/serre-grothendieck-etale-hero.png">
     <link rel="stylesheet" href="styles.css">
-    <script src="config.js" defer></script>
-    <script src="app.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -326,8 +324,16 @@
               <span>welcome email</span>
               <span>manual GitHub invitation</span>
             </div>
-            <div id="google-form-container" class="google-form-container"></div>
-            <a class="button primary" id="open-google-form" href="#" target="_blank" rel="noopener">Open registration form</a>
+            <div class="google-form-container">
+              <iframe
+                class="google-form-frame"
+                src="https://docs.google.com/forms/d/e/1FAIpQLSen1UvJUkqvQJ02HzUOPgFwIi9zpOo-xfBAYwa7NcQkACTO3w/viewform?embedded=true"
+                title="Étale Cohomology Seminar 2026 registration form"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+              ></iframe>
+            </div>
+            <a class="button primary" href="https://docs.google.com/forms/d/e/1FAIpQLSen1UvJUkqvQJ02HzUOPgFwIi9zpOo-xfBAYwa7NcQkACTO3w/viewform" target="_blank" rel="noopener">Open registration form</a>
             <p class="help">Read the <a href="privacy.html">privacy note</a>. Invitations to the GitHub repository remain a human organizer action after reviewing registrations.</p>
           </div>
         </div>

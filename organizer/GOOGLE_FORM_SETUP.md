@@ -128,16 +128,11 @@ Do not publish the Sheet. Do not link it publicly.
 
 ## 4. Configure the public site
 
-After creating the form, paste the form URLs into [`../docs/config.js`](../docs/config.js):
+After creating the form, paste the form URLs directly into [`../docs/index.html`](../docs/index.html).
 
-```js
-window.SEMINAR_CONFIG = {
-  googleFormEmbedUrl: "PASTE_EMBED_URL_HERE",
-  googleFormViewUrl: "PASTE_PUBLIC_FORM_URL_HERE"
-};
-```
+Use the Google Forms embed URL for the registration `iframe` `src`. Use the normal public form URL for the "Open registration form" link.
 
-Use the Google Forms embed URL for `googleFormEmbedUrl`. Use the normal public form URL for `googleFormViewUrl`.
+Also update [`../outreach/seminar-invitation.tex`](../outreach/seminar-invitation.tex) if the public form URL changes.
 
 ## 5. Optional welcome-email automation
 

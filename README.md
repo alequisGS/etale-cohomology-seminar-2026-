@@ -142,6 +142,6 @@ After merging to `main`, enable Pages with:
 Settings → Pages → Deploy from branch → main → /docs
 ```
 
-Registration is handled through Google Forms, with responses stored in a private Google Sheet controlled by the organizer. Configure the form URLs in [`docs/config.js`](docs/config.js). See [`organizer/GOOGLE_FORM_SETUP.md`](organizer/GOOGLE_FORM_SETUP.md) for setup instructions.
+Registration is handled through Google Forms, with responses stored in a private Google Sheet controlled by the organizer. The public site links directly to the Google Form from [`docs/index.html`](docs/index.html). See [`organizer/GOOGLE_FORM_SETUP.md`](organizer/GOOGLE_FORM_SETUP.md) for setup instructions.
 
 **Litt provides the curriculum. Tools help us prepare. The community verifies, digests, and decides what is worth remembering.**
