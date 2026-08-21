@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=1.35cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{url}
+
+\IfFileExists{qrcode.sty}{
+  \usepackage{qrcode}
+  \newcommand{\SeminarQRCode}{\qrcode[height=2.2cm]{https://alequisgs.github.io/etale-cohomology-seminar-2026-/}}
+}{
+  \newcommand{\SeminarQRCode}{}
+}
+
+\definecolor{Board}{HTML}{17231D}
+\definecolor{Copper}{HTML}{703918}
+\definecolor{Paper}{HTML}{F6EFE1}
+\definecolor{Gold}{HTML}{C99B4F}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=Copper,
+  linkcolor=Copper,
+  pdftitle={Étale Cohomology Seminar 2026 invitation},
+  pdfauthor={Étale Cohomology Seminar 2026}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.15em,topsep=0.2em}
+\pagestyle{empty}
+
+\begin{document}
+
+\colorbox{Board}{%
+  \begin{minipage}{\dimexpr\linewidth-2\fboxsep\relax}
+    \color{white}
+    \vspace{0.2cm}
+    {\LARGE\bfseries Étale Cohomology Seminar 2026}\\[0.15cm]
+    {\large Five-meeting pilot}
+    \vspace{0.2cm}
+  \end{minipage}
+}
+
+\vspace{0.45cm}
+
+\includegraphics[width=\linewidth,height=4.6cm,keepaspectratio]{docs/assets/serre-grothendieck-etale-hero.png}
+
+{\footnotesize\color{Copper}An imaginative illustration of the conversations and ideas surrounding the development of étale cohomology.}
+
+We are organizing a weekly reading/discussion seminar following Daniel Litt's course
+\href{https://www.daniellitt.com/tale-cohomology/}{\emph{Étale Cohomology and the Weil Conjectures}}.
+
+Videos, notes, and AI tools are used for preparation. Meetings are for mathematical
+community: verification, questions, examples, peer review, proof digestion, and
+shared understanding.
+
+{\large\bfseries How it works: 3 + 2 + 1 + E + R}
+
+\begin{itemize}
+  \item \textbf{3} things you think you understood.
+  \item \textbf{2} points of mathematical friction.
+  \item \textbf{1} question worth discussing with humans.
+  \item \textbf{E} one example or non-example.
+  \item \textbf{R} review one contribution from another participant.
+\end{itemize}
+
+Open to undergraduate, master's, PhD students, and other interested mathematicians.
+You do not need to understand every lecture completely before coming.
+
+\vspace{0.25cm}
+
+\colorbox{Paper}{%
+  \begin{minipage}{\dimexpr\linewidth-2\fboxsep\relax}
+    \centering
+    {\Large\bfseries Interested?}\\[0.1cm]
+    \textbf{Read the full plan and register here:}\\[0.1cm]
+    \href{https://alequisgs.github.io/etale-cohomology-seminar-2026-/}{\texttt{https://alequisgs.github.io/etale-cohomology-seminar-2026-/}}\\[0.15cm]
+    \SeminarQRCode
+  \end{minipage}
+}
+
+\vspace{0.35cm}
+
+{\large\bfseries Five pilot topics}
+
+\begin{itemize}
+  \item Weil conjectures and motivation.
+  \item Étale morphisms and introduction to sites.
+  \item Sites, sheaves, étale and fppf topologies.
+  \item Morphisms of sites and fppf descent I.
+  \item fppf descent II and the category of sheaves.
+\end{itemize}
+
+Weekly schedule will be selected after collecting participant availability.
+
+GitHub project:
+\href{https://github.com/alequisGS/etale-cohomology-seminar-2026-}{\texttt{github.com/alequisGS/etale-cohomology-seminar-2026-}}
+
+{\footnotesize Curriculum based on Daniel Litt's course. Seminar format developed independently by the group.}
+
+\end{document}
