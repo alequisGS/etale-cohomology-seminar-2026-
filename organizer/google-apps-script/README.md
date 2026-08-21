@@ -47,6 +47,8 @@ Recommended headers:
 
 ```text
 Full name
+GitHub username
+GitHub Invited
 Notes
 ```
 
@@ -58,3 +60,8 @@ After reviewing a registration:
 2. The installable trigger runs `handleApprovalEdit`.
 3. The script sends the welcome email only if `Approved` became TRUE, `Welcome Email Sent` is empty, and a valid email exists.
 4. After successful sending, `Welcome Email Sent` receives a timestamp.
+5. Copy/check the participant's GitHub username.
+6. Invite the participant manually from the repository collaborator settings.
+7. Mark `GitHub Invited` in the private Sheet.
+
+The script does not automate GitHub invitations and does not use a GitHub token.

@@ -2,6 +2,8 @@ const APPROVED_HEADER = "Approved";
 const EMAIL_SENT_HEADER = "Welcome Email Sent";
 const EMAIL_HEADER = "Email";
 const NAME_HEADER = "Full name";
+const SITE_URL = "https://alequisgs.github.io/etale-cohomology-seminar-2026-/";
+const GITHUB_REPO_URL = "https://github.com/alequisGS/etale-cohomology-seminar-2026-";
 
 function handleApprovalEdit(e) {
   try {
@@ -112,6 +114,12 @@ Google Meet: ${meetUrl}
 Course: Daniel Litt, Étale Cohomology and the Weil Conjectures
 https://www.daniellitt.com/tale-cohomology/
 
+Public seminar site:
+${SITE_URL}
+
+GitHub repository:
+${GITHUB_REPO_URL}
+
 Each week we use:
 
 3 + 2 + 1 + E + R + P
@@ -124,6 +132,8 @@ R — one review of another contribution
 P — Problem of the Week
 
 For P, try the common Problem of the Week before the meeting. You are not required to solve it completely; bring your approach, partial progress, or point of difficulty.
+
+You may receive a separate GitHub collaborator invitation.
 
 See you at the seminar.`;
 

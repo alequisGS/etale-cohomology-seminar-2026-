@@ -34,7 +34,7 @@ Candidate examples and non-examples go in [`contributions/examples/`](contributi
 
 ## Problem of the Week
 
-To be selected.
+Problem of the Week: to be selected.
 
 Once selected, this section can be updated with the problem and source.
 
