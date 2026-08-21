@@ -1,7 +1,7 @@
 ## Contribution
 
 - Meeting:
-- Type: example / non-example / proof / correction / toolkit promotion / other
+- Type: example / non-example / proof / problem / correction / toolkit promotion / other
 
 ## What am I claiming or changing?
 

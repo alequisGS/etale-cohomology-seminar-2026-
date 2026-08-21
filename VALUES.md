@@ -12,6 +12,8 @@ Community is an explicit mathematical output of the seminar, not an accidental s
 
 Producing a proof, summary, or example is cheap. Understanding why it works, checking it, deciding whether it is illuminating, and incorporating it into shared knowledge is the harder task.
 
+The same applies to problems: obtaining a solution is not the end of problem solving. Ask why it works, what the key idea is, where the difficulty was, what should be remembered, and whether the method can be used elsewhere.
+
 ## 3. Disclose tool use
 
 AI, computer algebra, proof assistants, search systems, and other tools are welcome. Participants should briefly disclose substantial tool use connected with mathematical contributions, especially when a tool helped generate examples, arguments, computations, or formulations.
@@ -19,6 +21,8 @@ AI, computer algebra, proof assistants, search systems, and other tools are welc
 ## 4. Support the needs of reviewing
 
 A contribution should be written so another participant can actually check it. State hypotheses, relevant definitions, sources, computations, and unclear points. Do not hide the difficult part behind polished prose.
+
+For problem solutions, include the source of the problem, the attempted approach, any substantial tool use, the step that needs checking, and any failed approach that reveals useful mathematical friction.
 
 ## 5. Affirm the humanity of authorship
 

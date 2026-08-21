@@ -1,4 +1,4 @@
 window.SEMINAR_CONFIG = {
-  registrationEndpoint: "",
-  scheduleOptions: []
+  googleFormEmbedUrl: "",
+  googleFormViewUrl: ""
 };

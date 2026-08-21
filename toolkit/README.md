@@ -23,6 +23,7 @@ Promoted contributions are organized into:
 - [non-examples](non-examples/)
 - [theorems](theorems/)
 - [proof ideas](proof-ideas/)
+- [problems](problems/)
 - [analogies](analogies/)
 - [warnings](warnings/)
 - [open questions](open-questions/)

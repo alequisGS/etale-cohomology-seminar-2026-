@@ -2,9 +2,25 @@
 
 This pilot follows the first five lectures of Daniel Litt's [*Étale Cohomology and the Weil Conjectures*](https://www.daniellitt.com/tale-cohomology/). The videos determine the seminar sequence.
 
-No detailed long-term schedule is planned yet. Lecture 6 would be the beginning of the next block if the group chooses to continue.
+Fridays: 17:00-18:30 Lima / 19:00-20:30 Brasília
+
+Time zones: `America/Lima` and `America/Sao_Paulo`
+
+Online via Google Meet. The Google Meet link will be sent by email to confirmed participants.
+
+Lecture 6 would be the beginning of the next block if the group chooses to continue after the pilot.
+
+| Meeting | Date | Litt lecture |
+| --- | --- | --- |
+| 1 | Aug 28 | Lecture 1 |
+| 2 | Sep 4 | Lecture 2 |
+| 3 | Sep 11 | Lecture 3 |
+| 4 | Sep 18 | Lecture 4 |
+| 5 | Sep 25 | Lecture 5 |
 
 ## Meeting 1
+
+**Friday, August 28, 2026**
 
 **Lecture 1**
 
@@ -19,6 +35,8 @@ Folder: [`meetings/01-weil-conjectures/`](meetings/01-weil-conjectures/)
 
 ## Meeting 2
 
+**Friday, September 4, 2026**
+
 **Lecture 2**
 
 Topics:
@@ -30,6 +48,8 @@ Topics:
 Folder: [`meetings/02-etale-morphisms-and-sites/`](meetings/02-etale-morphisms-and-sites/)
 
 ## Meeting 3
+
+**Friday, September 11, 2026**
 
 **Lecture 3**
 
@@ -45,6 +65,8 @@ Folder: [`meetings/03-sites-and-sheaves/`](meetings/03-sites-and-sheaves/)
 
 ## Meeting 4
 
+**Friday, September 18, 2026**
+
 **Lecture 4**
 
 Topics:
@@ -55,6 +77,8 @@ Topics:
 Folder: [`meetings/04-fppf-descent-I/`](meetings/04-fppf-descent-I/)
 
 ## Meeting 5
+
+**Friday, September 25, 2026**
 
 **Lecture 5**
 

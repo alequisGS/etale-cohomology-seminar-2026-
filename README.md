@@ -30,12 +30,12 @@ A merged contribution to a meeting folder is not automatically canonical or endo
 Each participant prepares:
 
 ```text
-3 + 2 + 1 + E + R
+3 + 2 + 1 + E + R + P
 ```
 
 ### 3 — Three things I think I understood
 
-Short statements.
+Three short mathematical points.
 
 ### 2 — Two points of friction
 
@@ -53,7 +53,33 @@ Contribute one example or non-example that illuminates a definition, theorem, or
 
 Read and critically check at least one mathematical contribution from another member.
 
-The repository does not need to store every individual's full 3-2-1 permanently. The durable record emphasizes examples, non-examples, proofs, friction worth remembering, reviews, and meeting digestion.
+### P — Problem of the Week
+
+Spend serious time engaging with the common problem selected for that meeting.
+
+P does not mean that every participant must arrive with a complete solution. A complete solution, partial solution, reduction, useful special case, failed approach, counterexample, obstruction, alternative proof, question about a key step, generalization, or comparison of approaches can all be valuable.
+
+The central question is not:
+
+> Did you solve it?
+
+but:
+
+> What did you learn by trying?
+
+The repository does not need to store every individual's full weekly preparation permanently. The durable record emphasizes examples, non-examples, proofs, problems, friction worth remembering, reviews, and meeting digestion.
+
+## Problems as Digestion
+
+AI can often generate plausible or even correct solutions quickly. Therefore the seminar does not optimize for merely producing solutions.
+
+```text
+solution generation ≠ problem digestion
+```
+
+The mathematical value lies in attempting the problem, identifying the right definitions, recognizing natural approaches, understanding failed attempts, checking hypotheses, verifying proposed solutions, comparing approaches, finding the key idea, and explaining the result to other humans.
+
+A polished AI-generated solution that nobody understands does not count as serious seminar participation.
 
 ## One seminar, several levels
 
@@ -68,6 +94,15 @@ PhD students additionally provide context, question formulations and hypotheses,
 > Mathematical sophistication is not the measure of the value of a contribution. A simple example that makes a definition transparent may be more valuable than a complicated example.
 
 ## The five-week experiment
+
+Schedule:
+
+- Fridays, 17:00-18:30 Lima / 19:00-20:30 Brasília
+- Online via Google Meet
+- First meeting: August 28, 2026
+- Time zones: `America/Lima` and `America/Sao_Paulo`
+
+The Google Meet link will be sent by email to confirmed participants.
 
 Participants initially commit only to five serious meetings. After Meeting 5 the group evaluates:
 
@@ -95,7 +130,7 @@ Participants initially commit only to five serious meetings. After Meeting 5 the
 
 ## Public site and registration
 
-The public entry point for the seminar is prepared in [`docs/`](docs/) for GitHub Pages:
+The public entry point for the seminar is prepared in [`docs/index.html`](docs/index.html) for GitHub Pages:
 
 - Site: <https://alequisgs.github.io/etale-cohomology-seminar-2026-/>
 - Registration form: <https://alequisgs.github.io/etale-cohomology-seminar-2026-/#register>
@@ -107,6 +142,6 @@ After merging to `main`, enable Pages with:
 Settings → Pages → Deploy from branch → main → /docs
 ```
 
-Registration submissions require a private external form endpoint. Configure it in [`docs/config.js`](docs/config.js) by setting `registrationEndpoint` to an HTTPS form URL. Schedule options are also configured in that file by editing `scheduleOptions`; leave the array empty until candidate meeting times exist.
+Registration is handled through Google Forms, with responses stored in a private Google Sheet controlled by the organizer. Configure the form URLs in [`docs/config.js`](docs/config.js). See [`organizer/GOOGLE_FORM_SETUP.md`](organizer/GOOGLE_FORM_SETUP.md) for setup instructions.
 
 **Litt provides the curriculum. Tools help us prepare. The community verifies, digests, and decides what is worth remembering.**

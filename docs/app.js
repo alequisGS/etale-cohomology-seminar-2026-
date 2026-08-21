@@ -1,110 +1,60 @@
 (function () {
   const config = window.SEMINAR_CONFIG || {};
-  const form = document.querySelector("#registration-form");
-  const status = document.querySelector("#form-status");
-  const scheduleContainer = document.querySelector("#schedule-options");
-  const submitButton = document.querySelector(".submit-button");
-  const githubInput = document.querySelector("#github_username");
+  const container = document.querySelector("#google-form-container");
+  const openButton = document.querySelector("#open-google-form");
 
-  function renderScheduleOptions() {
-    if (!scheduleContainer) return;
-
-    const options = Array.isArray(config.scheduleOptions) ? config.scheduleOptions : [];
-    scheduleContainer.innerHTML = "";
-
-    if (options.length === 0) {
-      const message = document.createElement("p");
-      message.className = "schedule-empty";
-      message.textContent = "Schedule options will appear here once candidate meeting times are defined. You may register now; we will ask/notify registered participants when the schedule poll opens.";
-      scheduleContainer.append(message);
-      return;
-    }
-
-    const prompt = document.createElement("p");
-    prompt.className = "help";
-    prompt.textContent = "Select every time at which you could regularly attend.";
-    scheduleContainer.append(prompt);
-
-    options.forEach((option) => {
-      if (!option || !option.id || !option.label) return;
-
-      const label = document.createElement("label");
-      label.className = "checkbox-row";
-
-      const input = document.createElement("input");
-      input.type = "checkbox";
-      input.name = "schedule_availability";
-      input.value = option.id;
-
-      const text = document.createElement("span");
-      text.textContent = option.label;
-
-      label.append(input, text);
-      scheduleContainer.append(label);
-    });
+  function isHttpsUrl(value) {
+    return typeof value === "string" && /^https:\/\//i.test(value);
   }
 
-  function setStatus(message, type) {
-    if (!status) return;
-    status.textContent = message;
-    status.dataset.type = type || "";
-  }
+  function renderGoogleForm() {
+    if (!container) return;
 
-  function normalizeGitHubUsername() {
-    if (!githubInput) return;
-    githubInput.value = githubInput.value.trim().replace(/^@+/, "");
-  }
+    const embedUrl = String(config.googleFormEmbedUrl || "").trim();
+    const viewUrl = String(config.googleFormViewUrl || "").trim();
 
-  async function submitForm(event) {
-    event.preventDefault();
-    normalizeGitHubUsername();
+    container.innerHTML = "";
 
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      setStatus("Please complete the required fields before submitting.", "error");
-      return;
-    }
-
-    if (!config.registrationEndpoint) {
-      setStatus("Registration submission is not yet activated. The form is available for testing, and organizers still need to configure a private form endpoint.", "error");
-      return;
-    }
-
-    const endpoint = String(config.registrationEndpoint);
-    if (!/^https:\/\//i.test(endpoint)) {
-      setStatus("Registration is not active because the configured endpoint is not HTTPS.", "error");
-      return;
-    }
-
-    const formData = new FormData(form);
-    submitButton.disabled = true;
-    setStatus("Submitting registration...", "pending");
-
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json"
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error("Registration service returned an error.");
+    if (openButton) {
+      if (isHttpsUrl(viewUrl)) {
+        openButton.href = viewUrl;
+        openButton.hidden = false;
+      } else {
+        openButton.hidden = true;
       }
-
-      form.reset();
-      renderScheduleOptions();
-      setStatus("Thank you. Your registration has been received. We will contact participants about schedule options and GitHub collaboration.", "success");
-    } catch (error) {
-      setStatus("Registration could not be submitted. Please try again later or contact the organizers through the GitHub repository.", "error");
-    } finally {
-      submitButton.disabled = false;
     }
+
+    if (!embedUrl && !viewUrl) {
+      const message = document.createElement("div");
+      message.className = "form-placeholder";
+      message.innerHTML = `
+        <h3>Registration form setup is in progress.</h3>
+        <p>The Google Form will appear here once the organizer adds the form URLs to <code>docs/config.js</code>.</p>
+        <p><a class="text-link" href="https://github.com/alequisGS/etale-cohomology-seminar-2026-/blob/main/organizer/GOOGLE_FORM_SETUP.md">Organizer setup guide →</a></p>
+      `;
+      container.append(message);
+      return;
+    }
+
+    if (isHttpsUrl(embedUrl)) {
+      const iframe = document.createElement("iframe");
+      iframe.className = "google-form-frame";
+      iframe.src = embedUrl;
+      iframe.title = "Étale Cohomology Seminar 2026 registration form";
+      iframe.loading = "lazy";
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      container.append(iframe);
+      return;
+    }
+
+    const fallback = document.createElement("div");
+    fallback.className = "form-placeholder";
+    fallback.innerHTML = `
+      <h3>Open registration in Google Forms.</h3>
+      <p>The embedded form URL is not configured yet, but the public registration link is available.</p>
+    `;
+    container.append(fallback);
   }
 
-  renderScheduleOptions();
-  if (form) {
-    form.addEventListener("submit", submitForm);
-  }
+  renderGoogleForm();
 })();

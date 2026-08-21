@@ -8,25 +8,47 @@ Topics:
 - review of étale morphisms
 - introduction to sites
 
+## When
+
+Friday, September 4, 2026
+
+## Time
+
+- 17:00-18:30 Lima
+- 19:00-20:30 Brasília/Rio
+
+## Where
+
+Google Meet — link sent privately to registered participants.
+
 ## Preparation
 
 Use the seminar protocol:
 
 ```text
-3 + 2 + 1 + E + R
+3 + 2 + 1 + E + R + P
 ```
 
-Candidate examples and non-examples go in [`contributions/examples/`](contributions/examples/). Candidate proof digestions go in [`contributions/proofs/`](contributions/proofs/). Points of mathematical friction go in [`friction.md`](friction.md).
+Candidate examples and non-examples go in [`contributions/examples/`](contributions/examples/). Candidate proof digestions go in [`contributions/proofs/`](contributions/proofs/). Problem work goes in [`contributions/problems/`](contributions/problems/). Personal weekly records go in [`contributors/`](contributors/). Points of mathematical friction go in [`friction.md`](friction.md).
 
-## 90-minute architecture
+## Problem of the Week
+
+To be selected.
+
+Once selected, this section can be updated with the problem and source.
+
+## Default 90-minute architecture
 
 ```text
-0-15 min    AI-free collective reconstruction
-15-35 min   friction board
-35-60 min   one example, theorem, or proof deeply
-60-75 min   what should survive?
-75-90 min   connections, questions, and community
+0-15    AI-free collective reconstruction
+15-30   friction board
+30-50   common Problem of the Week
+50-70   example / theorem / proof deep dive
+70-80   what should survive?
+80-90   connections, community, next week
 ```
+
+This is a default, not an inflexible law. For a particularly valuable problem, the problem and deep-dive sections may merge into a single 35-40 minute discussion.
 
 ### AI-free collective reconstruction
 
@@ -40,6 +62,19 @@ Notes closed and AI off. Collectively reconstruct:
 ### Friction board
 
 Discuss selected points where participants genuinely struggled. Do not try to resolve every question.
+
+### Problem of the Week
+
+Do not reveal the final solution immediately. Begin with:
+
+- What do we know?
+- Which definitions seem relevant?
+- What examples or special cases help?
+- What did different participants try?
+- Where did approaches fail?
+- Which hypotheses seem important?
+
+Then compare proposed approaches and eventually discuss a verified solution.
 
 ### Deep dive
 
@@ -59,4 +94,4 @@ Decide what deserves to enter the group's permanent mathematical memory.
 
 ### Community
 
-Identify connections, references, questions, possible pairs of participants, or ideas worth following.
+Identify connections, references, questions, possible pairs of participants, or ideas worth following next week.
