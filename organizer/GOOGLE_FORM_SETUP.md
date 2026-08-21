@@ -16,7 +16,7 @@ Use this description:
 
 Recommended confirmation message:
 
-> Thank you for registering for the Étale Cohomology Seminar 2026. We will contact confirmed participants by email with the Google Meet information and GitHub collaboration details.
+> Thank you for registering for the Étale Cohomology Seminar 2026. We will contact confirmed participants by email with the Google Meet information.
 
 Do not place the Google Meet link in the form description or confirmation message.
 
@@ -46,17 +46,7 @@ Short answer with email validation.
 
 Required.
 
-### 4. GitHub username
-
-Short answer.
-
-Required.
-
-Help text:
-
-> We use this username to invite confirmed participants to collaborate on the seminar repository. You may write `username` or `@username`.
-
-### 5. Current stage
+### 4. Current stage
 
 Multiple choice.
 
@@ -72,7 +62,7 @@ Options:
 - Other
 - Prefer not to say
 
-### 6. Why are you interested in the seminar?
+### 5. Why are you interested in the seminar?
 
 Paragraph.
 
@@ -80,7 +70,7 @@ Optional.
 
 Keep this intentionally short.
 
-### 7. Five-week commitment
+### 6. Five-week commitment
 
 Required checkbox.
 
@@ -88,13 +78,13 @@ Text:
 
 > I expect to be available on Fridays, 17:00-18:30 Lima / 19:00-20:30 Brasília, for the five-meeting pilot.
 
-### 8. Data-use consent
+### 7. Data-use consent
 
 Required checkbox.
 
 Text:
 
-> I agree that my registration information may be used for organizing this seminar and that my GitHub username may be used to invite me to the seminar repository.
+> I agree that my registration information may be used for organizing this seminar.
 
 Do not require participants to sign in to a particular university domain.
 
@@ -107,21 +97,13 @@ The Sheet should contain the normal Google Form response columns plus organizer-
 ```text
 Approved
 Welcome Email Sent
-GitHub Invited
 Notes
-```
-
-Optionally also add:
-
-```text
-GitHub Profile
 ```
 
 Suggested meaning:
 
 - `Approved` is a checkbox controlled by the organizer.
 - `Welcome Email Sent` is filled automatically by Apps Script after approval.
-- `GitHub Invited` is manually checked after sending the GitHub collaborator invitation.
 - `Notes` is private organizer information.
 
 Do not publish the Sheet. Do not link it publicly.
@@ -138,7 +120,7 @@ Also update [`../outreach/seminar-invitation.tex`](../outreach/seminar-invitatio
 
 The optional Apps Script lives in [`google-apps-script/`](google-apps-script/).
 
-It sends a welcome email only after an organizer checks `Approved` in the private response Sheet. GitHub invitations remain manual.
+It sends a welcome email only after an organizer checks `Approved` in the private response Sheet.
 
 The private Google Meet URL must be stored as a Script Property named:
 

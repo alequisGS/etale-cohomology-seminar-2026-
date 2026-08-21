@@ -133,7 +133,7 @@ Participants initially commit only to five serious meetings. After Meeting 5 the
 The public entry point for the seminar is prepared in [`docs/index.html`](docs/index.html) for GitHub Pages:
 
 - Site: <https://alequisgs.github.io/etale-cohomology-seminar-2026-/>
-- Registration form: <https://alequisgs.github.io/etale-cohomology-seminar-2026-/#register>
+- Registration form: <https://docs.google.com/forms/d/e/1FAIpQLSen1UvJUkqvQJ02HzUOPgFwIi9zpOo-xfBAYwa7NcQkACTO3w/viewform>
 - Outreach invitation source: [`outreach/seminar-invitation.tex`](outreach/seminar-invitation.tex)
 
 After merging to `main`, enable Pages with:

@@ -1,9 +1,7 @@
-const DEFAULT_REPO_URL = "https://github.com/alequisGS/etale-cohomology-seminar-2026-";
 const APPROVED_HEADER = "Approved";
 const EMAIL_SENT_HEADER = "Welcome Email Sent";
 const EMAIL_HEADER = "Email";
 const NAME_HEADER = "Full name";
-const GITHUB_HEADER = "GitHub username";
 
 function handleApprovalEdit(e) {
   try {
@@ -41,16 +39,12 @@ function handleApprovalEdit(e) {
     }
 
     const meetUrl = getRequiredProperty_("MEET_URL");
-    const repoUrl = PropertiesService.getScriptProperties().getProperty("REPO_URL") || DEFAULT_REPO_URL;
     const fullName = getOptionalCell_(sheet, row, headers[NAME_HEADER]);
-    const githubUsername = normalizeGitHubUsername_(getOptionalCell_(sheet, row, headers[GITHUB_HEADER]));
 
     sendWelcomeEmail_({
       email,
       fullName,
-      githubUsername,
-      meetUrl,
-      repoUrl
+      meetUrl
     });
 
     sheet.getRange(row, sentColumn).setValue(new Date());
@@ -94,21 +88,14 @@ function isValidEmail_(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function normalizeGitHubUsername_(value) {
-  return String(value || "").trim().replace(/^@+/, "");
-}
-
 function firstName_(fullName) {
   const trimmed = String(fullName || "").trim();
   return trimmed ? trimmed.split(/\s+/)[0] : "";
 }
 
-function sendWelcomeEmail_({ email, fullName, githubUsername, meetUrl, repoUrl }) {
+function sendWelcomeEmail_({ email, fullName, meetUrl }) {
   const greetingName = firstName_(fullName);
   const greeting = greetingName ? `Dear ${greetingName},` : "Dear participant,";
-  const githubLine = githubUsername
-    ? `We have your GitHub username as @${githubUsername}. A GitHub collaborator invitation may arrive separately.`
-    : "A GitHub collaborator invitation may arrive separately.";
 
   const body = `${greeting}
 
@@ -121,8 +108,6 @@ Time:
 - 19:00-20:30 Brasília/Rio
 
 Google Meet: ${meetUrl}
-
-GitHub: ${repoUrl}
 
 Course: Daniel Litt, Étale Cohomology and the Weil Conjectures
 https://www.daniellitt.com/tale-cohomology/
@@ -139,8 +124,6 @@ R — one review of another contribution
 P — Problem of the Week
 
 For P, try the common Problem of the Week before the meeting. You are not required to solve it completely; bring your approach, partial progress, or point of difficulty.
-
-${githubLine}
 
 See you at the seminar.`;
 
