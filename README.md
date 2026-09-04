@@ -133,7 +133,7 @@ Participants initially commit only to five serious meetings. After Meeting 5 the
 The public entry point for the seminar is prepared in [`docs/index.html`](docs/index.html) for GitHub Pages:
 
 - Site: <https://alequisgs.github.io/etale-cohomology-seminar-2026-/>
-- Registration form: <https://alequisgs.github.io/etale-cohomology-seminar-2026-/#register>
+- Registration form: <https://docs.google.com/forms/d/e/1FAIpQLSen1UvJUkqvQJ02HzUOPgFwIi9zpOo-xfBAYwa7NcQkACTO3w/viewform>
 - Outreach invitation source: [`outreach/seminar-invitation.tex`](outreach/seminar-invitation.tex)
 
 After merging to `main`, enable Pages with:
@@ -142,6 +142,6 @@ After merging to `main`, enable Pages with:
 Settings → Pages → Deploy from branch → main → /docs
 ```
 
-Registration is handled exclusively through the Google Form available on the public seminar site, with responses stored in a private Google Sheet controlled by the organizer. See [`organizer/GOOGLE_FORM_SETUP.md`](organizer/GOOGLE_FORM_SETUP.md) for setup instructions.
+Registration is handled exclusively through the Google Form, with responses stored in a private Google Sheet controlled by the organizer. See [`organizer/GOOGLE_FORM_SETUP.md`](organizer/GOOGLE_FORM_SETUP.md) for setup instructions.
 
 **Litt provides the curriculum. Tools help us prepare. The community verifies, digests, and decides what is worth remembering.**

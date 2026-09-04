@@ -150,11 +150,15 @@ GITHUB INVITED ✓
 
 Do not publish the Sheet. Do not link it publicly.
 
-## 4. Configure the public site
+## 4. Update public links
 
-After creating the form, paste the form URLs directly into [`../docs/index.html`](../docs/index.html).
+After creating the form, keep the public form URL in the root [`../README.md`](../README.md) and outreach source.
 
-Use the Google Forms embed URL for the registration `iframe` `src`. Use the normal public form URL for the "Open registration form" link.
+The current public form URL is:
+
+```text
+https://docs.google.com/forms/d/e/1FAIpQLSen1UvJUkqvQJ02HzUOPgFwIi9zpOo-xfBAYwa7NcQkACTO3w/viewform
+```
 
 Also update [`../outreach/seminar-invitation.tex`](../outreach/seminar-invitation.tex) if the public form URL changes.
 

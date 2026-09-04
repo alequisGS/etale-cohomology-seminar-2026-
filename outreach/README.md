@@ -2,7 +2,7 @@
 
 This folder contains a short invitation intended for sharing in WhatsApp, Telegram, and mathematics groups.
 
-The invitation points readers to the public site, where registration is handled through Google Forms. It does not include the private Google Meet link.
+The invitation points readers to the public site and the Google Form. It does not include the private Google Meet link.
 
 - Source: [`seminar-invitation.tex`](seminar-invitation.tex)
 - Generated PDF, when available: `seminar-invitation.pdf`

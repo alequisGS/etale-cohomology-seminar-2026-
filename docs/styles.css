@@ -113,11 +113,6 @@ a {
   background: rgba(164, 93, 42, 0.12);
 }
 
-.nav-links .nav-register {
-  color: var(--ivory);
-  background: var(--copper-dark);
-}
-
 .hero {
   position: relative;
   min-height: calc(100vh - 64px);
@@ -270,6 +265,37 @@ h3 {
   border-radius: var(--radius);
 }
 
+.notes-banner {
+  padding: 1.15rem 0;
+  color: var(--chalk);
+  background: var(--board);
+  border-top: 1px solid rgba(243, 236, 216, 0.14);
+  border-bottom: 1px solid rgba(243, 236, 216, 0.14);
+}
+
+.notes-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.notes-banner h2 {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.notes-banner p {
+  margin: 0;
+  color: rgba(243, 236, 216, 0.78);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.notes-banner .eyebrow {
+  margin-bottom: 0.35rem;
+  color: var(--gold);
+}
+
 .caption {
   max-width: 68ch;
   margin: 1.35rem 0 0;
@@ -305,8 +331,7 @@ h3 {
 }
 
 .intro,
-.audience,
-.register-section {
+.audience {
   background: var(--ivory);
 }
 
@@ -535,90 +560,6 @@ h3 {
   color: var(--muted);
 }
 
-.register-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
-  gap: clamp(1.5rem, 5vw, 4rem);
-  align-items: start;
-}
-
-.registration-form,
-.registration-panel {
-  padding: clamp(1rem, 3vw, 1.35rem);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.registration-panel {
-  display: grid;
-  gap: 0.75rem;
-  background:
-    linear-gradient(180deg, rgba(255, 250, 240, 0.72), rgba(234, 220, 196, 0.44)),
-    var(--paper);
-}
-
-.google-form-container {
-  position: relative;
-  overflow: hidden;
-  min-height: 720px;
-  background: var(--ivory);
-  border: 1px solid rgba(112, 57, 24, 0.18);
-  border-radius: var(--radius);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
-}
-
-.google-form-frame {
-  display: block;
-  width: 100%;
-  min-height: 720px;
-  border: 0;
-  background: var(--ivory);
-}
-
-.form-placeholder {
-  padding: 1rem;
-  background: var(--ivory);
-  border: 1px solid rgba(164, 93, 42, 0.18);
-  border-radius: var(--radius);
-}
-
-.form-placeholder h3 {
-  margin-bottom: 0.5rem;
-}
-
-.form-placeholder p {
-  margin: 0.5rem 0 0;
-  color: var(--muted);
-}
-
-.field {
-  margin-bottom: 1rem;
-}
-
-label,
-legend {
-  display: block;
-  margin-bottom: 0.35rem;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-}
-
-input,
-select {
-  width: 100%;
-  min-height: 48px;
-  padding: 0.72rem 0.75rem;
-  color: var(--ink);
-  background: var(--ivory);
-  border: 1px solid rgba(32, 27, 22, 0.28);
-  border-radius: var(--radius);
-  font: inherit;
-}
-
-input:focus,
-select:focus,
 button:focus-visible,
 a:focus-visible {
   outline: 3px solid rgba(201, 155, 79, 0.85);
@@ -631,72 +572,6 @@ a:focus-visible {
   color: var(--muted);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.88rem;
-}
-
-fieldset {
-  padding: 0;
-  border: 0;
-}
-
-.schedule-empty {
-  margin: 0;
-  padding: 0.85rem;
-  color: var(--muted);
-  background: rgba(164, 93, 42, 0.1);
-  border: 1px solid rgba(164, 93, 42, 0.18);
-  border-radius: var(--radius);
-}
-
-.checkbox-row,
-.consent label {
-  display: grid;
-  grid-template-columns: 22px 1fr;
-  gap: 0.65rem;
-  align-items: start;
-  font-weight: 400;
-}
-
-.checkbox-row input,
-.consent input {
-  width: 18px;
-  min-height: auto;
-  margin-top: 0.25rem;
-}
-
-.honeypot {
-  position: absolute;
-  left: -100vw;
-  width: 1px;
-  height: 1px;
-}
-
-.submit-button {
-  width: 100%;
-  margin-top: 0.3rem;
-}
-
-.submit-button:disabled {
-  cursor: wait;
-  opacity: 0.7;
-}
-
-.form-status {
-  min-height: 1.5rem;
-  margin: 0.9rem 0 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-}
-
-.form-status[data-type="error"] {
-  color: #8b2118;
-}
-
-.form-status[data-type="success"] {
-  color: #23592d;
-}
-
-.form-status[data-type="pending"] {
-  color: var(--copper-dark);
 }
 
 .footer {
@@ -776,8 +651,7 @@ fieldset {
     padding-top: 17rem;
   }
 
-  .split,
-  .register-layout {
+  .split {
     grid-template-columns: 1fr;
   }
 
@@ -820,6 +694,14 @@ fieldset {
     width: 100%;
   }
 
+  .notes-banner-inner {
+    display: grid;
+  }
+
+  .notes-banner .button {
+    width: 100%;
+  }
+
   .section-inner {
     width: min(100% - 1.25rem, var(--content));
   }
@@ -828,20 +710,5 @@ fieldset {
   .schedule div {
     grid-template-columns: 1fr;
     gap: 0.25rem;
-  }
-
-  .registration-form {
-    margin-left: -0.1rem;
-    margin-right: -0.1rem;
-  }
-
-  .registration-panel {
-    margin-left: -0.1rem;
-    margin-right: -0.1rem;
-  }
-
-  .google-form-container,
-  .google-form-frame {
-    min-height: 820px;
   }
 }
