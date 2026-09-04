@@ -482,6 +482,21 @@ h3 {
   color: var(--copper-dark);
 }
 
+.timeline .is-current {
+  background: rgba(201, 155, 79, 0.18);
+  border-color: rgba(112, 57, 24, 0.35);
+}
+
+.timeline a {
+  color: var(--copper-dark);
+  font-weight: 700;
+}
+
+.timeline em {
+  color: var(--muted);
+  font-style: italic;
+}
+
 .flow {
   padding: 0.75rem;
   color: var(--chalk);

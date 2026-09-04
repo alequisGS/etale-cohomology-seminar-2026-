@@ -2,11 +2,15 @@
 
 **Litt lecture:** Lecture 2
 
+**Status:** Current meeting.
+
 Topics:
 
 - proof of Serre's Kähler analogue
 - review of étale morphisms
 - introduction to sites
+
+Public notes for the seminar site: [`docs/meetings/02-etale-morphisms-and-sites/`](../../docs/meetings/02-etale-morphisms-and-sites/).
 
 ## When
 

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meeting 2 Notes | Étale Cohomology Seminar 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,macros:{'\\\\CH':'\\\\operatorname{CH}','\\\\Spec':'\\\\operatorname{Spec}'}})">
+</script>
+<style>
+:root {
+  --bg:#F5F2EB; --card:#FEFCF5; --text:#1C1929; --muted:#6E6882; --border:#DDD8CC;
+  --blue:#1A5FA3; --blue-lt:#EAF2FB;
+  --green:#146840; --green-lt:#E8F5EE;
+  --amber:#875010; --amber-lt:#FBF2E5;
+  --violet:#5B338E; --violet-lt:#F1EBFA;
+  --inv:#1C1929; --inv-tx:#EDE8DB; --inv-hi:#5FDFAA;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.82;}
+.wrap{max-width:840px;margin:0 auto;padding:60px 32px 100px;}
+a{color:var(--blue);}
+
+/* Header */
+.lh{margin-bottom:40px;}
+.lh-tag{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);border-radius:20px;padding:3px 12px;margin-bottom:18px;}
+.lh h1{font-size:34px;font-weight:700;line-height:1.18;letter-spacing:0;margin-bottom:18px;}
+.lh-meta{display:flex;flex-wrap:wrap;gap:18px 28px;font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px;}
+
+/* Logistics */
+.notice{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:13px 18px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted);margin-bottom:38px;line-height:1.6;}
+.notice b{color:var(--text);}
+
+/* TOC */
+.toc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 26px;margin-bottom:54px;}
+.toc-hd{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.toc ol{list-style:none;counter-reset:toc;}
+.toc li{counter-increment:toc;font-family:'Inter',sans-serif;font-size:14px;padding:4px 0;}
+.toc li::before{content:counter(toc)". ";color:var(--muted);font-size:12px;font-weight:600;}
+.toc a{color:var(--blue);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+
+/* Sections */
+.sec{margin-bottom:64px;}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.sh-num{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.05em;color:#fff;background:var(--muted);border-radius:5px;padding:3px 9px;white-space:nowrap;}
+.sh h2{font-size:23px;font-weight:700;letter-spacing:0;line-height:1.2;}
+.sh-rule{border:none;border-top:1px solid var(--border);margin:8px 0 26px;}
+h3{font-size:17px;font-weight:700;margin:34px 0 10px;}
+p{margin-bottom:14px;}
+p:last-child{margin-bottom:0;}
+ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
+
+/* Math environments */
+.env{border-left:4px solid;border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.env-lb{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;}
+.def{border-color:var(--blue);background:var(--blue-lt);}
+.def .env-lb{color:var(--blue);}
+.thm{border-color:var(--green);background:var(--green-lt);}
+.thm .env-lb{color:var(--green);}
+.ex{border-color:var(--amber);background:var(--amber-lt);}
+.ex .env-lb{color:var(--amber);}
+.rmk{border-color:var(--violet);background:var(--violet-lt);}
+.rmk .env-lb{color:var(--violet);}
+
+/* Slogan */
+.slogan{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:18px 24px;margin:22px 0;}
+.slogan-lb{font-family:'Inter',sans-serif;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--inv-hi);margin-bottom:7px;}
+.slogan p{color:var(--inv-tx);font-style:italic;margin:0;}
+.slogan strong{color:#fff;font-style:normal;}
+
+/* Proof */
+.proof{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:16px 0;font-size:15.5px;line-height:1.78;}
+.proof-lb{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--muted);font-style:italic;margin-bottom:8px;}
+.qed{text-align:right;color:var(--muted);margin-top:8px;}
+
+/* Prop list */
+.pl{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:16px 0;}
+.pi{display:flex;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border);align-items:flex-start;font-size:15.5px;line-height:1.72;}
+.pi:last-child{border-bottom:none;}
+.pn{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;color:var(--blue);min-width:22px;padding-top:4px;flex-shrink:0;}
+
+/* Example cards */
+.eg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.eg-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:8px;padding:14px 16px;font-size:15.5px;line-height:1.68;}
+.eg-card.bad{border-top-color:#a33;}
+.ec-t{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:7px;}
+.eg-card.bad .ec-t{color:#a33;}
+
+/* Comparison table */
+.ctbl{width:100%;border-collapse:collapse;font-family:'Inter',sans-serif;font-size:13px;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.ctbl thead th{background:var(--inv);color:var(--inv-tx);padding:11px 14px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.04em;}
+.ctbl td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55;background:var(--card);}
+.ctbl tr:last-child td{border-bottom:none;}
+.ctbl tr:nth-child(even) td{background:#F9F6EF;}
+
+/* Display math */
+.dm{overflow-x:auto;text-align:center;margin:12px 0;padding:4px 0;}
+
+/* Footer */
+.foot{border-top:1px solid var(--border);margin-top:60px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);}
+
+@media(max-width:620px){
+  .wrap{padding:36px 18px 72px;}
+  body{font-size:16px;}
+  .lh h1{font-size:26px;}
+  .sh h2{font-size:20px;}
+  .eg-grid{grid-template-columns:1fr;}
+  .ctbl{font-size:12px;}
+  .ctbl td,.ctbl thead th{padding:9px 10px;}
+}
+.back-link{display:inline-flex;margin-bottom:24px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--blue);text-decoration:none;}
+.back-link:hover{text-decoration:underline;}
+.seminar-note{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:16px 20px;margin:0 0 26px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;}
+.seminar-note b{color:#fff;}
+.seminar-note a{color:var(--inv-hi);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back-link" href="../../index.html#pilot">← Back to seminar site</a>
+
+<header class="lh">
+  <div class="lh-tag">Étale Seminar 2026 &middot; Meeting 2</div>
+  <h1>&Eacute;tale Morphisms &amp;<br>Grothendieck Topologies</h1>
+  <div class="lh-meta">
+    <span>Based on Daniel Litt's Lecture 2</span>
+    <span>Seminar meeting: Friday, September 4, 2026</span>
+    <span>17:00-18:30 Lima / 19:00-20:30 Brasília</span>
+  </div>
+</header>
+
+<div class="seminar-note">
+  <b>Seminar context:</b> These notes are adapted for Meeting 2 of the Étale Cohomology Seminar 2026. The mathematical curriculum is based on <a href="https://www.daniellitt.com/tale-cohomology/">Daniel Litt's course</a>; the timing, meeting format, Problem of the Week workflow, and discussion structure belong to this seminar. Google Meet details are sent privately to confirmed participants.
+</div>
+
+<div class="notice">
+  <b>Status:</b> The seminar is running. Meeting 1 materials are in progress; Meeting 2 focuses on étale morphisms and Grothendieck topologies.
+</div>
+
+<div class="toc">
+  <div class="toc-hd">Contents</div>
+  <ol>
+    <li><a href="#s1">Completing the Proof of the Weil Riemann Hypothesis</a></li>
+    <li><a href="#s2">&Eacute;tale Morphisms: Definitions, Examples, and Properties</a></li>
+    <li><a href="#s3">Grothendieck Topologies and the &Eacute;tale Site</a></li>
+  </ol>
+</div>
+
+<!-- ===== §1 ===== -->
+<section class="sec" id="s1">
+  <div class="sh"><span class="sh-num">&sect; 1</span><h2>Completing the Weil Riemann Hypothesis</h2></div>
+  <hr class="sh-rule">
+
+  <h3>Setup and Statement</h3>
+  <p>Throughout, $X$ is a smooth projective variety of dimension $n$ over $\mathbb{F}_q$, and $F: X \to X$ denotes the $q$-power Frobenius morphism. Fix a projective embedding; let $h \in \operatorname{CH}^1(X)$ be the hyperplane class and $L = h \cup (-) : H^i(X) \to H^{i+2}(X)$ the Lefschetz operator.</p>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; Weil Riemann Hypothesis (Serre&rsquo;s analogue)</div>
+    <p>The eigenvalues of $F^*$ acting on $H^k_{\operatorname{\acute{e}t}}(X_{\bar{\mathbb{F}}_q},\,\mathbb{Q}_\ell)$ all have absolute value $q^{k/2}$.</p>
+  </div>
+
+  <p>We carry over three structural results from Hodge theory (transferred to the $\ell$-adic setting via comparison with Betti cohomology):</p>
+
+  <div class="env thm">
+    <div class="env-lb">Hard Lefschetz Theorem</div>
+    <p>For $0 \leq k \leq n$, the cup-product map</p>
+    <div class="dm">$$L^k :\; H^{n-k}(X) \;\xrightarrow{\;\sim\;}\; H^{n+k}(X)$$</div>
+    <p>is an isomorphism. In particular the Betti numbers satisfy $b_{n-k} = b_{n+k}$.</p>
+  </div>
+
+  <div class="env thm">
+    <div class="env-lb">Hodge Index Theorem</div>
+    <p>A class $\alpha \in H^k(X)$ is <em>primitive</em> if $L^{n-k+1}\alpha = 0$. Define the pairing</p>
+    <div class="dm">$$Q(\alpha,\,\beta) \;:=\; \int_X \alpha \cup L^{n-k}\beta.$$</div>
+    <p>Then $(-1)^p \cdot Q$ is positive definite on the primitive piece $H^{p,q}_{\mathrm{prim}}$ with $p+q=k$. In particular, for any nonzero primitive $\alpha$ one has $Q(\alpha,\bar\alpha) \neq 0$.</p>
+  </div>
+
+  <h3>Key Formula: Frobenius and the Hyperplane Class</h3>
+
+  <div class="slogan">
+    <div class="slogan-lb">Fundamental Observation</div>
+    <p>Because Frobenius is a degree-$q$ map on each coordinate, it pulls back the hyperplane class by $q$: $$F^*(h) = q\cdot h \quad\Longrightarrow\quad F^* \circ L \;=\; q\cdot L \circ F^*.$$ The operators $L$ and $F^*$ <strong>nearly commute</strong> &mdash; they differ by a factor of $q$.</p>
+  </div>
+
+  <h3>Strategy: Reducing to Middle Degree</h3>
+  <p>It suffices to show that every $F^*$-eigenvalue on $H^n(X)$ has absolute value $q^{n/2}$; the general case follows from Hard Lefschetz.</p>
+
+  <div class="proof">
+    <div class="proof-lb">Reduction argument</div>
+    <p>Let $\alpha \in H^k(X)$ be an $F^*$-eigenvector with $F^*\alpha = \lambda\alpha$ and $k \leq n$. By Hard Lefschetz, $\beta := L^{n-k}\alpha \in H^{2n-k}(X)$ is nonzero. The key relation $F^*\circ L = q\,L\circ F^*$ gives:</p>
+    <div class="dm">$$F^*\beta \;=\; q^{n-k}\cdot\lambda\cdot\beta.$$</div>
+    <p>So $\beta$ is an eigenvector in $H^{2n-k}$ with eigenvalue $q^{n-k}\lambda$. If the RH holds in degree $2n-k$, then $|q^{n-k}\lambda| = q^{(2n-k)/2}$, which gives $|\lambda| = q^{k/2}$. Poincar&eacute; duality handles the case $k &gt; n$ symmetrically.</p>
+  </div>
+
+  <h3>The Core Eigenvalue Calculation</h3>
+  <p>Take a primitive class $\alpha \in H^{p,q}(X)$ with $p + q = n$ and $F^*\alpha = \lambda\cdot\alpha$. We want $|\lambda|^2 = q^n$.</p>
+
+  <div class="proof">
+    <div class="proof-lb">Proof</div>
+    <p>Frobenius acts on $H^{2n}(X) \cong \mathbb{Q}_\ell(-n)$ by multiplication by $q^n$ (since $F^*$ acts on $\mathbb{Q}_\ell(1)$ by $q^{-1}$, hence on $\mathbb{Q}_\ell(-n)$ by $q^n$). The Poincar&eacute; pairing $\langle\cdot,\cdot\rangle : H^n \times H^n \to H^{2n}$ then satisfies</p>
+    <div class="dm">$$\langle F^*\alpha,\; F^*\alpha'\rangle \;=\; q^n\cdot\langle\alpha,\,\alpha'\rangle.$$</div>
+    <p>Setting $\alpha' = \bar\alpha$ (complex conjugate via the Betti comparison isomorphism):</p>
+    <div class="dm">$$q^n\cdot Q(\alpha,\bar\alpha) \;=\; \langle F^*\alpha,\;F^*\bar\alpha\rangle \;=\; \langle\lambda\alpha,\;\bar\lambda\bar\alpha\rangle \;=\; |\lambda|^2\cdot Q(\alpha,\bar\alpha).$$</div>
+    <p>The Hodge Index Theorem guarantees $Q(\alpha,\bar\alpha) \neq 0$ since $\alpha$ is a nonzero primitive class. Dividing both sides:</p>
+    <div class="dm">$$|\lambda|^2 = q^n. \qquad\square$$</div>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Scope of the Argument</div>
+    <p>This is Serre&rsquo;s approach: it uses the Hodge-theoretic comparison isomorphism (valid over $\mathbb{C}$) in an essential way. Deligne&rsquo;s full proof (1974) works directly over $\mathbb{F}_q$ via the theory of weights in $\ell$-adic sheaves. Serre&rsquo;s argument nonetheless captures the geometric heart of <em>why</em> the Riemann Hypothesis holds.</p>
+  </div>
+</section>
+
+<!-- ===== §2 ===== -->
+<section class="sec" id="s2">
+  <div class="sh"><span class="sh-num">&sect; 2</span><h2>&Eacute;tale Morphisms</h2></div>
+  <hr class="sh-rule">
+
+  <p>To build &eacute;tale cohomology we need an algebraic replacement for the classical notion of &ldquo;open cover.&rdquo; The key players are <em>&eacute;tale morphisms</em> &mdash; the algebraic geometry analogue of local diffeomorphisms.</p>
+
+  <h3>Definitions</h3>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Unramified Morphism</div>
+    <p>A morphism $f: X \to Y$ (locally of finite presentation) is <strong>unramified</strong> if the sheaf of relative K&auml;hler differentials vanishes:</p>
+    <div class="dm">$$\Omega_{X/Y} = 0.$$</div>
+    <p><strong>Equivalently:</strong> For every point $x \in X$ with $y = f(x)$, the residue field extension $\kappa(y) \hookrightarrow \kappa(x)$ is finite and <em>separable</em>, and $\mathfrak{m}_y\cdot\mathcal{O}_{X,x} = \mathfrak{m}_x$.</p>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; &Eacute;tale Morphism</div>
+    <p>A morphism $f: X \to Y$ is <strong>&eacute;tale</strong> if it is simultaneously:</p>
+    <ul class="bl">
+      <li>Locally of finite presentation,</li>
+      <li>Flat (fibers deform continuously in families), and</li>
+      <li>Unramified (separable residue field extensions, no ramification).</li>
+    </ul>
+  </div>
+
+  <h3>Three Equivalent Characterizations</h3>
+
+  <div class="pl">
+    <div class="pi">
+      <span class="pn">1</span>
+      <span><strong>Smooth of relative dimension $0$.</strong> The morphism is smooth and all geometric fibers are discrete (finite as schemes, i.e., zero-dimensional).</span>
+    </div>
+    <div class="pi">
+      <span class="pn">2</span>
+      <span><strong>Formally &eacute;tale (infinitesimal lifting property).</strong> For any ring $A$ and nilpotent ideal $I \subset A$ with $I^2 = 0$, any compatible maps $\operatorname{Spec}(A/I) \to X$ and $\operatorname{Spec}(A) \to Y$ over $f$ admit a <em>unique</em> lift $\operatorname{Spec}(A) \to X$. This is the algebraic version of being a local isomorphism.</span>
+    </div>
+    <div class="pi">
+      <span class="pn">3</span>
+      <span><strong>Locally standard &eacute;tale.</strong> For every $x \in X$ with $f(x) = y$, there exist affine open neighborhoods $x \in U$ and $y \in V$ such that $f|_U : U \to V$ is isomorphic to the natural map $$\operatorname{Spec}\,R[t]/(g)\,[1/g'] \;\longrightarrow\; \operatorname{Spec}\,R,$$ where $g \in R[t]$ is monic and $g'(t) \pmod{g}$ is a unit in $R[t]/(g)$.</span>
+    </div>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Slogan &mdash; Standard &Eacute;tale Maps</div>
+    <p>The map $\operatorname{Spec}\,R[t]/(g)[1/g'] \to \operatorname{Spec}\,R$ &ldquo;extracts a root of $g$&rdquo; and inverts the derivative. The condition that $g'$ is a unit modulo $g$ means exactly that <strong>$g$ has no repeated roots in any fiber</strong>. &Eacute;tale morphisms are precisely those locally of this form.</p>
+  </div>
+
+  <h3>Examples</h3>
+
+  <div class="eg-grid">
+    <div class="eg-card">
+      <div class="ec-t">Open Immersions</div>
+      <p>Any open immersion $j: U \hookrightarrow X$ is &eacute;tale. It is flat and unramified (residue fields are unchanged). Open immersions are the prototypical &eacute;tale morphisms.</p>
+    </div>
+    <div class="eg-card">
+      <div class="ec-t">Multiplication by $n$ on $\mathbb{G}_m$</div>
+      <p>The map $[n]: \mathbb{G}_m \to \mathbb{G}_m$, $t \mapsto t^n$, is &eacute;tale when $n$ is invertible in the base. Here $g(s) = s^n - t$ with derivative $ns^{n-1}$, a unit when $n \in R^\times$.</p>
+    </div>
+    <div class="eg-card">
+      <div class="ec-t">Finite Separable Extensions</div>
+      <p>If $L/k$ is a finite separable field extension, then $\operatorname{Spec}\,L \to \operatorname{Spec}\,k$ is &eacute;tale (finite &eacute;tale). Separability is exactly the unramifiedness condition.</p>
+    </div>
+    <div class="eg-card">
+      <div class="ec-t">$n$-th Root Covers</div>
+      <p>The standard &eacute;tale cover extracting an $n$-th root: $$\operatorname{Spec}\,\mathbb{Z}[1/n][t^{\pm1}]/(t^n - a)\;\to\;\operatorname{Spec}\,\mathbb{Z}[1/n].$$ Inverting $n$ ensures $nt^{n-1}$ is a unit.</p>
+    </div>
+    <div class="eg-card">
+      <div class="ec-t">&Eacute;tale but Not Finite &Eacute;tale</div>
+      <p>The open immersion $\mathbb{G}_m \hookrightarrow \mathbb{A}^1$ is &eacute;tale but not proper, hence not finite &eacute;tale. Finite &eacute;taleness requires properness in addition.</p>
+    </div>
+    <div class="eg-card bad">
+      <div class="ec-t">&#9888; Non-Example: Frobenius in char $p$</div>
+      <p>The absolute Frobenius $F_X : X \to X$ in characteristic $p$ is <em>never</em> &eacute;tale. Residue field extensions $\kappa(x)^p \hookrightarrow \kappa(x)$ are purely inseparable &mdash; the opposite of separable.</p>
+    </div>
+  </div>
+
+  <h3>Stability Properties</h3>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; Closure Under Standard Operations</div>
+    <p>&Eacute;tale morphisms are stable under:</p>
+    <ul class="bl">
+      <li><strong>Composition:</strong> if $f: X \to Y$ and $g: Y \to Z$ are &eacute;tale, so is $g \circ f$.</li>
+      <li><strong>Base change:</strong> if $f: X \to Y$ is &eacute;tale and $Y' \to Y$ is any morphism, then $X \times_Y Y' \to Y'$ is &eacute;tale.</li>
+      <li><strong>2-out-of-3:</strong> if $g \circ f$ and $g$ are &eacute;tale, then $f$ is &eacute;tale. <em>(Use the cotangent exact sequence $f^*\Omega_{Y/Z} \to \Omega_{X/Z} \to \Omega_{X/Y} \to 0$.)</em></li>
+      <li><strong>Open immersions:</strong> any open immersion is &eacute;tale (as noted above).</li>
+    </ul>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Key Theorem &mdash; Isomorphism on Complete Local Rings</div>
+    <p>If $f: X \to Y$ is &eacute;tale with $f(x) = y$, the induced map on complete local rings is an isomorphism:</p>
+    <div class="dm">$$\hat{\mathcal{O}}_{Y,y} \;\xrightarrow{\;\;\sim\;\;}\; \hat{\mathcal{O}}_{X,x}.$$</div>
+    <p>This is the algebraic analogue of &ldquo;local diffeomorphisms induce isomorphisms on completions.&rdquo; It follows from the formally &eacute;tale lifting property via Hensel&rsquo;s lemma: any &eacute;tale morphism has a unique lifting property through successive nilpotent thickenings.</p>
+  </div>
+</section>
+
+<!-- ===== §3 ===== -->
+<section class="sec" id="s3">
+  <div class="sh"><span class="sh-num">&sect; 3</span><h2>Grothendieck Topologies and the &Eacute;tale Site</h2></div>
+  <hr class="sh-rule">
+
+  <h3>What Do We Need to Define Sheaves?</h3>
+  <p>A sheaf on a topological space $X$ assigns sections to open sets such that local sections agree on overlaps and glue uniquely. Grothendieck observed that to set this up, you need only three ingredients:</p>
+
+  <div class="pl">
+    <div class="pi">
+      <span class="pn" style="color:var(--violet);">(i)</span>
+      <span>A <strong>category</strong> $\mathcal{C}$ of &ldquo;open sets&rdquo; with morphisms playing the role of inclusions.</span>
+    </div>
+    <div class="pi">
+      <span class="pn" style="color:var(--violet);">(ii)</span>
+      <span>A notion of <strong>covering families:</strong> for each $U \in \mathcal{C}$, a specified collection of morphisms $\{U_i \to U\}$ counting as &ldquo;covers of $U$.&rdquo;</span>
+    </div>
+    <div class="pi">
+      <span class="pn" style="color:var(--violet);">(iii)</span>
+      <span><strong>Fiber products</strong> $U_i \times_U U_j$, playing the role of pairwise intersections where gluing conditions live.</span>
+    </div>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Grothendieck Topology and Site</div>
+    <p>A <strong>Grothendieck topology</strong> on a category $\mathcal{C}$ assigns, to each object $U$, a set of <em>covering families</em> $\{U_i \to U\}_{i \in I}$, satisfying:</p>
+    <ul class="bl">
+      <li><strong>(Isomorphisms cover.)</strong> If $V \xrightarrow{\sim} U$ is an isomorphism, then $\{V \to U\}$ is a cover.</li>
+      <li><strong>(Stability under base change.)</strong> If $\{U_i \to U\}$ is a cover and $V \to U$ is any morphism, then $\{U_i \times_U V \to V\}$ covers $V$.</li>
+      <li><strong>(Transitivity.)</strong> If $\{U_i \to U\}$ covers $U$, and for each $i$ the family $\{V_{ij} \to U_i\}$ covers $U_i$, then $\{V_{ij} \to U\}$ covers $U$.</li>
+    </ul>
+    <p style="margin-top:10px">A <strong>site</strong> is a pair $(\mathcal{C},\tau)$ of a category with a Grothendieck topology.</p>
+  </div>
+
+  <h3>The Three Key Examples</h3>
+
+  <div class="env ex">
+    <div class="env-lb">Example 1 &mdash; Classical (Zariski) Site</div>
+    <p>For a topological space $X$: take $\mathcal{C} = \mathbf{Open}(X)$ (open subsets, ordered by inclusion) and declare $\{U_i \hookrightarrow U\}$ a cover iff $\bigcup_i U_i = U$. Sheaves on this site are exactly the classical sheaves on $X$.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example 2 &mdash; Smooth (Manifold) Site</div>
+    <p>For a smooth manifold $M$: take $\mathcal{C}$ to consist of open subsets $U \subset M$ admitting a diffeomorphism $U \cong \mathbb{R}^n$, with covering families being smooth atlases (surjective families of local diffeomorphisms). This site sees the smooth structure, not just the topology.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example 3 &mdash; Small &Eacute;tale Site $X_{\operatorname{\acute{e}t}}$</div>
+    <p>For a scheme $X$, the <strong>small &eacute;tale site</strong> has:</p>
+    <ul class="bl">
+      <li><strong>Objects:</strong> pairs $(U, f)$ where $f: U \to X$ is &eacute;tale (the category of &eacute;tale $X$-schemes).</li>
+      <li><strong>Morphisms:</strong> $X$-morphisms between &eacute;tale schemes over $X$ (automatically &eacute;tale by the 2-of-3 property).</li>
+      <li><strong>Covering families:</strong> $\{f_i: U_i \to U\}$ with $\bigcup_i f_i(U_i) = U$ &mdash; surjective families of &eacute;tale maps.</li>
+    </ul>
+    <p style="margin-top:8px">Every Zariski open cover is an &eacute;tale cover (open immersions are &eacute;tale), but the &eacute;tale site has many more covers, including finite separable field extensions of residue fields.</p>
+  </div>
+
+  <h3>Comparing the Three Sites</h3>
+
+  <table class="ctbl">
+    <thead>
+      <tr>
+        <th>Site</th>
+        <th>Category $\mathcal{C}$</th>
+        <th>Covering families</th>
+        <th>What it sees</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Zariski</strong></td>
+        <td>Open subsets of $X$</td>
+        <td>Surjective open covers</td>
+        <td>Geometry of opens; misses arithmetic</td>
+      </tr>
+      <tr>
+        <td><strong>Manifold / smooth</strong></td>
+        <td>Coordinate patches $U \cong \mathbb{R}^n$</td>
+        <td>Smooth atlases</td>
+        <td>Smooth and analytic structure</td>
+      </tr>
+      <tr>
+        <td><strong>&Eacute;tale</strong> $X_{\operatorname{\acute{e}t}}$</td>
+        <td>&Eacute;tale $X$-schemes $U \to X$</td>
+        <td>Surjective &eacute;tale families</td>
+        <td>Separable extensions; arithmetic of residue fields</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Sheaves on a Site</h3>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Sheaf on a Site</div>
+    <p>A <strong>presheaf</strong> on a site $(\mathcal{C},\tau)$ is a contravariant functor $\mathcal{F}: \mathcal{C}^{\mathrm{op}} \to \mathbf{Ab}$ (or sets, rings, &hellip;). It is a <strong>sheaf</strong> if for every covering family $\{U_i \to U\}$, the sequence</p>
+    <div class="dm">$$\mathcal{F}(U) \;\longrightarrow\; \prod_{i}\,\mathcal{F}(U_i) \;\rightrightarrows\; \prod_{i,j}\,\mathcal{F}(U_i \times_U U_j)$$</div>
+    <p>is an equalizer: sections on $U$ are uniquely determined by compatible sections on the covering pieces.</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Why the &Eacute;tale Topology?</div>
+    <p>The Zariski topology is too coarse: constant sheaves like $\mathbb{Z}/n\mathbb{Z}$ have <em>zero cohomology</em> in all positive degrees on any connected normal scheme, completely missing the topological content. The &eacute;tale topology is the <strong>minimal refinement</strong> that (1) makes finite separable extensions into covers so the topology sees arithmetic, and (2) still supports a workable cohomological formalism. Over $\mathbb{C}$, &eacute;tale cohomology of constant sheaves recovers singular cohomology.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Preview &mdash; Next Lecture</div>
+    <p>With sites and sheaves in hand, we will define <strong>&eacute;tale cohomology</strong> $H^i_{\operatorname{\acute{e}t}}(X, \mathcal{F})$ as the right derived functors of global sections on the &eacute;tale site. The key comparison theorem:</p>
+    <div class="dm">$$H^i_{\operatorname{\acute{e}t}}(X,\,\mathbb{Z}/n\mathbb{Z}) \;\cong\; H^i_{\mathrm{sing}}(X(\mathbb{C}),\,\mathbb{Z}/n\mathbb{Z})$$</div>
+    <p>for $X$ smooth and proper over $\mathbb{C}$. This is what justifies &eacute;tale cohomology as the correct algebro-geometric replacement for singular cohomology over arbitrary fields.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>Étale Cohomology Seminar 2026 &middot; Meeting 2 &middot; September 4, 2026</span>
+  <span>Notes based on Daniel Litt's Lecture 2</span>
+</footer>
+
+</div>
+</body>
+</html>

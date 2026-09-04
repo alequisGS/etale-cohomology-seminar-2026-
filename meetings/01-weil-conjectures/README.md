@@ -2,6 +2,8 @@
 
 **Litt lecture:** Lecture 1
 
+**Status:** Materials in progress.
+
 Topics:
 
 - Introduction
