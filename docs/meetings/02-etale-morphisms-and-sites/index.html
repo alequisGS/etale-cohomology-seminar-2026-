@@ -310,9 +310,41 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
 
   <div class="env rmk">
     <div class="env-lb">Key Theorem &mdash; Isomorphism on Complete Local Rings</div>
-    <p>If $f: X \to Y$ is &eacute;tale with $f(x) = y$, the induced map on complete local rings is an isomorphism:</p>
-    <div class="dm">$$\hat{\mathcal{O}}_{Y,y} \;\xrightarrow{\;\;\sim\;\;}\; \hat{\mathcal{O}}_{X,x}.$$</div>
-    <p>This is the algebraic analogue of &ldquo;local diffeomorphisms induce isomorphisms on completions.&rdquo; It follows from the formally &eacute;tale lifting property via Hensel&rsquo;s lemma: any &eacute;tale morphism has a unique lifting property through successive nilpotent thickenings.</p>
+    <p>Let $X$ and $Y$ be varieties over an algebraically closed field $k$, and let $f: X \to Y$ be &eacute;tale. For a closed point $x \in X$, with $y = f(x)$, the induced map on complete local rings is an isomorphism:</p>
+    <div class="dm">$$\widehat{\mathcal{O}}_{Y,y} \;\xrightarrow{\;\;\sim\;\;}\; \widehat{\mathcal{O}}_{X,x}.$$</div>
+    <p>Under these hypotheses, this is the algebraic analogue of &ldquo;local diffeomorphisms induce isomorphisms on completions.&rdquo;</p>
+  </div>
+
+  <h3>Exercises from Litt's Lecture 2</h3>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 1 &mdash; Standard &Eacute;tale Morphisms</div>
+    <p>Let $R$ be a ring and consider a standard &eacute;tale $R$-algebra</p>
+    <div class="dm">$$B = R[t]_h/(g),$$</div>
+    <p>where $g \in R[t]$ is monic and the image of $g'$ in $B$ is a unit. Prove that</p>
+    <div class="dm">$$\operatorname{Spec} B \to \operatorname{Spec} R$$</div>
+    <p>is &eacute;tale. <em>What to check:</em> locally of finite presentation, flat, and unramified.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 2 &mdash; The Power Map on the Multiplicative Group</div>
+    <p>Assume $n$ is invertible in the base. Prove that</p>
+    <div class="dm">$$[n]: \mathbb{G}_m \to \mathbb{G}_m,\qquad t \mapsto t^n$$</div>
+    <p>is &eacute;tale. <em>Hint:</em> $\frac{d(t^n)}{dt} = n t^{n-1}$ (over a field $k$, this condition is $\operatorname{char}(k) \nmid n$).</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 3 &mdash; 2-out-of-3 for &Eacute;tale Morphisms</div>
+    <p>For composable morphisms</p>
+    <div class="dm">$$X \xrightarrow{\;\psi\;} Y \xrightarrow{\;\varphi\;} Z,$$</div>
+    <p>prove the 2-out-of-3 assertion stated above: if $\varphi$ and $\varphi \circ \psi$ are &eacute;tale, then $\psi$ is &eacute;tale. <em>Hint:</em> use formal &eacute;taleness or the cotangent exact sequence.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 4 &mdash; Completed Local Rings at Closed Points</div>
+    <p>Let $k$ be an algebraically closed field, let $X$ and $Y$ be varieties over $k$, and let $f: X \to Y$ be &eacute;tale. If $x \in X$ is a closed point and $y = f(x)$, prove that the induced map</p>
+    <div class="dm">$$\widehat{\mathcal{O}}_{Y,y} \to \widehat{\mathcal{O}}_{X,x}$$</div>
+    <p>is an isomorphism. <em>Hint:</em> use the criterion/formal lifting property for formal &eacute;taleness, applying it to successive infinitesimal neighborhoods.</p>
   </div>
 </section>
 
