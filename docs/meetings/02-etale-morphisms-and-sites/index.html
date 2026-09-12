@@ -342,7 +342,17 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
     <div class="env-lb">Exercise 3 &mdash; 2-out-of-3 for &Eacute;tale Morphisms</div>
     <p>For composable morphisms</p>
     <div class="dm">$$X \xrightarrow{\;\psi\;} Y \xrightarrow{\;\varphi\;} Z,$$</div>
-    <p>prove the 2-out-of-3 assertion stated above: if $\varphi$ and $\varphi \circ \psi$ are &eacute;tale, then $\psi$ is &eacute;tale. <em>Hint:</em> use formal &eacute;taleness or the cotangent exact sequence.</p>
+    <p>prove the 2-out-of-3 assertion stated above: if $\varphi$ and $\varphi \circ \psi$ are &eacute;tale, then $\psi$ is &eacute;tale.</p>
+    <div class="proof">
+      <div class="proof-lb">Proof</div>
+      <p>By <a href="https://stacks.math.columbia.edu/tag/0616">Stacks Project, Tag 0616</a>, it is enough to prove that $\psi$ is locally of finite presentation and formally &eacute;tale.</p>
+      <p>First, $\psi$ is locally of finite presentation. Indeed, $\varphi \circ \psi$ is locally of finite presentation and $\varphi$ is locally of finite type because both morphisms are &eacute;tale. The cancellation result for local finite presentation therefore applies (see <a href="https://stacks.math.columbia.edu/tag/02FV">Stacks Project, Tag 02FV</a>).</p>
+      <p>It remains to prove that $\psi$ is formally &eacute;tale. Let $T_0 \hookrightarrow T$ be a square-zero thickening, and suppose that maps $a_0:T_0\to X$ and $b:T\to Y$ satisfy $\psi\circ a_0=b|_{T_0}$. After composing $b$ with $\varphi$, formal &eacute;taleness of $\varphi\circ\psi$ gives a unique map $a:T\to X$ extending $a_0$ such that</p>
+      <div class="dm">$$(\varphi\circ\psi)\circ a=\varphi\circ b.$$</div>
+      <p>The maps $\psi\circ a$ and $b$ from $T$ to $Y$ agree on $T_0$ and have the same composite with $\varphi$. Since $\varphi$ is formally &eacute;tale, uniqueness in its lifting property gives $\psi\circ a=b$. The uniqueness of $a$ as a lift over $Y$ follows from its uniqueness as a lift through $\varphi\circ\psi$. Thus $\psi$ is formally &eacute;tale.</p>
+      <p>Therefore $\psi$ is locally of finite presentation and formally &eacute;tale, so Tag 0616 implies that $\psi$ is &eacute;tale.</p>
+      <div class="qed">$\square$</div>
+    </div>
   </div>
 
   <div class="env ex">
