@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meeting 3 Notes | Étale Cohomology Seminar 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,macros:{'\\\\CH':'\\\\operatorname{CH}','\\\\Spec':'\\\\operatorname{Spec}'}})">
+</script>
+<style>
+:root {
+  --bg:#F5F2EB; --card:#FEFCF5; --text:#1C1929; --muted:#6E6882; --border:#DDD8CC;
+  --blue:#1A5FA3; --blue-lt:#EAF2FB;
+  --green:#146840; --green-lt:#E8F5EE;
+  --amber:#875010; --amber-lt:#FBF2E5;
+  --violet:#5B338E; --violet-lt:#F1EBFA;
+  --inv:#1C1929; --inv-tx:#EDE8DB; --inv-hi:#5FDFAA;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.82;}
+.wrap{max-width:840px;margin:0 auto;padding:60px 32px 100px;}
+a{color:var(--blue);}
+
+/* Header */
+.lh{margin-bottom:40px;}
+.lh-tag{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);border-radius:20px;padding:3px 12px;margin-bottom:18px;}
+.lh h1{font-size:34px;font-weight:700;line-height:1.18;letter-spacing:0;margin-bottom:18px;}
+.lh-meta{display:flex;flex-wrap:wrap;gap:18px 28px;font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px;}
+
+/* Logistics */
+.notice{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:13px 18px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted);margin-bottom:38px;line-height:1.6;}
+.notice b{color:var(--text);}
+
+/* TOC */
+.toc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 26px;margin-bottom:54px;}
+.toc-hd{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.toc ol{list-style:none;counter-reset:toc;}
+.toc li{counter-increment:toc;font-family:'Inter',sans-serif;font-size:14px;padding:4px 0;}
+.toc li::before{content:counter(toc)". ";color:var(--muted);font-size:12px;font-weight:600;}
+.toc a{color:var(--blue);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+
+/* Sections */
+.sec{margin-bottom:64px;}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.sh-num{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.05em;color:#fff;background:var(--muted);border-radius:5px;padding:3px 9px;white-space:nowrap;}
+.sh h2{font-size:23px;font-weight:700;letter-spacing:0;line-height:1.2;}
+.sh-rule{border:none;border-top:1px solid var(--border);margin:8px 0 26px;}
+h3{font-size:17px;font-weight:700;margin:34px 0 10px;}
+p{margin-bottom:14px;}
+p:last-child{margin-bottom:0;}
+ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
+
+/* Math environments */
+.env{border-left:4px solid;border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.env-lb{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;}
+.def{border-color:var(--blue);background:var(--blue-lt);}
+.def .env-lb{color:var(--blue);}
+.thm{border-color:var(--green);background:var(--green-lt);}
+.thm .env-lb{color:var(--green);}
+.ex{border-color:var(--amber);background:var(--amber-lt);}
+.ex .env-lb{color:var(--amber);}
+.rmk{border-color:var(--violet);background:var(--violet-lt);}
+.rmk .env-lb{color:var(--violet);}
+
+/* Slogan */
+.slogan{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:18px 24px;margin:22px 0;}
+.slogan-lb{font-family:'Inter',sans-serif;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--inv-hi);margin-bottom:7px;}
+.slogan p{color:var(--inv-tx);font-style:italic;margin:0;}
+.slogan strong{color:#fff;font-style:normal;}
+
+/* Proof */
+.proof{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:16px 0;font-size:15.5px;line-height:1.78;}
+.proof-lb{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--muted);font-style:italic;margin-bottom:8px;}
+.qed{text-align:right;color:var(--muted);margin-top:8px;}
+
+/* Prop list */
+.pl{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:16px 0;}
+.pi{display:flex;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border);align-items:flex-start;font-size:15.5px;line-height:1.72;}
+.pi:last-child{border-bottom:none;}
+.pn{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;color:var(--blue);min-width:22px;padding-top:4px;flex-shrink:0;}
+
+/* Example cards */
+.eg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.eg-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:8px;padding:14px 16px;font-size:15.5px;line-height:1.68;}
+.eg-card.bad{border-top-color:#a33;}
+.ec-t{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:7px;}
+.eg-card.bad .ec-t{color:#a33;}
+
+/* Comparison table */
+.ctbl{width:100%;border-collapse:collapse;font-family:'Inter',sans-serif;font-size:13px;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.ctbl thead th{background:var(--inv);color:var(--inv-tx);padding:11px 14px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.04em;}
+.ctbl td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55;background:var(--card);}
+.ctbl tr:last-child td{border-bottom:none;}
+.ctbl tr:nth-child(even) td{background:#F9F6EF;}
+
+/* Display math */
+.dm{overflow-x:auto;text-align:center;margin:12px 0;padding:4px 0;}
+
+/* Footer */
+.foot{border-top:1px solid var(--border);margin-top:60px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);}
+
+@media(max-width:620px){
+  .wrap{padding:36px 18px 72px;}
+  body{font-size:16px;}
+  .lh h1{font-size:26px;}
+  .sh h2{font-size:20px;}
+  .eg-grid{grid-template-columns:1fr;}
+  .ctbl{font-size:12px;}
+  .ctbl td,.ctbl thead th{padding:9px 10px;}
+}
+.back-link{display:inline-flex;margin-bottom:24px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--blue);text-decoration:none;}
+.back-link:hover{text-decoration:underline;}
+.seminar-note{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:16px 20px;margin:0 0 26px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;}
+.seminar-note b{color:#fff;}
+.seminar-note a{color:var(--inv-hi);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back-link" href="../../index.html#pilot">&larr; Back to seminar site</a>
+
+<header class="lh">
+  <div class="lh-tag">&Eacute;tale Seminar 2026 &middot; Meeting 3</div>
+  <h1>Sites, Sheaves, and the<br>Origins of &Eacute;tale Cohomology</h1>
+  <div class="lh-meta">
+    <span>Based on Daniel Litt's Lecture 3</span>
+    <span>Seminar meeting: Friday, September 18, 2026</span>
+    <span>17:00-18:30 Lima / 19:00-20:30 Bras&iacute;lia</span>
+  </div>
+</header>
+
+<div class="seminar-note">
+  <b>Seminar context:</b> These notes are adapted for Meeting 3 of the &Eacute;tale Cohomology Seminar 2026. The mathematical curriculum is based on <a href="https://www.daniellitt.com/tale-cohomology/">Daniel Litt's course</a>, with additional examples and previews included for our discussion; the timing, meeting format, Problem of the Week workflow, and discussion structure belong to this seminar. Google Meet details are sent privately to confirmed participants.
+</div>
+
+<div class="notice">
+  <b>Last time:</b> we worked through the exercises from Litt&rsquo;s Lecture 2, including standard &eacute;tale morphisms and the 2-out-of-3 property.&emsp;
+  <b>This meeting:</b> the general machinery of Grothendieck topologies, sheaves on a site, and the first genuinely subtle phenomenon of the &eacute;tale topology &mdash; epimorphisms that are not surjective on sections.
+</div>
+
+<div class="toc">
+  <div class="toc-hd">Contents</div>
+  <ol>
+    <li><a href="#s1">Motivation for Sites</a></li>
+    <li><a href="#s2">Grothendieck Topologies: Definition and Examples</a></li>
+    <li><a href="#s3">Presheaves and Sheaves on a Site</a></li>
+    <li><a href="#s4">Representable Functors Are Sheaves</a></li>
+    <li><a href="#s5">&Eacute;tale Cohomology, Defined</a></li>
+    <li><a href="#s6">A Warning: $\mathbb{G}_m \xrightarrow{n} \mathbb{G}_m$ Is Not an Epimorphism on $X_{\mathrm{Zar}}$</a></li>
+    <li><a href="#s7">Maps of Sites</a></li>
+  </ol>
+</div>
+
+<!-- ===== §1 ===== -->
+<section class="sec" id="s1">
+  <div class="sh"><span class="sh-num">&sect; 1</span><h2>Motivation for Sites</h2></div>
+  <hr class="sh-rule">
+
+  <p>Last time we built &eacute;tale morphisms &mdash; the algebraic replacement for local diffeomorphisms. The goal now is to <strong>generalize topological spaces and sheaves</strong> so that &ldquo;&eacute;tale covers&rdquo; can play the role that open covers play classically. Unwinding what a sheaf actually needs, two ingredients stand out:</p>
+
+  <div class="pl">
+    <div class="pi">
+      <span class="pn" style="color:var(--violet);">(i)</span>
+      <span>A <strong>notion of covering</strong> &mdash; we no longer have literal open subsets, so &ldquo;cover&rdquo; must become data attached to a category, not a topological fact about subsets.</span>
+    </div>
+    <div class="pi">
+      <span class="pn" style="color:var(--violet);">(ii)</span>
+      <span>A <strong>notion of intersection</strong> &mdash; classically $U_i \cap U_j$ is where gluing conditions live. Its abstract replacement is the <strong>fiber product</strong> $U_i \times_U U_j$.</span>
+    </div>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">The Idea</div>
+    <p>A <strong>Grothendieck topology</strong> is exactly enough extra structure on an abstract category $\mathcal{C}$ to say what a &ldquo;covering family&rdquo; is and to make sense of intersections &mdash; enough, in short, to define sheaves and their cohomology without ever mentioning points.</p>
+  </div>
+</section>
+
+<!-- ===== §2 ===== -->
+<section class="sec" id="s2">
+  <div class="sh"><span class="sh-num">&sect; 2</span><h2>Grothendieck Topologies: Definition and Examples</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Grothendieck Topology / Site</div>
+    <p>A <strong>Grothendieck topology</strong> on a category $\mathcal{C}$ is the data of, for every $X \in \operatorname{Ob}(\mathcal{C})$, a collection of sets of morphisms $\{X_\alpha \to X\}$, called <strong>covering families</strong>, such that:</p>
+    <ul class="bl">
+      <li><strong>Fiber products exist and are compatible with covers.</strong> If $X_\alpha \to X$ appears in a covering family and $Y \to X$ is an arbitrary morphism, then $X_\alpha \times_X Y$ exists. (Intersecting a cover with an arbitrary map still gives a cover: if $\{X_\alpha \to X\}$ is a covering family and $Y \to X$ is arbitrary, then $\{X_\alpha \times_X Y \to Y\}$ is a covering family of $Y$.)</li>
+      <li><strong>Composition of covers is a cover.</strong> If $\{X_\alpha \to X\}$ and, for each $\alpha$, $\{X_{\alpha\beta} \to X_\alpha\}$ are covering families, then $\{X_{\alpha\beta} \to X\}$ is a covering family.</li>
+      <li><strong>Isomorphisms are covers.</strong> If $X \xrightarrow{\sim} Y$ is an isomorphism, then $\{X \to Y\}$ is a covering family.</li>
+    </ul>
+    <p style="margin-top:10px">A <strong>site</strong> is a category $\mathcal{C}$ equipped with a Grothendieck topology.</p>
+  </div>
+
+  <h3>Five Examples, Ranging From Classical to Exotic</h3>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Classical (Zariski) Site of a Topological Space</div>
+    <p>Let $X$ be a topological space. Take $\mathcal{C} = \mathrm{Open}(X)$: objects are open subsets $U \subset X$, and there is a unique morphism $U \to V$ iff $U \subset V$. A family $\{U_i \to U\}$ is a covering family iff $\bigcup_i U_i = U$. This recovers ordinary sheaf theory.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Small &Eacute;tale Site $X_{\mathrm{\acute{e}t}}$ of a Scheme</div>
+    <p>Let $X$ be a scheme. Take $\mathcal{C}$ to have objects the &eacute;tale morphisms $U \to X$, with morphisms the $X$-morphisms $U_1 \to U_2$. A family $\{U_\alpha \to U\}$ is a covering family iff $\bigcup_\alpha \mathrm{im}(U_\alpha) = U$ and every $U_\alpha \to U$ is &eacute;tale.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Big &Eacute;tale Site $X_{\mathrm{Et}}$</div>
+    <p>Take $\mathcal{C}$ to have objects <em>all</em> $X$-schemes (not just &eacute;tale ones). A family $\{U_\alpha \to U\}$ is a covering family iff every $f_\alpha$ is &eacute;tale and $\bigcup_\alpha \mathrm{im}(U_\alpha) = U$. The small site $X_{\mathrm{\acute{e}t}}$ sits inside $X_{\mathrm{Et}}$ as a full subcategory.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; The $\mathrm{fppf}$ Topology</div>
+    <p>(&ldquo;<em>fid&egrave;lement plate et de pr&eacute;sentation finie</em>&rdquo; &mdash; faithfully flat, finite presentation.) Take $\mathcal{C} = X_{\mathrm{fppf}}$ with objects all $X$-schemes $U \to X$ of finite presentation, and covering families those $\{U_\alpha \to U\}$ that are jointly faithfully flat. This topology is coarser to define than &eacute;tale (no unramifiedness needed) but has more covers, and is essential for descent arguments.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Other Sites You Will Meet</div>
+    <p>The <strong>Nisnevich</strong>, <strong>crystalline</strong>, <strong>infinitesimal</strong>, and <strong>cdh</strong> sites are all variations on the same theme, tuned to different problems (motivic homotopy theory, $p$-adic Hodge theory, resolution of singularities). There is also the small <strong>Zariski site</strong> $X_{\mathrm{Zar}}$ of a scheme $X$: objects are open $U \subset X$, morphisms are open immersions, and $\{U_i \hookrightarrow U\}$ covers iff $\bigcup U_i = U$ &mdash; this is literally the classical topological site, now viewed inside the world of schemes.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Complex Analytic Site $X_{\mathrm{an,\acute{e}t}}$</div>
+    <p>For $X$ a complex analytic space, let $X_{\mathrm{an,\acute{e}t}}$ have objects complex analytic spaces $Y \to X$ such that, locally on $Y$, the map is an analytic isomorphism; morphisms and covers are the evident ones. One can check directly that $\mathrm{Sh}(X_{\mathrm{an,\acute{e}t}}) \simeq \mathrm{Sh}(X_{\mathrm{an}})$ &mdash; sheaves on this exotic site agree with ordinary sheaves on the underlying space. (A good warm-up exercise.)</p>
+  </div>
+
+  <h3>Comparing the Sites on a Scheme $X$</h3>
+
+  <table class="ctbl">
+    <thead>
+      <tr>
+        <th>Site</th>
+        <th>Objects</th>
+        <th>Covering families</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>$X_{\mathrm{Zar}}$</strong></td>
+        <td>Open $U \subset X$</td>
+        <td>Open immersions, $\bigcup U_i = U$</td>
+      </tr>
+      <tr>
+        <td><strong>$X_{\mathrm{\acute{e}t}}$</strong> (small)</td>
+        <td>&Eacute;tale $U \to X$</td>
+        <td>&Eacute;tale, jointly surjective</td>
+      </tr>
+      <tr>
+        <td><strong>$X_{\mathrm{Et}}$</strong> (big)</td>
+        <td>All $X$-schemes</td>
+        <td>&Eacute;tale, jointly surjective</td>
+      </tr>
+      <tr>
+        <td><strong>$X_{\mathrm{fppf}}$</strong></td>
+        <td>Finite presentation $X$-schemes</td>
+        <td>Faithfully flat, finite presentation</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== §3 ===== -->
+<section class="sec" id="s3">
+  <div class="sh"><span class="sh-num">&sect; 3</span><h2>Presheaves and Sheaves on a Site</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Presheaf</div>
+    <p>Let $\mathcal{C}$ be a category and $\mathcal{D}$ any category (e.g.&nbsp;sets, abelian groups). A <strong>$\mathcal{D}$-valued presheaf</strong> on $\mathcal{C}$ is a contravariant functor $F : \mathcal{C}^{\mathrm{op}} \to \mathcal{D}$. Note: this definition does not require a Grothendieck topology on $\mathcal{C}$ at all &mdash; presheaves make sense on any category. (For $X$ a topological space, a $\mathcal{D}$-valued presheaf on $X$ in the usual sense is exactly the same thing as a $\mathcal{D}$-valued presheaf on $\mathrm{Open}(X)$.)</p>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Sheaf on a Site</div>
+    <p>A presheaf $F$ (valued in sets, say) on a site $\mathcal{C}$ is a <strong>sheaf</strong> if for every covering family $\{U_\alpha \to U\}$, the diagram</p>
+    <div class="dm">$$F(U) \;\longrightarrow\; \prod_\alpha F(U_\alpha) \;\rightrightarrows\; \prod_{\alpha,\beta} F(U_\alpha \times_U U_\beta)$$</div>
+    <p>is an <strong>equalizer</strong>. Concretely, this says two things:</p>
+    <ul class="bl">
+      <li><strong>Injectivity (separatedness).</strong> $F(U) \to \prod_\alpha F(U_\alpha)$ is injective: the value of $F$ on $U$ is determined by its restrictions to the $U_\alpha$.</li>
+      <li><strong>Gluing.</strong> Given $(s_\alpha) \in \prod_\alpha F(U_\alpha)$ that agree on overlaps &mdash; i.e.&nbsp;$s_\alpha|_{U_\alpha \times_U U_\beta} = s_\beta|_{U_\alpha \times_U U_\beta}$ for all $\alpha,\beta$ &mdash; there exists $s \in F(U)$ restricting to each $s_\alpha$.</li>
+    </ul>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Morphism of (Pre)sheaves</div>
+    <p>A morphism of presheaves (or of sheaves) $F \to G$ is simply a <strong>natural transformation</strong> of functors $\mathcal{C}^{\mathrm{op}} \to \mathcal{D}$.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Sheaves Form an Abelian Category</div>
+    <p>Fix a site $\mathcal{C}$. The category $\mathrm{Sh}(\mathcal{C}, \mathbf{Ab})$ of abelian-group-valued sheaves on $\mathcal{C}$ is an <strong>abelian category with enough injectives</strong>. Kernels of maps of sheaves are computed exactly as for presheaves (kernel is again a sheaf automatically); but be warned &mdash; <strong>cokernels are subtler</strong>: the presheaf cokernel need not already be a sheaf, and one must sheafify. This subtlety is worth sitting with; it is the reason $\mathbb{G}_m \xrightarrow{n} \mathbb{G}_m$ behaves so differently on different sites (see &sect;6 below).</p>
+  </div>
+</section>
+
+<!-- ===== §4 ===== -->
+<section class="sec" id="s4">
+  <div class="sh"><span class="sh-num">&sect; 4</span><h2>Representable Functors Are Sheaves</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; Representable Sheaves</div>
+    <p>Any representable functor $\operatorname{Hom}_{\mathcal{C}}(-, X)$ is a sheaf on $X_{\mathrm{\acute{e}t}}$. Moreover, the same functor, restricted appropriately, is a sheaf on the finer site $X_{\mathrm{fppf}}$.</p>
+  </div>
+
+  <p>This single theorem manufactures most of the sheaves we care about. Four examples:</p>
+
+  <div class="eg-grid">
+    <div class="eg-card">
+      <div class="ec-t">$\mu_n$ &mdash; $n$-th Roots of Unity</div>
+      <p>The functor $U \mapsto \{f \in \mathcal{O}(U)^\times : f^n = 1\}$ is representable by $\operatorname{Spec}\,\mathbb{Z}[t]/(t^n-1)$, so it is a sheaf on $X_{\mathrm{\acute{e}t}}$.</p>
+    </div>
+    <div class="eg-card">
+      <div class="ec-t">Constant Sheaf $\underline{\mathbb{Z}/n\mathbb{Z}}$</div>
+      <p>Represented by $n$ disjoint copies of $X$ (i.e.&nbsp;$\coprod_{\mathbb{Z}/n\mathbb{Z}} X$). We have $\underline{\mathbb{Z}/n\mathbb{Z}}(U) = \operatorname{Hom}(U,\, \mathbb{Z}/n\mathbb{Z}) = $ locally constant functions $U \to \mathbb{Z}/n\mathbb{Z}$.</p>
+    </div>
+    <div class="eg-card">
+      <div class="ec-t">$\mathbb{G}_m$ &mdash; Multiplicative Group</div>
+      <p>$U \mapsto \mathcal{O}(U)^\times$, represented by $\mathbb{G}_{m} = \operatorname{Spec}\,\mathbb{Z}[t^{\pm1}]$. This is the fundamental example for Kummer theory.</p>
+    </div>
+    <div class="eg-card">
+      <div class="ec-t">$\mathbb{P}^1$-Valued Points</div>
+      <p>$U \mapsto \operatorname{Hom}(U, \mathbb{P}^1)$ is representable (by $\mathbb{P}^1$ itself), hence a sheaf on $X_{\mathrm{\acute{e}t}}$ &mdash; and indeed on $X_{\mathrm{fppf}}$.</p>
+    </div>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; &Eacute;tale Cohomology With Values in $\mathbb{Z}/n\mathbb{Z}$: A First Pass</div>
+    <p>We would like to define $H^i_{\mathrm{\acute{e}t}}(X,\, \underline{\mathbb{Z}/n\mathbb{Z}})$ using $\underline{\mathbb{Z}/n\mathbb{Z}}$ as above. Two things need to be checked first: (1) that $\underline{\mathbb{Z}/n\mathbb{Z}}$ really is a sheaf on $X_{\mathrm{\acute{e}t}}$ (it is, by the theorem above); and (2) that the category of abelian-group-valued sheaves on $X_{\mathrm{\acute{e}t}}$ has enough injectives, so that right derived functors make sense.</p>
+  </div>
+</section>
+
+<!-- ===== §5 ===== -->
+<section class="sec" id="s5">
+  <div class="sh"><span class="sh-num">&sect; 5</span><h2>&Eacute;tale Cohomology, Defined</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; &Eacute;tale Cohomology</div>
+    <p>Let $F$ be an abelian-group-valued sheaf on $X_{\mathrm{\acute{e}t}}$. Global sections $\Gamma(X_{\mathrm{\acute{e}t}}, -) = F \mapsto F(X)$ is a left-exact functor $\mathrm{Sh}(X_{\mathrm{\acute{e}t}}, \mathbf{Ab}) \to \mathbf{Ab}$. Since the source category has enough injectives, we define</p>
+    <div class="dm">$$H^i_{\mathrm{\acute{e}t}}(X,\,F) \;:=\; R^i\Gamma(X_{\mathrm{\acute{e}t}},\,F),$$</div>
+    <p>the $i$-th right derived functor of global sections, computed via an injective resolution $F \to I^\bullet$ in $\mathrm{Sh}(X_{\mathrm{\acute{e}t}}, \mathbf{Ab})$.</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Why Go Through All This Machinery?</div>
+    <p>Once cohomology is defined this way, it is automatically functorial, comes with long exact sequences from short exact sequences of sheaves, and specializes correctly: for $X$ a variety over $\mathbb{C}$, $H^i_{\mathrm{\acute{e}t}}(X, \underline{\mathbb{Z}/n\mathbb{Z}})$ recovers ordinary singular cohomology $H^i_{\mathrm{sing}}(X(\mathbb{C}), \mathbb{Z}/n\mathbb{Z})$. None of this is visible from the Zariski topology alone, which is why the extra covers matter.</p>
+  </div>
+</section>
+
+<!-- ===== §6 ===== -->
+<section class="sec" id="s6">
+  <div class="sh"><span class="sh-num">&sect; 6</span><h2>A Warning: $\mathbb{G}_m \xrightarrow{\,n\,} \mathbb{G}_m$ Is Not an Epimorphism on $X_{\mathrm{Zar}}$</h2></div>
+  <hr class="sh-rule">
+
+  <p>Here is the first real surprise of the &eacute;tale topology, and it is worth dwelling on because it is exactly the phenomenon that makes &eacute;tale cohomology see more than Zariski cohomology.</p>
+
+  <div class="env thm">
+    <div class="env-lb">Claim</div>
+    <p>The $n$-th power map of sheaves on $X_{\mathrm{\acute{e}t}}$,</p>
+    <div class="dm">$$[n] : \mathbb{G}_m \longrightarrow \mathbb{G}_m, \qquad f \mapsto f^n,$$</div>
+    <p>is <strong>not</strong> in general an epimorphism of sheaves on $X_{\mathrm{Zar}}$, but <strong>is</strong> an epimorphism of sheaves on $X_{\mathrm{\acute{e}t}}$ (indeed on $X_{\mathrm{fppf}}$), once $n$ is invertible on $X$.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Why it fails on $X_{\mathrm{Zar}}$</div>
+    <p>Take $X = \operatorname{Spec}\,\mathbb{R}$ and $n = 2$. Then $\mathbb{G}_m(X) = \mathbb{R}^\times$, and the map $\mathbb{R}^\times \to \mathbb{R}^\times$, $x \mapsto x^2$, is <strong>not surjective</strong>: $-1$ has no square root in $\mathbb{R}$. Since $\operatorname{Spec}\,\mathbb{R}$ has no nontrivial Zariski covers (it's a single point), surjectivity on global sections is the only thing being asked, and it fails.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Why it succeeds on $X_{\mathrm{\acute{e}t}}$ (or $X_{\mathrm{fppf}}$)</div>
+    <p>A map of sheaves is an epimorphism iff it is <strong>locally surjective</strong>: surjective after passing to a cover. So given $f \in \mathcal{O}(U)^\times$, we need an &eacute;tale cover $\{V \to U\}$ on which $f$ acquires an $n$-th root. Take</p>
+    <div class="dm">$$V \;=\; \operatorname{Spec}\Big(\mathcal{O}(U)[t]/(t^n - f)\Big),$$</div>
+    <p>with structure map $V \to U$. Since $f \in \mathcal{O}(U)^\times$ and $n$ is invertible on $X$, the polynomial $t^n - f$ has derivative $nt^{n-1}$, which is a unit modulo $(t^n - f)$ (because $t$ is a unit there, $t \cdot t^{n-1} = f \cdot(\text{unit})$, so $t^{n-1}$ is a unit, so $nt^{n-1}$ is a unit) &mdash; exactly the standard-&eacute;tale criterion reviewed in <a href="../02-etale-morphisms-and-sites/">Meeting 2</a>. So $V \to U$ is &eacute;tale, and by construction the pullback of $f$ to $V$ is $t^n$, an $n$-th power. Thus $[n]$ is surjective &eacute;tale-locally, i.e.&nbsp;an epimorphism of sheaves on $X_{\mathrm{\acute{e}t}}$.</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Moral</div>
+    <p>&ldquo;Epimorphism&rdquo; in a sheaf category never means &ldquo;surjective on global sections&rdquo; &mdash; it means <strong>surjective after passing to a cover</strong>. Enlarging the site (Zariski $\to$ &eacute;tale $\to$ fppf) enlarges the supply of covers, and hence enlarges the supply of epimorphisms. This is precisely why the Kummer sequence $$1 \to \mu_n \to \mathbb{G}_m \xrightarrow{[n]} \mathbb{G}_m \to 1$$ is exact as sheaves on $X_{\mathrm{\acute{e}t}}$ (with $n$ invertible on $X$) but simply false as a statement about $\mathcal{O}(X)^\times$ on the nose. This is the engine behind Kummer theory and the definition of &eacute;tale cohomology with $\mu_n$-coefficients.</p>
+  </div>
+</section>
+
+<!-- ===== §7 ===== -->
+<section class="sec" id="s7">
+  <div class="sh"><span class="sh-num">&sect; 7</span><h2>Maps of Sites</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Continuous Map of Sites</div>
+    <p>Let $\mathcal{T}, \mathcal{T}'$ be sites. A <strong>continuous map of sites</strong> $f : \mathcal{T} \to \mathcal{T}'$ is a functor $u : \mathcal{T}' \to \mathcal{T}$ (note the direction reversal, exactly as for continuous maps and pullback of opens) such that:</p>
+    <ul class="bl">
+      <li>$u$ preserves fiber products, and</li>
+      <li>$u$ sends covering families to covering families.</li>
+    </ul>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Continuous Maps of Spaces</div>
+    <p>If $f: X \to Y$ is a continuous map of topological spaces, define $u : \mathrm{Open}(Y) \to \mathrm{Open}(X)$ by $u(V) = f^{-1}(V)$. One checks directly that $u$ preserves finite intersections (fiber products in $\mathrm{Open}$) and sends covers to covers, so $u$ is a continuous map of sites $X_{\mathrm{Zar}} \to Y_{\mathrm{Zar}}$ in the sense above &mdash; recovering the ordinary pushforward/pullback formalism for sheaves.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; A Map That Is Not What It Looks Like: $\operatorname{Spec}\,\mathbb{F}_p \to \operatorname{Spec}\,\mathbb{Z}$</div>
+    <p>Consider the inclusion of the closed point $i : \operatorname{Spec}\,\mathbb{F}_p \hookrightarrow \operatorname{Spec}\,\mathbb{Z}$. On the &eacute;tale sites, this induces a map</p>
+    <div class="dm">$$\operatorname{Hom}(\overline{\mathbb{F}}_p,\, \overline{\mathbb{F}}_p) \;\longleftarrow\; \operatorname{Hom}(\operatorname{Spec}\,\overline{\mathbb{F}}_p,\, \operatorname{Spec}\,\mathbb{Z})\big|_{(p)} \;\cong\; \widehat{\mathbb{Z}} \;=\; \operatorname{Gal}(\overline{\mathbb{F}}_p/\mathbb{F}_p),$$</div>
+    <p>identifying decomposition/inertia data at $p$ with the absolute Galois group of the residue field. This is the germ of the entire theory of Frobenius elements and unramified representations &mdash; a preview of why the &eacute;tale fundamental group, defined via automorphisms of fiber functors on $X_{\mathrm{\acute{e}t}}$, will recover $\operatorname{Gal}(\overline{k}/k)$ when $X = \operatorname{Spec}\,k$.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Preview &mdash; Next Meeting</div>
+    <p>Next time: morphisms of sites in greater depth and the first part of fppf descent, following Litt&rsquo;s Lecture 4.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>&Eacute;tale Cohomology Seminar 2026 &middot; Meeting 3 &middot; September 18, 2026</span>
+  <span>Notes based on Daniel Litt's Lecture 3</span>
+</footer>
+
+</div>
+</body>
+</html>
