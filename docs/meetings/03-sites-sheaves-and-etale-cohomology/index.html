@@ -155,6 +155,7 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
     <li><a href="#s5">&Eacute;tale Cohomology, Defined</a></li>
     <li><a href="#s6">A Warning: $\mathbb{G}_m \xrightarrow{n} \mathbb{G}_m$ Is Not an Epimorphism on $X_{\mathrm{Zar}}$</a></li>
     <li><a href="#s7">Maps of Sites</a></li>
+    <li><a href="#s8">Exercises from Litt's Lecture 3</a></li>
   </ol>
 </div>
 
@@ -227,7 +228,7 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
 
   <div class="env ex">
     <div class="env-lb">Example &mdash; Complex Analytic Site $X_{\mathrm{an,\acute{e}t}}$</div>
-    <p>For $X$ a complex analytic space, let $X_{\mathrm{an,\acute{e}t}}$ have objects complex analytic spaces $Y \to X$ such that, locally on $Y$, the map is an analytic isomorphism; morphisms and covers are the evident ones. One can check directly that $\mathrm{Sh}(X_{\mathrm{an,\acute{e}t}}) \simeq \mathrm{Sh}(X_{\mathrm{an}})$ &mdash; sheaves on this exotic site agree with ordinary sheaves on the underlying space. (A good warm-up exercise.)</p>
+    <p>For $X$ a complex analytic space, let $X_{\mathrm{an,\acute{e}t}}$ have objects complex analytic spaces $Y \to X$ such that, locally on $Y$, the map is an analytic isomorphism; morphisms and covers are the evident ones. One can check directly that $\mathrm{Sh}(X_{\mathrm{an,\acute{e}t}}) \simeq \mathrm{Sh}(X_{\mathrm{an}})$ &mdash; sheaves on this exotic site agree with ordinary sheaves on the underlying space. This is Exercise 1 in &sect;8.</p>
   </div>
 
   <h3>Comparing the Sites on a Scheme $X$</h3>
@@ -294,6 +295,7 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
   <div class="env rmk">
     <div class="env-lb">Remark &mdash; Sheaves Form an Abelian Category</div>
     <p>Fix a site $\mathcal{C}$. The category $\mathrm{Sh}(\mathcal{C}, \mathbf{Ab})$ of abelian-group-valued sheaves on $\mathcal{C}$ is an <strong>abelian category with enough injectives</strong>. Kernels of maps of sheaves are computed exactly as for presheaves (kernel is again a sheaf automatically); but be warned &mdash; <strong>cokernels are subtler</strong>: the presheaf cokernel need not already be a sheaf, and one must sheafify. This subtlety is worth sitting with; it is the reason $\mathbb{G}_m \xrightarrow{n} \mathbb{G}_m$ behaves so differently on different sites (see &sect;6 below).</p>
+    <p>The general colimit construction is Exercise 2 in &sect;8.</p>
   </div>
 </section>
 
@@ -363,7 +365,7 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
     <div class="env-lb">Claim</div>
     <p>The $n$-th power map of sheaves on $X_{\mathrm{\acute{e}t}}$,</p>
     <div class="dm">$$[n] : \mathbb{G}_m \longrightarrow \mathbb{G}_m, \qquad f \mapsto f^n,$$</div>
-    <p>is <strong>not</strong> in general an epimorphism of sheaves on $X_{\mathrm{Zar}}$, but <strong>is</strong> an epimorphism of sheaves on $X_{\mathrm{\acute{e}t}}$ (indeed on $X_{\mathrm{fppf}}$), once $n$ is invertible on $X$.</p>
+    <p>is <strong>not</strong> in general an epimorphism of sheaves on $X_{\mathrm{Zar}}$, but <strong>is</strong> an epimorphism of sheaves on $X_{\mathrm{\acute{e}t}}$ once $n$ is invertible on $X$. On $X_{\mathrm{fppf}}$, it is an epimorphism for every $n \geq 1$, with no invertibility hypothesis; this is Exercise 3 in &sect;8.</p>
   </div>
 
   <div class="proof">
@@ -372,7 +374,7 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
   </div>
 
   <div class="proof">
-    <div class="proof-lb">Why it succeeds on $X_{\mathrm{\acute{e}t}}$ (or $X_{\mathrm{fppf}}$)</div>
+    <div class="proof-lb">Why it succeeds on $X_{\mathrm{\acute{e}t}}$</div>
     <p>A map of sheaves is an epimorphism iff it is <strong>locally surjective</strong>: surjective after passing to a cover. So given $f \in \mathcal{O}(U)^\times$, we need an &eacute;tale cover $\{V \to U\}$ on which $f$ acquires an $n$-th root. Take</p>
     <div class="dm">$$V \;=\; \operatorname{Spec}\Big(\mathcal{O}(U)[t]/(t^n - f)\Big),$$</div>
     <p>with structure map $V \to U$. Since $f \in \mathcal{O}(U)^\times$ and $n$ is invertible on $X$, the polynomial $t^n - f$ has derivative $nt^{n-1}$, which is a unit modulo $(t^n - f)$ (because $t$ is a unit there, $t \cdot t^{n-1} = f \cdot(\text{unit})$, so $t^{n-1}$ is a unit, so $nt^{n-1}$ is a unit) &mdash; exactly the standard-&eacute;tale criterion reviewed in <a href="../02-etale-morphisms-and-sites/">Meeting 2</a>. So $V \to U$ is &eacute;tale, and by construction the pullback of $f$ to $V$ is $t^n$, an $n$-th power. Thus $[n]$ is surjective &eacute;tale-locally, i.e.&nbsp;an epimorphism of sheaves on $X_{\mathrm{\acute{e}t}}$.</p>
@@ -400,7 +402,7 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
 
   <div class="env ex">
     <div class="env-lb">Example &mdash; Continuous Maps of Spaces</div>
-    <p>If $f: X \to Y$ is a continuous map of topological spaces, define $u : \mathrm{Open}(Y) \to \mathrm{Open}(X)$ by $u(V) = f^{-1}(V)$. One checks directly that $u$ preserves finite intersections (fiber products in $\mathrm{Open}$) and sends covers to covers, so $u$ is a continuous map of sites $X_{\mathrm{Zar}} \to Y_{\mathrm{Zar}}$ in the sense above &mdash; recovering the ordinary pushforward/pullback formalism for sheaves.</p>
+    <p>If $f: X \to Y$ is a continuous map of topological spaces, define $u : \mathrm{Open}(Y) \to \mathrm{Open}(X)$ by $u(V) = f^{-1}(V)$. Exercise 4 in &sect;8 asks you to check directly that $u$ preserves finite intersections (fiber products in $\mathrm{Open}$) and sends covers to covers. It is therefore a continuous map of sites $X_{\mathrm{Zar}} \to Y_{\mathrm{Zar}}$ in the sense above &mdash; recovering the ordinary pushforward/pullback formalism for sheaves.</p>
   </div>
 
   <div class="env ex">
@@ -413,6 +415,49 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
   <div class="env rmk">
     <div class="env-lb">Preview &mdash; Next Meeting</div>
     <p>Next time: morphisms of sites in greater depth and the first part of fppf descent, following Litt&rsquo;s Lecture 4.</p>
+  </div>
+</section>
+
+<!-- ===== §8 ===== -->
+<section class="sec" id="s8">
+  <div class="sh"><span class="sh-num">&sect; 8</span><h2>Exercises from Litt's Lecture 3</h2></div>
+  <hr class="sh-rule">
+
+  <p>These are the exercises explicitly marked in Litt&rsquo;s Lecture 3. They follow the order in which the relevant ideas appeared above: first sites, then sheaves, then local surjectivity in the fppf topology, and finally maps of sites.</p>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 1 &mdash; Sheaves on the Complex Analytic &Eacute;tale Site</div>
+    <p>Let $X$ be a complex analytic space. Let $X_{\mathrm{an,\acute{e}t}}$ be the site whose objects are local analytic isomorphisms $Y \to X$, with the evident coverings. Prove that</p>
+    <div class="dm">$$\mathrm{Sh}(X_{\mathrm{an,\acute{e}t}}) \;\simeq\; \mathrm{Sh}(X_{\mathrm{an}}).$$</div>
+    <p>Thus passing from ordinary open subsets to local analytic isomorphisms does not change the resulting category of sheaves. <em>Hint:</em> ordinary open subsets form a basis for this site; every local analytic isomorphism is locally an open embedding, so compare restriction and gluing on this basis.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 2 &mdash; Colimits of Abelian Sheaves on a Site</div>
+    <p>Let $\mathcal{C}$ be a site. Prove that the category</p>
+    <div class="dm">$$\mathrm{Sh}(\mathcal{C},\mathbf{Ab})$$</div>
+    <p>of abelian-group-valued sheaves on $\mathcal{C}$ admits all small colimits. <em>Hint:</em> first form the colimit objectwise in the category of presheaves. The result need not be a sheaf, so apply sheafification and use its universal property to verify the universal property of the colimit in $\mathrm{Sh}(\mathcal{C},\mathbf{Ab})$.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 3 &mdash; The $n$-th Power Map in the fppf Topology</div>
+    <p>Let $n \geq 1$. Show that the $n$-th power map</p>
+    <div class="dm">$$[n]:\mathbb{G}_m \longrightarrow \mathbb{G}_m,\qquad z \longmapsto z^n$$</div>
+    <p>is an epimorphism of sheaves on $X_{\mathrm{fppf}}$. Unlike the &eacute;tale argument in &sect;6, no invertibility hypothesis on $n$ is required.</p>
+    <p><em>Hint:</em> for $f \in \mathcal{O}(U)^\times$, consider</p>
+    <div class="dm">$$V=\operatorname{Spec}_U\big(\mathcal{O}_U[t]/(t^n-f)\big).$$</div>
+    <p>Because $t^n-f$ is monic, $V\to U$ is finite locally free of rank $n$; check that it is surjective, hence an fppf cover. On $V$, the pullback of $f$ is $t^n$. Compare this with the standard-&eacute;tale calculation reviewed in <a href="../02-etale-morphisms-and-sites/">Meeting 2</a>.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 4 &mdash; Continuous Maps and Maps of Sites</div>
+    <p>Let $f:X\to Y$ be a continuous map of topological spaces. Consider</p>
+    <div class="dm">$$f^{-1}:\mathrm{Open}(Y)\longrightarrow\mathrm{Open}(X),\qquad U\longmapsto f^{-1}(U).$$</div>
+    <p>Check directly that this defines a continuous map of sites in the convention used in these notes. <em>What to check:</em></p>
+    <ol class="bl">
+      <li>$f^{-1}$ preserves fiber products: in $\mathrm{Open}(Y)$ these are intersections.<div class="dm">$$f^{-1}(U\cap V)=f^{-1}(U)\cap f^{-1}(V).$$</div></li>
+      <li>$f^{-1}$ sends covering families to covering families.<div class="dm">$$U=\bigcup_i U_i \quad\Longrightarrow\quad f^{-1}(U)=\bigcup_i f^{-1}(U_i).$$</div></li>
+    </ol>
   </div>
 </section>
 
