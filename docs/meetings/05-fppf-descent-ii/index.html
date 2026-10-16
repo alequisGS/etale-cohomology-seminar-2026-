@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meeting 5 Notes | Étale Cohomology Seminar 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,macros:{'\\\\CH':'\\\\operatorname{CH}','\\\\Spec':'\\\\operatorname{Spec}'}})">
+</script>
+<style>
+:root {
+  --bg:#F5F2EB; --card:#FEFCF5; --text:#1C1929; --muted:#6E6882; --border:#DDD8CC;
+  --blue:#1A5FA3; --blue-lt:#EAF2FB;
+  --green:#146840; --green-lt:#E8F5EE;
+  --amber:#875010; --amber-lt:#FBF2E5;
+  --violet:#5B338E; --violet-lt:#F1EBFA;
+  --inv:#1C1929; --inv-tx:#EDE8DB; --inv-hi:#5FDFAA;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.82;}
+.wrap{max-width:840px;margin:0 auto;padding:60px 32px 100px;}
+a{color:var(--blue);}
+
+/* Header */
+.lh{margin-bottom:40px;}
+.lh-tag{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);border-radius:20px;padding:3px 12px;margin-bottom:18px;}
+.lh h1{font-size:34px;font-weight:700;line-height:1.18;letter-spacing:0;margin-bottom:18px;}
+.lh-meta{display:flex;flex-wrap:wrap;gap:18px 28px;font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px;}
+
+/* Logistics */
+.notice{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:13px 18px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted);margin-bottom:38px;line-height:1.6;}
+.notice b{color:var(--text);}
+
+/* TOC */
+.toc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 26px;margin-bottom:54px;}
+.toc-hd{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.toc ol{list-style:none;counter-reset:toc;}
+.toc li{counter-increment:toc;font-family:'Inter',sans-serif;font-size:14px;padding:4px 0;}
+.toc li::before{content:counter(toc)". ";color:var(--muted);font-size:12px;font-weight:600;}
+.toc a{color:var(--blue);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+
+/* Sections */
+.sec{margin-bottom:64px;}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.sh-num{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.05em;color:#fff;background:var(--muted);border-radius:5px;padding:3px 9px;white-space:nowrap;}
+.sh h2{font-size:23px;font-weight:700;letter-spacing:0;line-height:1.2;}
+.sh-rule{border:none;border-top:1px solid var(--border);margin:8px 0 26px;}
+h3{font-size:17px;font-weight:700;margin:34px 0 10px;}
+p{margin-bottom:14px;}
+p:last-child{margin-bottom:0;}
+ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
+
+/* Math environments */
+.env{border-left:4px solid;border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.env-lb{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;}
+.def{border-color:var(--blue);background:var(--blue-lt);}
+.def .env-lb{color:var(--blue);}
+.thm{border-color:var(--green);background:var(--green-lt);}
+.thm .env-lb{color:var(--green);}
+.ex{border-color:var(--amber);background:var(--amber-lt);}
+.ex .env-lb{color:var(--amber);}
+.rmk{border-color:var(--violet);background:var(--violet-lt);}
+.rmk .env-lb{color:var(--violet);}
+
+/* Slogan */
+.slogan{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:18px 24px;margin:22px 0;}
+.slogan-lb{font-family:'Inter',sans-serif;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--inv-hi);margin-bottom:7px;}
+.slogan p{color:var(--inv-tx);font-style:italic;margin:0;}
+.slogan strong{color:#fff;font-style:normal;}
+
+/* Proof */
+.proof{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:16px 0;font-size:15.5px;line-height:1.78;}
+.proof-lb{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--muted);font-style:italic;margin-bottom:8px;}
+.qed{text-align:right;color:var(--muted);margin-top:8px;}
+
+/* Prop list */
+.pl{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:16px 0;}
+.pi{display:flex;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border);align-items:flex-start;font-size:15.5px;line-height:1.72;}
+.pi:last-child{border-bottom:none;}
+.pn{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;color:var(--blue);min-width:22px;padding-top:4px;flex-shrink:0;}
+
+/* Example cards */
+.eg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.eg-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:8px;padding:14px 16px;font-size:15.5px;line-height:1.68;}
+.eg-card.bad{border-top-color:#a33;}
+.ec-t{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:7px;}
+.eg-card.bad .ec-t{color:#a33;}
+
+/* Comparison table */
+.ctbl{width:100%;border-collapse:collapse;font-family:'Inter',sans-serif;font-size:13px;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.ctbl thead th{background:var(--inv);color:var(--inv-tx);padding:11px 14px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.04em;}
+.ctbl td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55;background:var(--card);}
+.ctbl tr:last-child td{border-bottom:none;}
+.ctbl tr:nth-child(even) td{background:#F9F6EF;}
+
+/* Display math */
+.dm{overflow-x:auto;text-align:center;margin:12px 0;padding:4px 0;}
+
+/* Footer */
+.foot{border-top:1px solid var(--border);margin-top:60px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);}
+
+@media(max-width:620px){
+  .wrap{padding:36px 18px 72px;}
+  body{font-size:16px;}
+  .lh h1{font-size:26px;}
+  .sh h2{font-size:20px;}
+  .eg-grid{grid-template-columns:1fr;}
+  .ctbl{font-size:12px;}
+  .ctbl td,.ctbl thead th{padding:9px 10px;}
+}
+.back-link{display:inline-flex;margin-bottom:24px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--blue);text-decoration:none;}
+.back-link:hover{text-decoration:underline;}
+.seminar-note{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:16px 20px;margin:0 0 26px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;}
+.seminar-note b{color:#fff;}
+.seminar-note a{color:var(--inv-hi);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back-link" href="../../index.html#pilot">&larr; Back to seminar site</a>
+
+<header class="lh">
+  <div class="lh-tag">&Eacute;tale Seminar 2026 &middot; Meeting 5</div>
+  <h1>fppf Descent, Part II, and<br>the Category of Sheaves</h1>
+  <div class="lh-meta">
+    <span>Based on Daniel Litt's Lecture 5</span>
+    <span>Seminar meeting: Friday, October 2, 2026</span>
+    <span>17:00-18:30 Lima / 19:00-20:30 Bras&iacute;lia</span>
+  </div>
+</header>
+
+<div class="seminar-note">
+  <b>Seminar context:</b> These notes are adapted for Meeting 5, the final meeting of the pilot, of the &Eacute;tale Cohomology Seminar 2026. The mathematical curriculum is based on <a href="https://www.daniellitt.com/tale-cohomology/">Daniel Litt's course</a>, with additional examples and previews included for our discussion; the timing, meeting format, Problem of the Week workflow, and discussion structure belong to this seminar. Google Meet details are sent privately to confirmed participants.
+</div>
+
+<div class="notice">
+  <b>Last time:</b> the first part of fppf descent &mdash; continuous morphisms of sites, descent data, and full faithfulness of $f^* : \mathbf{QCoh}(X) \to \mathrm{Desc}(U/X)$ for an fppf cover, resting on the equalizer lemma for faithfully flat maps.&emsp;
+  <b>This meeting:</b> the second half of the descent theorem, descent for sheaves rather than just modules, and the beginning of the study of the category of sheaves on a site &mdash; which is where cohomology finally becomes available.
+</div>
+
+<div class="toc">
+  <div class="toc-hd">Contents</div>
+  <ol>
+    <li><a href="#s1">Recap and Strategy</a></li>
+    <li><a href="#s2">Completing fppf Descent: Essential Surjectivity</a></li>
+    <li><a href="#s3">Descent for Sheaves, Not Just Modules</a></li>
+    <li><a href="#s4">The Category of Abelian Sheaves on a Site</a></li>
+    <li><a href="#s5">Sheafification</a></li>
+    <li><a href="#s6">Pushforward and Pullback for a Morphism of Sites</a></li>
+    <li><a href="#s7">Exercises from Litt's Lecture 5</a></li>
+  </ol>
+</div>
+
+<!-- ===== §1 ===== -->
+<section class="sec" id="s1">
+  <div class="sh"><span class="sh-num">&sect; 1</span><h2>Recap and Strategy</h2></div>
+  <hr class="sh-rule">
+
+  <p>We have an fppf cover $f : U \to X$ and the pullback functor</p>
+
+  <div class="dm">$$f^* : \mathbf{QCoh}(X) \;\longrightarrow\; \mathrm{Desc}(U/X), \qquad \mathcal{F} \longmapsto \big(f^*\mathcal{F},\ \text{canonical gluing iso}\big).$$</div>
+
+  <p>Last time we established full faithfulness by reducing to the affine case $X = \operatorname{Spec} R$, $U = \operatorname{Spec} S$ with $R \to S$ faithfully flat of finite presentation, where the assertion becomes the exactness of</p>
+
+  <div class="dm">$$M \;\longrightarrow\; M \otimes_R S \;\rightrightarrows\; M \otimes_R S \otimes_R S .$$</div>
+
+  <p>The plan for today is:</p>
+
+  <div class="pl">
+    <div class="pi">
+      <span class="pn">(1)</span>
+      <span><strong>Finish the theorem.</strong> Prove essential surjectivity, so that $f^* : \mathbf{QCoh}(X) \to \mathrm{Desc}(U/X)$ is an equivalence of categories.</span>
+    </div>
+    <div class="pi">
+      <span class="pn">(2)</span>
+      <span><strong>Replace modules by sheaves.</strong> Run the same argument for sheaves of modules on a site, where the conclusion is weaker &mdash; full faithfulness holds, and essential surjectivity is a genuine extra hypothesis.</span>
+    </div>
+    <div class="pi">
+      <span class="pn">(3)</span>
+      <span><strong>Study $\mathrm{Sh}(\mathcal{C},\mathbf{Ab})$.</strong> Establish that the category of abelian sheaves on a site is abelian with enough injectives, so that derived-functor cohomology can be defined.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== §2 ===== -->
+<section class="sec" id="s2">
+  <div class="sh"><span class="sh-num">&sect; 2</span><h2>Completing fppf Descent: Essential Surjectivity</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; fppf Descent for Quasi-Coherent Sheaves, Concluded</div>
+    <p>Let $f : U \to X$ be an fppf cover. Then $f^* : \mathbf{QCoh}(X) \to \mathrm{Desc}(U/X)$ is an equivalence of categories.</p>
+  </div>
+
+  <p>Only essential surjectivity remains: given a descent datum $(\mathcal{F}, \varphi)$ on $U$, we must produce $\mathcal{G} \in \mathbf{QCoh}(X)$ with $f^*\mathcal{G} \cong \mathcal{F}$ compatible with $\varphi$.</p>
+
+  <div class="proof">
+    <div class="proof-lb">Step 1 &mdash; Reduce to the affine case</div>
+    <p>Suppose $U \to X$ is affine. Then $X = \operatorname{Spec} R$, $U = \operatorname{Spec} S$ with $R \to S$ faithfully flat of finite presentation, and the descent datum is an $S$-module $M$ together with a gluing isomorphism</p>
+    <div class="dm">$$\varphi : M \otimes_S (S \otimes_R S) \;\xrightarrow{\;\sim\;}\; (S \otimes_R S) \otimes_S M \;=\; M \otimes_S (S \otimes_R S)$$</div>
+    <p>satisfying the cocycle condition on $S \otimes_R S \otimes_R S$. (The reduction from a general fppf cover to the affine case is Exercise 1 in &sect;7: one first reduces to $U \to X$ affine, using that descent data for quasi-coherent sheaves is local on $X$, and then to $X$ affine.)</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Step 2 &mdash; Construct the descended module</div>
+    <p>Define</p>
+    <div class="dm">$$N \;=\; \big\{\, m \in M \;:\; \varphi(m \otimes 1) = 1 \otimes m \,\big\},$$</div>
+    <p>the elements of $M$ fixed by the gluing isomorphism. Then $N$ is an $R$-module and there is a natural $S$-linear comparison map</p>
+    <div class="dm">$$\kappa : N \otimes_R S \;\longrightarrow\; M .$$</div>
+    <p><strong>$\kappa$ is an isomorphism.</strong> Since $R \to S$ is faithfully flat, it suffices to check this after base changing along $S \to S \otimes_R S$, i.e.&nbsp;to show that $\kappa \otimes_S (S \otimes_R S)$ is an isomorphism. After this base change the sequence of the affine lemma <em>acquires a section</em>, hence splits: base changing $M$ along $S \to S \otimes_R S$ exhibits $M \otimes_S (S \otimes_R S)$ as a direct summand carrying a copy of $M$ on which the two face maps agree. The fixed locus of $\varphi$ is then exactly the image of $M$ under this splitting, and $\kappa$ identifies the two. This is the step where the cocycle condition is used: it is what makes $\varphi$ an action of a groupoid rather than an arbitrary isomorphism, and hence what makes &ldquo;fixed elements&rdquo; well behaved. Independence of $N$ from the choices made is a formal consequence of the same splitting.</p>
+    <p class="qed">&#9633;</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Summary</div>
+    <p>For an fppf cover $U \to X$, a quasi-coherent sheaf on $X$ is <strong>the same thing as</strong> a quasi-coherent sheaf on $U$ equipped with a compatible gluing isomorphism on the double overlap. Descent is not an extra theorem about gluing &mdash; it is the statement that <strong>Zariski gluing is a special case of a mechanism that works for every fppf cover</strong>.</p>
+  </div>
+</section>
+
+<!-- ===== §3 ===== -->
+<section class="sec" id="s3">
+  <div class="sh"><span class="sh-num">&sect; 3</span><h2>Descent for Sheaves, Not Just Modules</h2></div>
+  <hr class="sh-rule">
+
+  <p>Now let $\mathcal{C}$ be a site, $U \to X$ a cover in $\mathcal{C}$, and consider sheaves of $\mathcal{O}$-modules rather than quasi-coherent sheaves on a scheme. The same two questions arise, and the answers are no longer symmetric.</p>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; Descent for Sheaves: Full Faithfulness</div>
+    <p>Let $f : U \to X$ be an &eacute;tale (or fppf) cover of a scheme $X$ and let $\mathcal{F}, \mathcal{G}$ be sheaves of $\mathcal{O}_X$-modules on the corresponding site. Then</p>
+    <div class="dm">$$\operatorname{Hom}_X(\mathcal{F}, \mathcal{G}) \;\longrightarrow\; \operatorname{Hom}_U(f^*\mathcal{F}, f^*\mathcal{G}) \;\rightrightarrows\; \operatorname{Hom}_{U \times_X U}(p_1^*f^*\mathcal{F}, p_2^*f^*\mathcal{G})$$</div>
+    <p>is an equalizer. Equivalently, the functor from sheaves on $X$ to descent data on $U/X$ is fully faithful.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Idea of the proof</div>
+    <p>Reduce to the case where $f : U \to X$ is affine and $X$ is affine, so that the situation is $R \to S$ faithfully flat with $M, N$ modules. Then use the affine lemma of the previous meeting to exhibit the diagram of $\operatorname{Hom}$-sets as an equalizer. The reduction uses that a map of sheaves is determined locally and that the sheaf condition itself is an equalizer condition &mdash; so the argument is the same shape as the quasi-coherent one, with &ldquo;module&rdquo; replaced throughout by &ldquo;sheaf of modules&rdquo;.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Where the analogy with modules breaks</div>
+    <p>For quasi-coherent sheaves on a scheme, descent data along an fppf cover is <em>always</em> effective: essential surjectivity holds. For general sheaves this fails. Two things then need separating:</p>
+    <ul class="bl">
+      <li>A functor $F : \mathcal{C}^{\mathrm{op}} \to \mathbf{Set}$ that is a sheaf for the &eacute;tale topology is automatically a sheaf for the finer fppf topology only if it is representable by a scheme &mdash; which is the theorem of the previous meeting, not a general fact about sheaves.</li>
+      <li>Descent data for sheaves is <strong>not essentially surjective in general</strong>. It is essentially surjective for covers of schemes when the descent datum is algebraic &mdash; for instance for relatively polarized schemes, or, in the case that matters most for us, when the descended object is produced as the relative spectrum of a descended sheaf of algebras.</li>
+    </ul>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Descending a Sheaf of Algebras and Its Spectrum</div>
+    <p>Let $U \to X$ be a cover and let $\mathcal{A}$ be a sheaf of $\mathcal{O}_U$-algebras equipped with descent data. Then $\mathcal{A}$ descends to a sheaf of $\mathcal{O}_X$-algebras $\mathcal{B}$ (algebras are modules, so the mechanism of &sect;2 applies, together with compatibility of the multiplication with $\varphi$). Applying the <strong>relative spectrum</strong> construction,</p>
+    <div class="dm">$$\operatorname{Spec}_X(\mathcal{B}) \longrightarrow X \quad\text{descends}\quad \operatorname{Spec}_U(\mathcal{A}) \longrightarrow U ,$$</div>
+    <p>so the descended scheme is recovered from descended algebra data. This is the bridge from descent of <em>sheaves</em> to descent of <em>schemes</em>, and it is the reason relative spectra appear naturally in this lecture. The condition that $\mathcal{A}$ be quasi-coherent as a sheaf of algebras is the analogue of the effectiveness hypothesis above.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; The Sheaves We Actually Use</div>
+    <p>To see that the sheaves appearing in practice really are sheaves for both topologies, note that</p>
+    <div class="dm">$$\mathbb{G}_m,\quad \mu_n,\quad \mathbb{G}_a,\quad \underline{\mathbb{Z}/n\mathbb{Z}},$$</div>
+    <p>are all representable (&sect;3 of the previous meeting), hence sheaves on $X_{\mathrm{fppf}}$ and therefore on $X_{\mathrm{\acute{e}t}}$ and $X_{\mathrm{Zar}}$. The Kummer sequence</p>
+    <div class="dm">$$1 \longrightarrow \mu_n \longrightarrow \mathbb{G}_m \xrightarrow{\;[n]\;} \mathbb{G}_m \longrightarrow 1$$</div>
+    <p>is exact as a sequence of sheaves on $X_{\mathrm{\acute{e}t}}$ when $n$ is invertible on $X$, and on $X_{\mathrm{fppf}}$ for every $n$ &mdash; the fact established at the end of the previous meeting, and the reason the fppf topology is worth the trouble.</p>
+  </div>
+</section>
+
+<!-- ===== §4 ===== -->
+<section class="sec" id="s4">
+  <div class="sh"><span class="sh-num">&sect; 4</span><h2>The Category of Abelian Sheaves on a Site</h2></div>
+  <hr class="sh-rule">
+
+  <p>We now change subject, from descent to the structure of the category of sheaves itself. This is the beginning of the machinery that will produce &eacute;tale cohomology.</p>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; Structural Facts</div>
+    <p>Let $\mathcal{C}$ be a site. Then the category</p>
+    <div class="dm">$$\mathrm{Sh}(\mathcal{C}, \mathbf{Ab})$$</div>
+    <p>of abelian-group-valued sheaves on $\mathcal{C}$ is an <strong>abelian category</strong>, and it has <strong>enough injectives</strong>. Consequently every object admits an injective resolution, and right derived functors of left exact functors out of $\mathrm{Sh}(\mathcal{C},\mathbf{Ab})$ &mdash; in particular $H^i(\mathcal{C}, -) = R^i\Gamma(\mathcal{C}, -)$ &mdash; are defined.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; What makes this plausible</div>
+    <p>Categories of presheaves with values in $\mathbf{Ab}$ are very well behaved: limits and colimits are computed objectwise, so kernels and cokernels exist and the abelian-category axioms are inherited from $\mathbf{Ab}$. Sheaves are a full subcategory cut out by an equalizer condition, and the subtlety is that this subcategory is <em>not</em> closed under cokernels computed in presheaves. The missing ingredient is a left adjoint to the inclusion &mdash; sheafification &mdash; which both repairs the cokernels and supplies enough injectives. This is the content of the next section.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Where enough injectives come from</div>
+    <p>Injective objects in a category of presheaves are easy to manufacture: for a presheaf category, the functors $\prod_{U} \operatorname{Hom}_{\mathbf{Ab}}(\mathbb{Z}[h_U], -)$-shaped constructions give injectives, using the injective objects of $\mathbf{Ab}$ &mdash; that is, divisible abelian groups. Because the forgetful functor $\mathrm{Sh} \to \mathrm{Pre}$ has a left adjoint, it is right adjoint to something, so it preserves injectives up to the appropriate statement: pushing a presheaf injective into sheaves via the right adjoint produces injectives in $\mathrm{Sh}$. Every sheaf embeds into such an object, which is enough injectives. (This is the standard two-step argument; the adjunction of &sect;5 is the only non-formal input.)</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Why this matters for the seminar</div>
+    <p>Everything up to now has been setting the stage. <strong>&Eacute;tale cohomology is the right derived functor of global sections on this category.</strong> Without abelian-ness and enough injectives there is no long exact sequence, no derived functor, and no cohomology at all &mdash; so this unglamorous structural theorem is the gate through which the whole subject passes.</p>
+  </div>
+</section>
+
+<!-- ===== §5 ===== -->
+<section class="sec" id="s5">
+  <div class="sh"><span class="sh-num">&sect; 5</span><h2>Sheafification</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; The Sheafification Adjunction</div>
+    <p>Let $\mathcal{C}$ be a site. The forgetful functor</p>
+    <div class="dm">$$\mathrm{Sh}(\mathcal{C}, \mathbf{Ab}) \longrightarrow \mathrm{Pre}(\mathcal{C}, \mathbf{Ab})$$</div>
+    <p>admits a <strong>left adjoint</strong>, called <strong>sheafification</strong> (or the associated sheaf functor), written $F \mapsto F^{+}$. That is, for a presheaf $F$ and a sheaf $G$ there is a natural bijection</p>
+    <div class="dm">$$\operatorname{Hom}_{\mathrm{Sh}}(F^{+}, G) \;\cong\; \operatorname{Hom}_{\mathrm{Pre}}(F, G),$$</div>
+    <p>and the unit $F \to F^{+}$ is the universal map from $F$ to a sheaf.</p>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Construction &mdash; Two Steps</div>
+    <p>The associated sheaf is built in two steps:</p>
+    <ul class="bl">
+      <li>First form $F^{+}$, whose sections over $U$ are families of sections of $F$ over a cover of $U$, modulo the equivalence relation given by common refinement. This makes the <em>gluing</em> part of the sheaf axiom hold.</li>
+      <li>Then repeat: $F^{++}$ makes the <em>separatedness</em> part hold as well. For most purposes $F \mapsto F^{+}$ already produces a sheaf; the double application is the safe general statement.</li>
+    </ul>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Consequences to remember</div>
+    <ul class="bl">
+      <li><strong>Cokernels of sheaves.</strong> The cokernel of a map of sheaves is the <em>sheafification</em> of the presheaf cokernel. This is exactly the phenomenon that made $\mathbb{G}_m \xrightarrow{n} \mathbb{G}_m$ an epimorphism on $X_{\mathrm{\acute{e}t}}$ while failing to be surjective on global sections.</li>
+      <li><strong>Colimits exist.</strong> Since presheaf colimits exist and sheafification is a left adjoint, all small colimits exist in $\mathrm{Sh}(\mathcal{C},\mathbf{Ab})$; they are computed as the sheafification of the objectwise colimit.</li>
+      <li><strong>Abelian-ness.</strong> Kernels agree with presheaf kernels, and cokernels are sheafified presheaf cokernels; the abelian-category axioms follow from those of $\mathbf{Ab}$ and the exactness properties of the adjunction.</li>
+      <li><strong>Maps are checked locally.</strong> A map of sheaves is an isomorphism (respectively a monomorphism, respectively an epimorphism) if and only if it is so locally on a cover. This is the working form of the adjunction.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== §6 ===== -->
+<section class="sec" id="s6">
+  <div class="sh"><span class="sh-num">&sect; 6</span><h2>Pushforward and Pullback for a Morphism of Sites</h2></div>
+  <hr class="sh-rule">
+
+  <p>Finally, we make the definition of the previous meeting do work. Let</p>
+
+  <div class="dm">$$f : X \longrightarrow Y$$</div>
+
+  <p>be a morphism of schemes, and consider the induced continuous morphism of sites obtained from the functor $U \mapsto U \times_Y X$ &mdash; the algebraic analogue of $V \mapsto f^{-1}(V)$. Then $u$ preserves fiber products (fiber products commute with base change) and sends covers to covers (base change of an &eacute;tale or fppf cover is again one).</p>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Pushforward</div>
+    <p>For a sheaf $\mathcal{G}$ on $X$, define the <strong>pushforward</strong> (direct image) $f_*\mathcal{G}$ to be the sheaf on $Y$ given on an object $V \to Y$ by</p>
+    <div class="dm">$$(f_*\mathcal{G})(V) \;=\; \mathcal{G}(V \times_Y X).$$</div>
+    <p>Equivalently, $f_*\mathcal{G} = \mathcal{G} \circ u$, the composite of $\mathcal{G}$ with the functor $u : Y \to X$ of the continuous morphism. One checks directly that $f_*\mathcal{G}$ satisfies the sheaf condition, precisely because $u$ sends covers to covers and preserves the fiber products along which the gluing conditions are imposed.</p>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Pullback</div>
+    <p>For a sheaf $\mathcal{F}$ on $Y$, define $f^{-1}\mathcal{F}$ on $X$ by</p>
+    <div class="dm">$$(f^{-1}\mathcal{F})(U) \;=\; \varinjlim_{U \to V} \mathcal{F}(V),$$</div>
+    <p>the colimit over the category of factorizations $U \to V \to Y$ &mdash; and then <strong>sheafify</strong>:</p>
+    <div class="dm">$$f^{*}\mathcal{F} \;=\; \big(f^{-1}\mathcal{F}\big)^{+}.$$</div>
+    <p>The sheafification is essential: $f^{-1}\mathcal{F}$ is only a presheaf in general, and it is the sheafification that makes it a sheaf on a finer topology. For this reason pullback is right exact but not left exact; its derived functors &mdash; the higher direct images, on the other side of the adjunction &mdash; are exactly what Leray spectral sequences and later lectures will compute.</p>
+  </div>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; The Adjunction</div>
+    <p>The functors $f^{-1}$ and $f_*$ are adjoint,</p>
+    <div class="dm">$$\operatorname{Hom}_{X}\big(f^{-1}\mathcal{F},\, \mathcal{G}\big) \;\cong\; \operatorname{Hom}_{Y}\big(\mathcal{F},\, f_*\mathcal{G}\big),$$</div>
+    <p>and consequently $f^{*}$ is left adjoint to $f_*$ on sheaves of modules. Taking global sections of the adjunction recovers the usual formalism: a map of sheaves downstairs is the same as a map downstairs after pulling back.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Preview &mdash; The Next Block</div>
+    <p>With sheafification, the abelian category of sheaves, and the pushforward/pullback adjunction in hand, the machinery of cohomology is complete in outline. The next block (Litt&rsquo;s Lectures 6&ndash;10) develops stalks, enough injectives in more detail, derived-functor cohomology, &Ccedil;ech cohomology, the Artin&ndash;Schreier sequence, and the first computations of $H^i_{\mathrm{\acute{e}t}}(X, \mathbb{G}_m)$ and $H^i_{\mathrm{\acute{e}t}}(X, \mu_\ell)$ &mdash; the point at which the theory starts returning answers. Following the pilot, the group decides whether to continue.</p>
+  </div>
+</section>
+
+<!-- ===== §7 ===== -->
+<section class="sec" id="s7">
+  <div class="sh"><span class="sh-num">&sect; 7</span><h2>Exercises from Litt's Lecture 5</h2></div>
+  <hr class="sh-rule">
+
+  <p>These are the exercises marked in Litt&rsquo;s Lecture 5. They follow the order in which the ideas appeared above: reducing to the affine case, completing the descent theorem, and then the pullback construction for maps of sites.</p>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 1 &mdash; Reduction to the Affine Case, Completed</div>
+    <p>Let $f : U \to X$ be an fppf cover of schemes. Show that in order to prove essential surjectivity of $f^* : \mathbf{QCoh}(X) \to \mathrm{Desc}(U/X)$ &mdash; and in order to prove full faithfulness &mdash; it is enough to treat the case where $U \to X$ is an affine morphism, and then the case where $X$ itself is affine.</p>
+    <p><em>What to check:</em> that descent data restricts along an open immersion $X' \hookrightarrow X$ to descent data for the restricted cover, that a quasi-coherent sheaf on $X$ can be produced by gluing its restrictions to a Zariski cover of $X$, and that these two constructions are inverse to one another. <em>Moral:</em> descent statements are Zariski-local on the target, which is why &ldquo;affine&rdquo; is always available as a hypothesis.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 2 &mdash; The Comparison Map Acquires a Section</div>
+    <p>Keep the notation of &sect;2: $R \to S$ is faithfully flat of finite presentation, $M$ an $S$-module with a gluing isomorphism $\varphi$ satisfying the cocycle condition, and</p>
+    <div class="dm">$$N = \{\, m \in M : \varphi(m \otimes 1) = 1 \otimes m \,\}, \qquad \kappa : N \otimes_R S \longrightarrow M .$$</div>
+    <p>Show that the sequence of the affine lemma <em>splits</em> after the faithfully flat base change $S \to S \otimes_R S$, and deduce that $\kappa$ is an isomorphism. <em>Hint:</em> the multiplication map $S \otimes_R S \to S$, $s_1 \otimes s_2 \mapsto s_1 s_2$, is a section of $s \mapsto s \otimes 1$; use the resulting idempotent to exhibit $M$ as a direct summand carrying the fixed locus of $\varphi$.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 3 &mdash; Descent for a Sheaf of Algebras</div>
+    <p>Let $U \to X$ be a cover and let $\mathcal{A}$ be a sheaf of $\mathcal{O}_U$-algebras with descent data $(\mathcal{A}, \varphi)$ in which $\varphi$ is compatible with the multiplication. Show that $\mathcal{A}$ descends to a sheaf of $\mathcal{O}_X$-algebras $\mathcal{B}$, and that the relative spectrum construction descends:</p>
+    <div class="dm">$$\operatorname{Spec}_U(\mathcal{A}) \;\longrightarrow\; U \qquad\rightsquigarrow\qquad \operatorname{Spec}_X(\mathcal{B}) \;\longrightarrow\; X .$$</div>
+    <p><em>What to check:</em> that the descended multiplication is well defined, that $\varphi$ being multiplicative is exactly the compatibility needed, and that the universal property of the relative spectrum is preserved under descent.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 4 &mdash; Pullback Needs Sheafification</div>
+    <p>Let $f : X \to Y$ be a morphism of schemes and $\mathcal{F}$ a sheaf on $Y_{\mathrm{\acute{e}t}}$. Consider the presheaf on $X$ defined by</p>
+    <div class="dm">$$U \longmapsto \varinjlim_{U \to V} \mathcal{F}(V).$$</div>
+    <p>Give an example showing that this presheaf need not be a sheaf on $X_{\mathrm{\acute{e}t}}$, so that the sheafification in the definition of $f^{*}$ is genuinely necessary rather than a formality. <em>Hint:</em> take $\mathcal{F}$ representable and ask whether the colimit description already satisfies the gluing condition; the failure is the same phenomenon as the failure of the presheaf cokernel to be a sheaf. Then verify the adjunction $\operatorname{Hom}_X(f^{-1}\mathcal{F}, \mathcal{G}) \cong \operatorname{Hom}_Y(\mathcal{F}, f_*\mathcal{G})$ directly from the definitions.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>&Eacute;tale Cohomology Seminar 2026 &middot; Meeting 5 &middot; October 2, 2026</span>
+  <span>Notes based on Daniel Litt's Lecture 5</span>
+</footer>
+
+</div>
+</body>
+</html>

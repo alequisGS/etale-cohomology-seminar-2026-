@@ -12,7 +12,11 @@ Topics:
 
 ## When
 
-Friday, September 11, 2026
+Friday, September 18, 2026
+
+## Notes
+
+Seminar notes for this meeting: [`docs/meetings/03-sites-sheaves-and-etale-cohomology/`](../../docs/meetings/03-sites-sheaves-and-etale-cohomology/)
 
 ## Time
 

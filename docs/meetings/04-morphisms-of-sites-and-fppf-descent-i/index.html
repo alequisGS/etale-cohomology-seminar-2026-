@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meeting 4 Notes | Étale Cohomology Seminar 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,macros:{'\\\\CH':'\\\\operatorname{CH}','\\\\Spec':'\\\\operatorname{Spec}'}})">
+</script>
+<style>
+:root {
+  --bg:#F5F2EB; --card:#FEFCF5; --text:#1C1929; --muted:#6E6882; --border:#DDD8CC;
+  --blue:#1A5FA3; --blue-lt:#EAF2FB;
+  --green:#146840; --green-lt:#E8F5EE;
+  --amber:#875010; --amber-lt:#FBF2E5;
+  --violet:#5B338E; --violet-lt:#F1EBFA;
+  --inv:#1C1929; --inv-tx:#EDE8DB; --inv-hi:#5FDFAA;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.82;}
+.wrap{max-width:840px;margin:0 auto;padding:60px 32px 100px;}
+a{color:var(--blue);}
+
+/* Header */
+.lh{margin-bottom:40px;}
+.lh-tag{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);border-radius:20px;padding:3px 12px;margin-bottom:18px;}
+.lh h1{font-size:34px;font-weight:700;line-height:1.18;letter-spacing:0;margin-bottom:18px;}
+.lh-meta{display:flex;flex-wrap:wrap;gap:18px 28px;font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px;}
+
+/* Logistics */
+.notice{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:13px 18px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted);margin-bottom:38px;line-height:1.6;}
+.notice b{color:var(--text);}
+
+/* TOC */
+.toc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 26px;margin-bottom:54px;}
+.toc-hd{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.toc ol{list-style:none;counter-reset:toc;}
+.toc li{counter-increment:toc;font-family:'Inter',sans-serif;font-size:14px;padding:4px 0;}
+.toc li::before{content:counter(toc)". ";color:var(--muted);font-size:12px;font-weight:600;}
+.toc a{color:var(--blue);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+
+/* Sections */
+.sec{margin-bottom:64px;}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.sh-num{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.05em;color:#fff;background:var(--muted);border-radius:5px;padding:3px 9px;white-space:nowrap;}
+.sh h2{font-size:23px;font-weight:700;letter-spacing:0;line-height:1.2;}
+.sh-rule{border:none;border-top:1px solid var(--border);margin:8px 0 26px;}
+h3{font-size:17px;font-weight:700;margin:34px 0 10px;}
+p{margin-bottom:14px;}
+p:last-child{margin-bottom:0;}
+ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
+
+/* Math environments */
+.env{border-left:4px solid;border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.env-lb{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;}
+.def{border-color:var(--blue);background:var(--blue-lt);}
+.def .env-lb{color:var(--blue);}
+.thm{border-color:var(--green);background:var(--green-lt);}
+.thm .env-lb{color:var(--green);}
+.ex{border-color:var(--amber);background:var(--amber-lt);}
+.ex .env-lb{color:var(--amber);}
+.rmk{border-color:var(--violet);background:var(--violet-lt);}
+.rmk .env-lb{color:var(--violet);}
+
+/* Slogan */
+.slogan{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:18px 24px;margin:22px 0;}
+.slogan-lb{font-family:'Inter',sans-serif;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--inv-hi);margin-bottom:7px;}
+.slogan p{color:var(--inv-tx);font-style:italic;margin:0;}
+.slogan strong{color:#fff;font-style:normal;}
+
+/* Proof */
+.proof{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:16px 0;font-size:15.5px;line-height:1.78;}
+.proof-lb{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--muted);font-style:italic;margin-bottom:8px;}
+.qed{text-align:right;color:var(--muted);margin-top:8px;}
+
+/* Prop list */
+.pl{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:16px 0;}
+.pi{display:flex;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border);align-items:flex-start;font-size:15.5px;line-height:1.72;}
+.pi:last-child{border-bottom:none;}
+.pn{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;color:var(--blue);min-width:22px;padding-top:4px;flex-shrink:0;}
+
+/* Example cards */
+.eg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.eg-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:8px;padding:14px 16px;font-size:15.5px;line-height:1.68;}
+.eg-card.bad{border-top-color:#a33;}
+.ec-t{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:7px;}
+.eg-card.bad .ec-t{color:#a33;}
+
+/* Comparison table */
+.ctbl{width:100%;border-collapse:collapse;font-family:'Inter',sans-serif;font-size:13px;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.ctbl thead th{background:var(--inv);color:var(--inv-tx);padding:11px 14px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.04em;}
+.ctbl td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55;background:var(--card);}
+.ctbl tr:last-child td{border-bottom:none;}
+.ctbl tr:nth-child(even) td{background:#F9F6EF;}
+
+/* Display math */
+.dm{overflow-x:auto;text-align:center;margin:12px 0;padding:4px 0;}
+
+/* Footer */
+.foot{border-top:1px solid var(--border);margin-top:60px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);}
+
+@media(max-width:620px){
+  .wrap{padding:36px 18px 72px;}
+  body{font-size:16px;}
+  .lh h1{font-size:26px;}
+  .sh h2{font-size:20px;}
+  .eg-grid{grid-template-columns:1fr;}
+  .ctbl{font-size:12px;}
+  .ctbl td,.ctbl thead th{padding:9px 10px;}
+}
+.back-link{display:inline-flex;margin-bottom:24px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--blue);text-decoration:none;}
+.back-link:hover{text-decoration:underline;}
+.seminar-note{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:16px 20px;margin:0 0 26px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;}
+.seminar-note b{color:#fff;}
+.seminar-note a{color:var(--inv-hi);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back-link" href="../../index.html#pilot">&larr; Back to seminar site</a>
+
+<header class="lh">
+  <div class="lh-tag">&Eacute;tale Seminar 2026 &middot; Meeting 4</div>
+  <h1>Morphisms of Sites and<br>the First Part of fppf Descent</h1>
+  <div class="lh-meta">
+    <span>Based on Daniel Litt's Lecture 4</span>
+    <span>Seminar meeting: Friday, September 25, 2026</span>
+    <span>17:00-18:30 Lima / 19:00-20:30 Bras&iacute;lia</span>
+  </div>
+</header>
+
+<div class="seminar-note">
+  <b>Seminar context:</b> These notes are adapted for Meeting 4 of the &Eacute;tale Cohomology Seminar 2026. The mathematical curriculum is based on <a href="https://www.daniellitt.com/tale-cohomology/">Daniel Litt's course</a>, with additional examples and previews included for our discussion; the timing, meeting format, Problem of the Week workflow, and discussion structure belong to this seminar. Google Meet details are sent privately to confirmed participants.
+</div>
+
+<div class="notice">
+  <b>Last time:</b> Grothendieck topologies, sheaves on a site, representable functors as sheaves, and the warning that &ldquo;epimorphism&rdquo; means locally surjective.&emsp;
+  <b>This meeting:</b> continuous morphisms of sites, how to <em>check</em> that something is a sheaf, and the first real theorem of descent &mdash; quasi-coherent sheaves satisfy fppf descent.
+</div>
+
+<div class="toc">
+  <div class="toc-hd">Contents</div>
+  <ol>
+    <li><a href="#s1">Continuous Morphisms of Sites</a></li>
+    <li><a href="#s2">How to Check That Something Is a Sheaf</a></li>
+    <li><a href="#s3">Quasi-Coherent Sheaves Are Sheaves for the &Eacute;tale and fppf Topologies</a></li>
+    <li><a href="#s4">Descent Data</a></li>
+    <li><a href="#s5">The fppf Descent Theorem for Quasi-Coherent Sheaves</a></li>
+    <li><a href="#s6">An Affine Lemma: Faithfully Flat Maps and Equalizers</a></li>
+    <li><a href="#s7">Sketch of Essential Surjectivity</a></li>
+    <li><a href="#s8">Exercises from Litt's Lecture 4</a></li>
+  </ol>
+</div>
+
+<!-- ===== §1 ===== -->
+<section class="sec" id="s1">
+  <div class="sh"><span class="sh-num">&sect; 1</span><h2>Continuous Morphisms of Sites</h2></div>
+  <hr class="sh-rule">
+
+  <p>Last time a site was a category equipped with a notion of covering family. A map between sites is not extra structure &mdash; it is exactly what is needed to compare sheaves on two sites, and hence to say what pushforward and pullback of sheaves mean.</p>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Continuous Morphism of Sites</div>
+    <p>Let $\mathcal{C}$ and $\mathcal{D}$ be sites. A <strong>continuous morphism of sites</strong> $f : \mathcal{C} \to \mathcal{D}$ is a functor</p>
+    <div class="dm">$$u : \mathcal{D} \longrightarrow \mathcal{C}$$</div>
+    <p>going in the <em>reverse</em> direction &mdash; exactly as a continuous map of spaces pulls back open sets &mdash; such that:</p>
+    <ul class="bl">
+      <li>$u$ <strong>preserves fiber products</strong>: $u(Y_1 \times_Y Y_2) = u(Y_1) \times_{u(Y)} u(Y_2)$;</li>
+      <li>$u$ <strong>sends covering families to covering families</strong>: if $\{Y_\alpha \to Y\}$ covers $Y$, then $\{u(Y_\alpha) \to u(Y)\}$ covers $u(Y)$.</li>
+    </ul>
+  </div>
+
+  <p>The direction reversal is the whole content of the definition, and it is worth stating as a slogan.</p>
+
+  <div class="slogan">
+    <div class="slogan-lb">Slogan</div>
+    <p>A <strong>continuous morphism of sites</strong> is a functor that carries covers to covers and commutes with the fiber products in which gluing conditions live. Preserving covers is what lets a sheaf on the source be pulled back to a sheaf on the target; preserving fiber products is what keeps the gluing conditions themselves intact.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Continuous Maps of Spaces Recovered</div>
+    <p>Let $f : X \to Y$ be a continuous map of topological spaces and put $u(V) = f^{-1}(V)$ for $V \subset Y$ open. Then $u$ preserves fiber products, because fiber products in $\mathrm{Open}(Y)$ are intersections and preimages commute with intersections:</p>
+    <div class="dm">$$f^{-1}(V_1 \cap V_2) = f^{-1}(V_1) \cap f^{-1}(V_2),$$</div>
+    <p>and $u$ sends covers to covers, because preimages commute with unions. So $f$ induces a continuous morphism of sites $X_{\mathrm{Zar}} \to Y_{\mathrm{Zar}}$, and the abstract definition recovers the familiar pushforward/pullback formalism for sheaves.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; The Sites of a Scheme Are Nested</div>
+    <p>For a scheme $X$, the identity functor on the underlying category gives continuous morphisms of sites</p>
+    <div class="dm">$$X_{\mathrm{Zar}} \longrightarrow X_{\mathrm{\acute{e}t}} \longrightarrow X_{\mathrm{Et}} \longrightarrow X_{\mathrm{fppf}}$$</div>
+    <p>(reading the arrows as maps of sites). Each inclusion of topologies goes the other way on underlying categories, and every Zariski cover is an &eacute;tale cover, every &eacute;tale cover is an fppf cover. This nesting is the reason a sheaf for a finer topology is automatically a sheaf for a coarser one: a condition imposed on <em>more</em> covering families is a <em>stronger</em> condition.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Terminology</div>
+    <p>A <strong>topos</strong> is a category of sheaves on a site, together with the extra structure &mdash; colimits, finite limits, and a way to glue &mdash; that makes it behave like a category of sheaves on a space. Different sites can present the same topos; in that case the associated categories of sheaves are equivalent, and the sites are two descriptions of one object. This is the sense in which Grothendieck topologies generalize topological spaces rather than merely decorate them.</p>
+  </div>
+</section>
+
+<!-- ===== §2 ===== -->
+<section class="sec" id="s2">
+  <div class="sh"><span class="sh-num">&sect; 2</span><h2>How to Check That Something Is a Sheaf</h2></div>
+  <hr class="sh-rule">
+
+  <p>In practice one rarely checks the sheaf axiom on a site directly for every covering family. Two reduction principles do almost all the work.</p>
+
+  <div class="pl">
+    <div class="pi">
+      <span class="pn">(i)</span>
+      <span><strong>Reduce to the covers you understand.</strong> By the nesting of &sect;1, being a sheaf for $X_{\mathrm{fppf}}$ implies being a sheaf for $X_{\mathrm{Et}}$ and $X_{\mathrm{\acute{e}t}}$, which implies being a sheaf for $X_{\mathrm{Zar}}$. To <em>verify</em> the sheaf condition, it suffices to check it on a generating class of covers &mdash; for the &eacute;tale site, on covers by a single &eacute;tale map, and for the Zariski site, on covers by a finite family of open immersions.</span>
+    </div>
+    <div class="pi">
+      <span class="pn">(ii)</span>
+      <span><strong>Produce sheaves from representable functors.</strong> Rather than inventing presheaves and testing them, build them as representable functors $U \mapsto \operatorname{Hom}(U, Z)$ for a scheme $Z$, where the sheaf condition follows formally (&sect;3 of the previous meeting, and &sect;3 below).</span>
+    </div>
+  </div>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; Representable Functors Are Sheaves, Revisited</div>
+    <p>Let $X$ be a scheme and $Y$ an $X$-scheme. Then the functor</p>
+    <div class="dm">$$h_Y : (X_{\mathrm{fppf}})^{\mathrm{op}} \longrightarrow \mathbf{Set}, \qquad U \longmapsto \operatorname{Hom}_X(U, Y)$$</div>
+    <p>is a sheaf on the fppf site $X_{\mathrm{fppf}}$; hence also on $X_{\mathrm{\acute{e}t}}$ and on $X_{\mathrm{Zar}}$. Consequently $\mathbb{G}_m$, $\mu_n$, $\underline{\mathbb{Z}/n\mathbb{Z}}$, and $\mathbb{P}^1$ all give sheaves on every one of these sites.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Why this is the right formal statement</div>
+    <p>Maps into $Y$ glue along a cover because they glue on the underlying topological spaces and the gluing is compatible with the structure sheaves; faithful flatness of finite presentation is what upgrades compatibility on overlaps to a genuine map. The point to retain is structural: <strong>a functor represented by a scheme is automatically a sheaf, so the supply of sheaves is not a problem</strong>. The interesting questions are about the ones that are <em>not</em> representable, such as the cokernels of natural maps (recall $\mathbb{G}_m \xrightarrow{n} \mathbb{G}_m$ from &sect;6 of the previous meeting).</p>
+  </div>
+</section>
+
+<!-- ===== §3 ===== -->
+<section class="sec" id="s3">
+  <div class="sh"><span class="sh-num">&sect; 3</span><h2>Quasi-Coherent Sheaves Are Sheaves for the &Eacute;tale and fppf Topologies</h2></div>
+  <hr class="sh-rule">
+
+  <p>The next observation is the entry point to descent. A quasi-coherent sheaf on $X$ is, by definition, a sheaf for the Zariski topology. It turns out to satisfy the sheaf condition for far more covers than that.</p>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem</div>
+    <p>Let $\mathcal{F}$ be a quasi-coherent sheaf on a scheme $X$. Then $\mathcal{F}$ is a sheaf on the fppf site $X_{\mathrm{fppf}}$, and hence also on $X_{\mathrm{\acute{e}t}}$ and $X_{\mathrm{Zar}}$.</p>
+  </div>
+
+  <p>Equivalently, the evident functor is fully faithful:</p>
+
+  <div class="dm">$$\mathbf{QCoh}(X) \;\longrightarrow\; \mathrm{Sh}(X_{\mathrm{fppf}}) \;\longrightarrow\; \mathrm{Sh}(X_{\mathrm{\acute{e}t}}).$$</div>
+
+  <div class="proof">
+    <div class="proof-lb">Idea</div>
+    <p>A quasi-coherent sheaf is, Zariski-locally on $X$, a module $M$ over a ring $R$, and its sections over an $X$-scheme $U$ are $M \otimes_R \mathcal{O}(U)$. The sheaf condition for a cover $U' \to U$ becomes the statement that</p>
+    <div class="dm">$$M \;\longrightarrow\; M \otimes_R S \;\rightrightarrows\; M \otimes_R (S \otimes_R S)$$</div>
+    <p>is an equalizer whenever $R \to S$ is faithfully flat of finite presentation. That is exactly the affine lemma of &sect;6 &mdash; the algebraic heart of descent. So the theorem is not an accident of the &eacute;tale topology: it is the same flatness statement that makes descent work at all.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Why one cares</div>
+    <p>This is what allows us to speak of &ldquo;the same&rdquo; quasi-coherent sheaf in four different topologies, and hence to compare Zariski cohomology with &eacute;tale and fppf cohomology of $\mathcal{O}_X$-modules. It also means that the interesting part of descent is not that quasi-coherent sheaves <em>are</em> sheaves, but that they can be <em>reconstructed</em> from data downstairs &mdash; the subject of the rest of the lecture.</p>
+  </div>
+</section>
+
+<!-- ===== §4 ===== -->
+<section class="sec" id="s4">
+  <div class="sh"><span class="sh-num">&sect; 4</span><h2>Descent Data</h2></div>
+  <hr class="sh-rule">
+
+  <p>Fix a cover $f : U \to X$. Given a sheaf on $X$, restricting along $f$ gives a sheaf on $U$; but restricting alone forgets information, because a cover has overlaps on which the restrictions must be compatible.</p>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Descent Data for a Quasi-Coherent Sheaf</div>
+    <p>Let $f : U \to X$ be a cover and write $U^{\times_X 2} = U \times_X U$, $U^{\times_X 3} = U \times_X U \times_X U$, with the projections $p_1, p_2 : U \times_X U \to U$ and $p_{ij} : U^{\times_X 3} \to U \times_X U$. <strong>Descent data</strong> for a quasi-coherent sheaf along $f$ is a quasi-coherent sheaf $\mathcal{F}$ on $U$, together with an isomorphism</p>
+    <div class="dm">$$\varphi : p_1^* \mathcal{F} \;\xrightarrow{\;\sim\;}\; p_2^* \mathcal{F}$$</div>
+    <p>on $U \times_X U$ &mdash; the <strong>gluing isomorphism</strong> &mdash; satisfying the <strong>cocycle condition</strong> on $U^{\times_X 3}$:</p>
+    <div class="dm">$$p_{23}^*\varphi \,\circ\, p_{12}^*\varphi \;=\; p_{13}^*\varphi .$$</div>
+  </div>
+
+  <p>The three projections and their two ways around the triple overlap are worth reading as a picture: the cocycle condition says that the three identifications of $\mathcal{F}$ pulled back from the three copies of $U$ are consistent on the triple intersection. This is literally the same condition as the usual cocycle condition for transition functions of a vector bundle.</p>
+
+  <div class="slogan">
+    <div class="slogan-lb">Translation</div>
+    <p>Descent data is <strong>&ldquo;a sheaf on the cover plus consistent identifications on overlaps&rdquo;</strong> &mdash; the same shape as gluing local data in the Zariski topology, but with the open cover replaced by an arbitrary cover in a Grothendieck topology.</p>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Morphisms of Descent Data</div>
+    <p>A <strong>morphism of descent data</strong> $(\mathcal{F}, \varphi) \to (\mathcal{G}, \psi)$ is a morphism $h : \mathcal{F} \to \mathcal{G}$ of quasi-coherent sheaves on $U$ compatible with the gluing isomorphisms, i.e.</p>
+    <div class="dm">$$\psi \circ p_1^* h \;=\; p_2^* h \circ \varphi .$$</div>
+    <p>Descent data on $U/X$ therefore forms a category, denoted $\mathrm{Desc}(U/X)$ in the statement below.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Zariski Covers</div>
+    <p>For a Zariski cover $U = \bigsqcup_i U_i \to X$ of a scheme $X$, descent data along $f$ is exactly gluing data: quasi-coherent sheaves $\mathcal{F}_i$ on the pieces together with isomorphisms $\varphi_{ij} : \mathcal{F}_i|_{U_{ij}} \to \mathcal{F}_j|_{U_{ij}}$ on the overlaps satisfying $\varphi_{jk}\varphi_{ij} = \varphi_{ik}$ on the triple overlaps. The conclusion is the familiar statement that a quasi-coherent sheaf on $X$ is the same thing as compatible quasi-coherent sheaves on the pieces &mdash; which is why Zariski descent is unremarkable and the theorem below is not.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Galois Descent</div>
+    <p>Let $L/k$ be a finite Galois extension with group $G$ and take $U = \operatorname{Spec} L \to \operatorname{Spec} k = X$. A quasi-coherent sheaf on $\operatorname{Spec} L$ is a vector space $V$ over $L$, and descent data is an action of $G$ on $V$ by semilinear maps: a collection of isomorphisms $g : V \to V$ satisfying the cocycle condition $gh = g \circ h$. The descent theorem below then asserts that</p>
+    <div class="dm">$$\{\text{descending data on } \operatorname{Spec} L / \operatorname{Spec} k\} \;\simeq\; \{\text{vector spaces over } k\},$$</div>
+    <p>recovering classical <strong>Galois descent</strong>. This is Exercise 3 in &sect;8; it is the single best example to carry in mind for everything that follows.</p>
+  </div>
+</section>
+
+<!-- ===== §5 ===== -->
+<section class="sec" id="s5">
+  <div class="sh"><span class="sh-num">&sect; 5</span><h2>The fppf Descent Theorem for Quasi-Coherent Sheaves</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; fppf Descent for Quasi-Coherent Sheaves</div>
+    <p>Let $f : U \to X$ be an fppf cover (faithfully flat and locally of finite presentation). Then the pullback functor</p>
+    <div class="dm">$$f^* : \mathbf{QCoh}(X) \;\longrightarrow\; \mathrm{Desc}(U/X)$$</div>
+    <p>sending a quasi-coherent sheaf $\mathcal{F}$ to $(f^*\mathcal{F}, \text{the canonical gluing isomorphism})$ is an <strong>equivalence of categories</strong>.</p>
+  </div>
+
+  <p>An equivalence is two statements, and they are proved by different means:</p>
+
+  <div class="pl">
+    <div class="pi">
+      <span class="pn">(1)</span>
+      <span><strong>Full faithfulness.</strong> For quasi-coherent $\mathcal{F}, \mathcal{G}$ on $X$, the pullback map on morphism sets is a bijection. Equivalently, the sequence</span>
+    </div>
+    <div class="pi">
+      <span class="pn">(2)</span>
+      <span><strong>Essential surjectivity.</strong> Every descent datum on $U/X$ is isomorphic to the pullback of a quasi-coherent sheaf on $X$.</span>
+    </div>
+  </div>
+
+  <p>Full faithfulness is a statement about <em>morphisms</em> and reduces to an equalizer diagram; essential surjectivity is a statement about <em>objects</em> and requires a construction. We take them in turn.</p>
+
+  <div class="proof">
+    <div class="proof-lb">Full faithfulness, in one line</div>
+    <p>We must show that</p>
+    <div class="dm">$$\operatorname{Hom}_X(\mathcal{F}, \mathcal{G}) \;\longrightarrow\; \operatorname{Hom}_U(f^*\mathcal{F}, f^*\mathcal{G}) \;\rightrightarrows\; \operatorname{Hom}_{U\times_X U}(p_1^* f^* \mathcal{F}, p_2^* f^* \mathcal{G})$$</div>
+    <p>is an equalizer: a morphism downstairs is exactly a morphism on the cover whose two pullbacks to the overlap agree. Since $f$ is fppf, we may work Zariski-locally on $X$ and $U$ and reduce to the affine case $X = \operatorname{Spec} R$, $U = \operatorname{Spec} S$, where $\mathcal{F}, \mathcal{G}$ correspond to $R$-modules $M, N$ and $f^*$ corresponds to $- \otimes_R S$. The assertion becomes: for a faithfully flat $R$-algebra $S$ of finite presentation and $R$-modules $M, N$, the diagram</p>
+    <div class="dm">$$\operatorname{Hom}_R(M, N) \;\longrightarrow\; \operatorname{Hom}_S(M \otimes_R S,\, N \otimes_R S) \;\rightrightarrows\; \operatorname{Hom}_{S \otimes_R S}\big(M \otimes_R (S \otimes_R S),\, N \otimes_R (S \otimes_R S)\big)$$</div>
+    <p>is an equalizer. This follows from the affine lemma of &sect;6 applied to $M$ and to $N$, together with the exactness of $-\otimes_R S$: a map is determined by its base change because the first map is injective, and a compatible map on the cover descends because the middle exactness of the lemma supplies the needed element downstairs. This is where <strong>faithful flatness is used, and only there</strong>.</p>
+  </div>
+</section>
+
+<!-- ===== §6 ===== -->
+<section class="sec" id="s6">
+  <div class="sh"><span class="sh-num">&sect; 6</span><h2>An Affine Lemma: Faithfully Flat Maps and Equalizers</h2></div>
+  <hr class="sh-rule">
+
+  <p>The whole of fppf descent rests on one algebraic fact, which is worth isolating because it is also the engine of Galois descent and of flat descent for modules.</p>
+
+  <div class="env thm">
+    <div class="env-lb">Lemma &mdash; Faithfully Flat Base Change Is an Equalizer</div>
+    <p>Let $R \to S$ be a faithfully flat ring homomorphism and let $M$ be an $R$-module. Then the sequence</p>
+    <div class="dm">$$M \;\xrightarrow{\;d_0\;}\; M \otimes_R S \;\xrightarrow[\;d_2\;]{\;d_1\;}\; M \otimes_R S \otimes_R S$$</div>
+    <p>is exact, where $d_0(m) = m \otimes 1$, $d_1(m \otimes s) = m \otimes s \otimes 1$, and $d_2(m \otimes s) = m \otimes 1 \otimes s$. That is, $M$ is the equalizer of $d_1$ and $d_2$.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Proof sketch</div>
+    <p><strong>Injectivity of $d_0$.</strong> If $m \neq 0$ in $M$, choose a linear functional $\lambda : M \to R$ with $\lambda(m) \neq 0$; then $m \otimes 1 = 0$ in $M \otimes_R S$ would force $\lambda(m) \otimes 1 = 0$ in $S$, contradicting faithful flatness.</p>
+    <p><strong>Exactness in the middle.</strong> First suppose the map $R \to S$ <em>splits</em>, i.e. there is an $R$-module map $S \to R$ with $1 \mapsto 1$. Then the sequence is split exact, which is a formal computation with the two face maps. In general one reduces to the split case: $S \to S \otimes_R S$, $s \mapsto s \otimes 1$, is a faithfully flat base change that admits a section, namely multiplication $S \otimes_R S \to S$. Exactness can be checked after this base change because $-\otimes_R S$ is faithfully flat, and it holds there by the split case. (This is Exercise 1 in &sect;8.)</p>
+    <p class="qed">&#9633;</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Why this is the heart of descent</div>
+    <p>Everything in the theorem is a consequence of this one sequence. <strong>&ldquo;Descent&rdquo; is the statement that a module over $R$ is exactly a module over $S$ with a compatible isomorphism between its two pullbacks to $S \otimes_R S$</strong> &mdash; the cocycle condition of &sect;4 is the triple-overlap shadow of the same exactness.</p>
+  </div>
+</section>
+
+<!-- ===== §7 ===== -->
+<section class="sec" id="s7">
+  <div class="sh"><span class="sh-num">&sect; 7</span><h2>Sketch of Essential Surjectivity</h2></div>
+  <hr class="sh-rule">
+
+  <p>It remains to build the descended object. Fix an fppf cover $U \to X$ and a descent datum $(\mathcal{F}, \varphi)$ on $U$.</p>
+
+  <div class="proof">
+    <div class="proof-lb">Construction of the descended sheaf &mdash; affine case</div>
+    <p>First reduce to the case where $U \to X$ is an affine morphism, so that $X = \operatorname{Spec} R$, $U = \operatorname{Spec} S$ with $R \to S$ faithfully flat of finite presentation. The descent datum is an $S$-module $M$ together with an isomorphism of $S \otimes_R S$-modules</p>
+    <div class="dm">$$\varphi : M \otimes_S (S \otimes_R S) \;\xrightarrow{\;\sim\;}\; (S \otimes_R S) \otimes_S M$$</div>
+    <p>satisfying the cocycle condition on $S \otimes_R S \otimes_R S$. Set</p>
+    <div class="dm">$$N \;=\; \big\{ m \in M \;:\; \varphi(m \otimes 1) = 1 \otimes m \big\},$$</div>
+    <p>the <strong>descent</strong> of $M$: the elements of $M$ that are fixed by the gluing isomorphism. Then $N$ is an $R$-module, and one checks that the natural map $N \otimes_R S \to M$ is an isomorphism. The verification that $N \otimes_R S \to M$ is an isomorphism uses the affine lemma of &sect;6 applied after the faithfully flat base change to $S$: the sequence acquires a section, hence splits, and the comparison map can be read off from the resulting decomposition. Independence of the construction from the choice of presentation is where the cocycle condition is used.</p>
+    <p class="qed">&#9633;</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; What is still missing</div>
+    <p>The reduction of the general case to the affine case, and the verification that the construction is independent of choices, are the technical parts. The same argument, run for sheaves of modules rather than modules, gives <strong>descent for sheaves&nbsp;I</strong>: for a cover $U \to X$, descent data on $U/X$ is fully faithful for the category of sheaves, and the construction above supplies the descended object when a presentation exists. The subtlety &mdash; in fact the whole reason fppf descent is a theorem rather than a tautology &mdash; is that for arbitrary sheaves the functor need not be essentially surjective; it is on quasi-coherent sheaves that the argument above applies.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Preview &mdash; Next Meeting</div>
+    <p>Next time: the second part of fppf descent, descent for sheaves relative to an &eacute;tale cover, and the beginning of the study of the category of sheaves. Following Litt&rsquo;s Lecture 5.</p>
+  </div>
+</section>
+
+<!-- ===== §8 ===== -->
+<section class="sec" id="s8">
+  <div class="sh"><span class="sh-num">&sect; 8</span><h2>Exercises from Litt's Lecture 4</h2></div>
+  <hr class="sh-rule">
+
+  <p>These are the exercises marked in Litt&rsquo;s Lecture 4. They follow the order in which the ideas appeared above: the equalizer lemma first, then the reduction steps that make the descent theorem available, and finally Galois descent as the guiding example.</p>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 1 &mdash; The Equalizer Lemma for Faithfully Flat Maps</div>
+    <p>Let $R \to S$ be a faithfully flat ring homomorphism and $M$ an $R$-module. Prove that</p>
+    <div class="dm">$$M \;\longrightarrow\; M \otimes_R S \;\rightrightarrows\; M \otimes_R S \otimes_R S$$</div>
+    <p>is an exact sequence. <em>Hint:</em> handle the case in which $R \to S$ splits, then reduce to it by base changing along $S \to S \otimes_R S$ and using that exactness can be checked after a faithfully flat base change.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 2 &mdash; Reduction to the Affine Case</div>
+    <p>Let $U \to X$ be an fppf cover. Show that in order to prove full faithfulness of $f^* : \mathbf{QCoh}(X) \to \mathrm{Desc}(U/X)$, it suffices to treat the case in which $X = \operatorname{Spec} R$ and $U = \operatorname{Spec} S$ are affine with $R \to S$ faithfully flat of finite presentation. <em>What to check:</em> that the statement is Zariski-local on $X$ and on $U$, and that restriction of quasi-coherent sheaves to an affine open commutes with the morphism sets involved.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 3 &mdash; Galois Descent as a Special Case</div>
+    <p>Let $L/k$ be a finite Galois extension with Galois group $G$, and take the fppf cover $\operatorname{Spec} L \to \operatorname{Spec} k$.</p>
+    <ol class="bl">
+      <li>Show that descent data for a quasi-coherent sheaf on $\operatorname{Spec} L$ along this cover is the same as a $k$-vector space $V$ with a semilinear action of $G$, i.e.&nbsp;isomorphisms $g : V \to V$ of abelian groups with $g(\lambda v) = g(\lambda) g(v)$ for $\lambda \in L$, satisfying $(gh)(v) = g(h(v))$.</li>
+      <li>Conclude that every such $(V, G\text{-action})$ comes from a $k$-vector space, so that the descent theorem recovers Galois descent.</li>
+    </ol>
+    <p><em>Hint:</em> the cocycle condition on the triple overlap is exactly the relation $(gh)(v) = g(h(v))$; average over $G$ to identify the descended subspace with the invariants $V^G$ when $L/k$ is finite.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 4 &mdash; Compatibility with the Zariski Case</div>
+    <p>Let $U = \bigsqcup_i U_i \to X$ be a Zariski cover. Check that descent data for quasi-coherent sheaves along this cover agrees with the usual gluing data</p>
+    <div class="dm">$$\varphi_{ij} : \mathcal{F}_i|_{U_{ij}} \xrightarrow{\;\sim\;} \mathcal{F}_j|_{U_{ij}}, \qquad \varphi_{jk}\varphi_{ij} = \varphi_{ik} \ \text{ on } U_{ijk},$$</div>
+    <p>so that the fppf descent theorem specializes to the statement that quasi-coherent sheaves glue in the Zariski topology &mdash; a statement we already know. <em>Moral:</em> a theorem of descent should be checked against the cases where there is nothing to prove.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>&Eacute;tale Cohomology Seminar 2026 &middot; Meeting 4 &middot; September 25, 2026</span>
+  <span>Notes based on Daniel Litt's Lecture 4</span>
+</footer>
+
+</div>
+</body>
+</html>

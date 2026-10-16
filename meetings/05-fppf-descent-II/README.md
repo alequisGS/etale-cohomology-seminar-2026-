@@ -9,7 +9,11 @@ Topics:
 
 ## When
 
-Friday, September 25, 2026
+Friday, October 2, 2026
+
+## Notes
+
+Seminar notes for this meeting: [`docs/meetings/05-fppf-descent-ii/`](../../docs/meetings/05-fppf-descent-ii/)
 
 ## Time
 

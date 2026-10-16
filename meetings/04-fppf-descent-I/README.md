@@ -9,7 +9,11 @@ Topics:
 
 ## When
 
-Friday, September 18, 2026
+Friday, September 25, 2026
+
+## Notes
+
+Seminar notes for this meeting: [`docs/meetings/04-morphisms-of-sites-and-fppf-descent-i/`](../../docs/meetings/04-morphisms-of-sites-and-fppf-descent-i/)
 
 ## Time
 

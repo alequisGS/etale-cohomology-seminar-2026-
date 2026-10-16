@@ -1,0 +1,8 @@
+# Local scratch space used while drafting notes or rendering the site.
+.pdftools/
+
+# OS and editor cruft.
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
