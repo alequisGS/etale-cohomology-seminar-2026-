@@ -119,6 +119,12 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
 .seminar-note{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:16px 20px;margin:0 0 26px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;}
 .seminar-note b{color:#fff;}
 .seminar-note a{color:var(--inv-hi);}
+/* Prev / next meeting navigation */
+.mnav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:52px;padding-top:22px;border-top:1px solid var(--border);font-family:'Inter',sans-serif;font-size:13.5px;}
+.mnav a{display:flex;flex-direction:column;gap:2px;color:var(--blue);text-decoration:none;max-width:48%;}
+.mnav a:hover{text-decoration:underline;}
+.mnav .mn-dir{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.mnav .mn-next{text-align:right;margin-left:auto;}
 </style>
 </head>
 <body>
@@ -460,6 +466,17 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
     </ol>
   </div>
 </section>
+
+<nav class="mnav" aria-label="Meeting navigation">
+  <a class="mn-prev" href="../02-etale-morphisms-and-sites/">
+    <span class="mn-dir">&larr; Previous meeting</span>
+    <span>Meeting 2: &Eacute;tale Morphisms &amp; Grothendieck Topologies</span>
+  </a>
+  <a class="mn-next" href="../04-morphisms-of-sites-and-fppf-descent-i/">
+    <span class="mn-dir">Next meeting &rarr;</span>
+    <span>Meeting 4: Morphisms of Sites and the First Part of fppf Descent</span>
+  </a>
+</nav>
 
 <footer class="foot">
   <span>&Eacute;tale Cohomology Seminar 2026 &middot; Meeting 3 &middot; September 18, 2026</span>

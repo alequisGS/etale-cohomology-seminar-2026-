@@ -119,6 +119,12 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
 .seminar-note{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:16px 20px;margin:0 0 26px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;}
 .seminar-note b{color:#fff;}
 .seminar-note a{color:var(--inv-hi);}
+/* Prev / next meeting navigation */
+.mnav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:52px;padding-top:22px;border-top:1px solid var(--border);font-family:'Inter',sans-serif;font-size:13.5px;}
+.mnav a{display:flex;flex-direction:column;gap:2px;color:var(--blue);text-decoration:none;max-width:48%;}
+.mnav a:hover{text-decoration:underline;}
+.mnav .mn-dir{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.mnav .mn-next{text-align:right;margin-left:auto;}
 </style>
 </head>
 <body>
@@ -489,6 +495,17 @@ ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
     <p>for $X$ smooth and proper over $\mathbb{C}$. This is what justifies &eacute;tale cohomology as the correct algebro-geometric replacement for singular cohomology over arbitrary fields.</p>
   </div>
 </section>
+
+<nav class="mnav" aria-label="Meeting navigation">
+  <a class="mn-prev" href="../../index.html#pilot">
+    <span class="mn-dir">&larr; Back</span>
+    <span>All meetings</span>
+  </a>
+  <a class="mn-next" href="../03-sites-sheaves-and-etale-cohomology/">
+    <span class="mn-dir">Next meeting &rarr;</span>
+    <span>Meeting 3: Sites, Sheaves, and the Origins of &Eacute;tale Cohomology</span>
+  </a>
+</nav>
 
 <footer class="foot">
   <span>Étale Cohomology Seminar 2026 &middot; Meeting 2 &middot; September 4, 2026</span>

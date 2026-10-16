@@ -114,11 +114,20 @@ Participants initially commit only to five serious meetings. After Meeting 5 the
 
 ## Meetings
 
-1. [Meeting 1: Weil conjectures](meetings/01-weil-conjectures/)
-2. [Meeting 2: Étale morphisms and sites](meetings/02-etale-morphisms-and-sites/)
-3. [Meeting 3: Sites and sheaves](meetings/03-sites-and-sheaves/)
-4. [Meeting 4: fppf descent I](meetings/04-fppf-descent-I/)
-5. [Meeting 5: fppf descent II](meetings/05-fppf-descent-II/)
+Each meeting folder holds the working record — friction logs, digests, candidate contributions. The published notes live on the seminar site.
+
+| Meeting | Folder | Notes |
+| --- | --- | --- |
+| 1 — Weil conjectures | [`meetings/01-weil-conjectures/`](meetings/01-weil-conjectures/) | Materials in progress |
+| 2 — Étale morphisms and sites | [`meetings/02-etale-morphisms-and-sites/`](meetings/02-etale-morphisms-and-sites/) | [Meeting 2 notes](docs/meetings/02-etale-morphisms-and-sites/) |
+| Problem session — Lecture 2 exercises | — | [Exercises](docs/meetings/02-etale-morphisms-and-sites/#s3) |
+| 3 — Sites and sheaves | [`meetings/03-sites-and-sheaves/`](meetings/03-sites-and-sheaves/) | [Meeting 3 notes](docs/meetings/03-sites-sheaves-and-etale-cohomology/) |
+| 4 — fppf descent I | [`meetings/04-fppf-descent-I/`](meetings/04-fppf-descent-I/) | [Meeting 4 notes](docs/meetings/04-morphisms-of-sites-and-fppf-descent-i/) |
+| 5 — fppf descent II | [`meetings/05-fppf-descent-II/`](meetings/05-fppf-descent-II/) | [Meeting 5 notes](docs/meetings/05-fppf-descent-ii/) |
+
+On the published site, the same notes are at <https://alequisgs.github.io/etale-cohomology-seminar-2026-/> under `meetings/`. The notes pages link to one another, so from any meeting you can step forward or back.
+
+What comes after Lecture 5 is mapped in the [roadmap](ROADMAP.md#the-full-course).
 
 ## Repository guides
 
