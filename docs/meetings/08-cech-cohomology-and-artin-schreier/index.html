@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 8 Notes | Étale Cohomology Seminar 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,macros:{'\\\\CH':'\\\\operatorname{CH}','\\\\Spec':'\\\\operatorname{Spec}'}})">
+</script>
+<style>
+:root {
+  --bg:#F5F2EB; --card:#FEFCF5; --text:#1C1929; --muted:#6E6882; --border:#DDD8CC;
+  --blue:#1A5FA3; --blue-lt:#EAF2FB;
+  --green:#146840; --green-lt:#E8F5EE;
+  --amber:#875010; --amber-lt:#FBF2E5;
+  --violet:#5B338E; --violet-lt:#F1EBFA;
+  --inv:#1C1929; --inv-tx:#EDE8DB; --inv-hi:#5FDFAA;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.82;}
+.wrap{max-width:840px;margin:0 auto;padding:60px 32px 100px;}
+a{color:var(--blue);}
+
+/* Header */
+.lh{margin-bottom:40px;}
+.lh-tag{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);border-radius:20px;padding:3px 12px;margin-bottom:18px;}
+.lh h1{font-size:34px;font-weight:700;line-height:1.18;letter-spacing:0;margin-bottom:18px;}
+.lh-meta{display:flex;flex-wrap:wrap;gap:18px 28px;font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px;}
+
+/* Logistics */
+.notice{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:13px 18px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted);margin-bottom:38px;line-height:1.6;}
+.notice b{color:var(--text);}
+
+/* TOC */
+.toc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 26px;margin-bottom:54px;}
+.toc-hd{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.toc ol{list-style:none;counter-reset:toc;}
+.toc li{counter-increment:toc;font-family:'Inter',sans-serif;font-size:14px;padding:4px 0;}
+.toc li::before{content:counter(toc)". ";color:var(--muted);font-size:12px;font-weight:600;}
+.toc a{color:var(--blue);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+
+/* Sections */
+.sec{margin-bottom:64px;}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.sh-num{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.05em;color:#fff;background:var(--muted);border-radius:5px;padding:3px 9px;white-space:nowrap;}
+.sh h2{font-size:23px;font-weight:700;letter-spacing:0;line-height:1.2;}
+.sh-rule{border:none;border-top:1px solid var(--border);margin:8px 0 26px;}
+h3{font-size:17px;font-weight:700;margin:34px 0 10px;}
+p{margin-bottom:14px;}
+p:last-child{margin-bottom:0;}
+ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
+
+/* Math environments */
+.env{border-left:4px solid;border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.env-lb{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;}
+.def{border-color:var(--blue);background:var(--blue-lt);}
+.def .env-lb{color:var(--blue);}
+.thm{border-color:var(--green);background:var(--green-lt);}
+.thm .env-lb{color:var(--green);}
+.ex{border-color:var(--amber);background:var(--amber-lt);}
+.ex .env-lb{color:var(--amber);}
+.rmk{border-color:var(--violet);background:var(--violet-lt);}
+.rmk .env-lb{color:var(--violet);}
+
+/* Slogan */
+.slogan{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:18px 24px;margin:22px 0;}
+.slogan-lb{font-family:'Inter',sans-serif;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--inv-hi);margin-bottom:7px;}
+.slogan p{color:var(--inv-tx);font-style:italic;margin:0;}
+.slogan strong{color:#fff;font-style:normal;}
+
+/* Proof */
+.proof{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:16px 0;font-size:15.5px;line-height:1.78;}
+.proof-lb{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--muted);font-style:italic;margin-bottom:8px;}
+.qed{text-align:right;color:var(--muted);margin-top:8px;}
+
+/* Prop list */
+.pl{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:16px 0;}
+.pi{display:flex;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border);align-items:flex-start;font-size:15.5px;line-height:1.72;}
+.pi:last-child{border-bottom:none;}
+.pn{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;color:var(--blue);min-width:22px;padding-top:4px;flex-shrink:0;}
+
+/* Example cards */
+.eg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.eg-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:8px;padding:14px 16px;font-size:15.5px;line-height:1.68;}
+.eg-card.bad{border-top-color:#a33;}
+.ec-t{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:7px;}
+.eg-card.bad .ec-t{color:#a33;}
+
+/* Comparison table */
+.ctbl{width:100%;border-collapse:collapse;font-family:'Inter',sans-serif;font-size:13px;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.ctbl thead th{background:var(--inv);color:var(--inv-tx);padding:11px 14px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.04em;}
+.ctbl td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55;background:var(--card);}
+.ctbl tr:last-child td{border-bottom:none;}
+.ctbl tr:nth-child(even) td{background:#F9F6EF;}
+
+/* Display math */
+.dm{overflow-x:auto;text-align:center;margin:12px 0;padding:4px 0;}
+
+/* Footer */
+.foot{border-top:1px solid var(--border);margin-top:60px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);}
+
+@media(max-width:620px){
+  .wrap{padding:36px 18px 72px;}
+  body{font-size:16px;}
+  .lh h1{font-size:26px;}
+  .sh h2{font-size:20px;}
+  .eg-grid{grid-template-columns:1fr;}
+  .ctbl{font-size:12px;}
+  .ctbl td,.ctbl thead th{padding:9px 10px;}
+}
+.back-link{display:inline-flex;margin-bottom:24px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--blue);text-decoration:none;}
+.back-link:hover{text-decoration:underline;}
+.seminar-note{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:16px 20px;margin:0 0 26px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;}
+.seminar-note b{color:#fff;}
+.seminar-note a{color:var(--inv-hi);}
+/* Prev / next meeting navigation */
+.mnav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:52px;padding-top:22px;border-top:1px solid var(--border);font-family:'Inter',sans-serif;font-size:13.5px;}
+.mnav a{display:flex;flex-direction:column;gap:2px;color:var(--blue);text-decoration:none;max-width:48%;}
+.mnav a:hover{text-decoration:underline;}
+.mnav .mn-dir{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.mnav .mn-next{text-align:right;margin-left:auto;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back-link" href="../../index.html#pilot">&larr; Back to seminar site</a>
+
+<header class="lh">
+  <div class="lh-tag">&Eacute;tale Seminar 2026 &middot; Lecture 8</div>
+  <h1>&#268;ech Cohomology, Quasi-coherent Sheaves,<br>and the Artin&ndash;Schreier Sequence</h1>
+  <div class="lh-meta">
+    <span>Based on Daniel Litt's Lecture 8 (September 15, 2020)</span>
+    <span>Seminar meeting: Friday, November 6, 2026</span>
+    <span>17:00-18:30 Lima / 19:00-20:30 Bras&iacute;lia</span>
+  </div>
+</header>
+
+<div class="seminar-note">
+  <b>Seminar context:</b> These notes are adapted for the November 6 lecture of the &Eacute;tale Cohomology Seminar 2026. The mathematical content follows <a href="https://www.daniellitt.com/tale-cohomology/">Daniel Litt's course</a>, Lecture 8 (<a href="https://www.daniellitt.com/s/Etale-cohomology-Sep-15-2020.pdf">handwritten notes</a>, <a href="https://www.youtube.com/watch?v=pk_f3psNK3c">video</a>). Proof sketches have been expanded where Litt's notes say &ldquo;exercise&rdquo;; exercises marked <em>seminar addition</em> are ours, not Litt's. Google Meet details are sent privately to confirmed participants.
+</div>
+
+<div class="notice">
+  <b>Before this lecture:</b> sheaves on a site form an abelian category with enough injectives, so $H^i(X_{\mathrm{\acute{e}t}}, -)$ is defined as a right derived functor of global sections (Litt's Lectures 6&ndash;7), and &#268;ech cohomology was introduced.&emsp;
+  <b>This lecture:</b> how &#268;ech cohomology relates to derived functor cohomology; the first real computation &mdash; quasi-coherent sheaves have the same cohomology in the Zariski, &eacute;tale and fppf topologies; and, as a consequence, $H^i(X_{\mathrm{\acute{e}t}}, \mathbb{F}_p)$ for $X$ in characteristic $p$.
+</div>
+
+<div class="toc">
+  <div class="toc-hd">Contents</div>
+  <ol>
+    <li><a href="#s1">&#268;ech Cohomology and When It Computes $H^i$</a></li>
+    <li><a href="#s2">The &#268;ech-to-Derived Spectral Sequence</a></li>
+    <li><a href="#s3">Mayer&ndash;Vietoris</a></li>
+    <li><a href="#s4">Cohomology of Quasi-coherent Sheaves</a></li>
+    <li><a href="#s5">The Artin&ndash;Schreier Sequence and $H^i(X_{\mathrm{\acute{e}t}}, \mathbb{F}_p)$</a></li>
+    <li><a href="#s6">Exercises</a></li>
+  </ol>
+</div>
+
+<!-- ===== §1 ===== -->
+<section class="sec" id="s1">
+  <div class="sh"><span class="sh-num">&sect; 1</span><h2>&#268;ech Cohomology and When It Computes $H^i$</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; &#268;ech Complex</div>
+    <p>Let $U \to X$ be a cover in $X_{\mathrm{\acute{e}t}}$ and $\mathcal{F}$ an abelian presheaf. The <strong>&#268;ech complex</strong> of the cover is</p>
+    <div class="dm">$$\check{C}^{\bullet}(U/X, \mathcal{F}) \;:\; \mathcal{F}(U) \longrightarrow \mathcal{F}(U \times_X U) \longrightarrow \mathcal{F}(U \times_X U \times_X U) \longrightarrow \cdots$$</div>
+    <p>with differentials the alternating sums of the maps induced by the projections. Its cohomology is $\check{H}^{i}(U/X, \mathcal{F})$. Passing to the colimit over all covers (ordered by refinement),</p>
+    <div class="dm">$$\check{H}^{i}(X_{\mathrm{\acute{e}t}}, \mathcal{F}) \;=\; \varinjlim_{U/X\ \text{cover}} \check{H}^{i}(U/X, \mathcal{F}).$$</div>
+  </div>
+
+  <p>If $\mathcal{F}$ is a sheaf, the sheaf condition says exactly that $\check{H}^0(U/X, \mathcal{F}) = \mathcal{F}(X)$ for every cover. In higher degrees the two theories differ in general:</p>
+
+  <div class="env rmk">
+    <div class="env-lb">Warning</div>
+    <p>$\check{H}^i(X_{\mathrm{\acute{e}t}}, \mathcal{F})$ is <strong>not</strong> in general isomorphic to the derived functor cohomology $H^i(X_{\mathrm{\acute{e}t}}, \mathcal{F})$.</p>
+  </div>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem (Artin; Milne, <cite>&Eacute;tale Cohomology</cite>, Ch. III)</div>
+    <p>Suppose $X$ is quasi-compact and every finite subset of $X$ is contained in an affine open subset (true, for example, if $X$ is quasi-projective over an affine scheme). Then &#268;ech cohomology is canonically isomorphic to derived functor cohomology:</p>
+    <div class="dm">$$\check{H}^{i}(X_{\mathrm{\acute{e}t}}, \mathcal{F}) \;\cong\; H^{i}(X_{\mathrm{\acute{e}t}}, \mathcal{F}) \qquad \text{for all } i \text{ and all sheaves } \mathcal{F}.$$</div>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Hypercovers</div>
+    <p>There is a version of &#268;ech cohomology in which covers are replaced by <strong>hypercovers</strong>; it computes derived functor cohomology with no hypothesis on $X$. We will not need it.</p>
+  </div>
+</section>
+
+<!-- ===== §2 ===== -->
+<section class="sec" id="s2">
+  <div class="sh"><span class="sh-num">&sect; 2</span><h2>The &#268;ech-to-Derived Spectral Sequence</h2></div>
+  <hr class="sh-rule">
+
+  <p>Choose an injective resolution of the sheaf $\mathcal{F}$ in $\mathrm{Sh}(X_{\mathrm{\acute{e}t}}, \mathbf{Ab})$:</p>
+  <div class="dm">$$\mathcal{F} \longrightarrow \mathcal{I}^0 \longrightarrow \mathcal{I}^1 \longrightarrow \mathcal{I}^2 \longrightarrow \cdots$$</div>
+  <p>Given a cover $U \to X$, apply the &#268;ech complex to each $\mathcal{I}^s$. This gives a double complex</p>
+  <div class="dm">$$K^{r,s} \;=\; \check{C}^{r}(U/X, \mathcal{I}^{s}) \;=\; \mathcal{I}^{s}\big(U^{\times_X (r+1)}\big),$$</div>
+  <p>with the &#268;ech differential in the $r$ direction and the resolution differential in the $s$ direction. The two ways of computing the cohomology of its total complex give two spectral sequences.</p>
+
+  <div class="pl">
+    <div class="pi">
+      <span class="pn">(a)</span>
+      <span><strong>Cohomology in the $s$ direction first.</strong> For fixed $r$, the column $\mathcal{I}^{\bullet}(U^{\times(r+1)})$ computes $H^{s}(U^{\times(r+1)}_{\mathrm{\acute{e}t}}, \mathcal{F})$ (restriction to an object of the site preserves injectives). So $E_1^{r,s} = \check{C}^{r}(U/X, \underline{H}^{s}(\mathcal{F}))$, where $\underline{H}^{s}(\mathcal{F})$ is the <em>presheaf</em> $V \mapsto H^{s}(V_{\mathrm{\acute{e}t}}, \mathcal{F})$, and then $E_2^{r,s} = \check{H}^{r}\big(U/X, \underline{H}^{s}(\mathcal{F})\big)$.</span>
+    </div>
+    <div class="pi">
+      <span class="pn">(b)</span>
+      <span><strong>Cohomology in the $r$ direction first.</strong> An injective sheaf has vanishing &#268;ech cohomology in positive degrees, and $\check{H}^0(U/X, \mathcal{I}^s) = \mathcal{I}^s(X)$. So this spectral sequence collapses: $E_2 = H^{s}(\Gamma(X, \mathcal{I}^{\bullet})) = H^{s}(X_{\mathrm{\acute{e}t}}, \mathcal{F}) = E_\infty$. Hence the total complex computes $H^{\ast}(X_{\mathrm{\acute{e}t}}, \mathcal{F})$.</span>
+    </div>
+  </div>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; &#268;ech-to-Derived Spectral Sequence</div>
+    <p>For a cover $U \to X$ and a sheaf $\mathcal{F}$ on $X_{\mathrm{\acute{e}t}}$ there is a spectral sequence</p>
+    <div class="dm">$$E_2^{r,s} \;=\; \check{H}^{r}\big(U/X,\, \underline{H}^{s}(\mathcal{F})\big) \;\Longrightarrow\; H^{r+s}(X_{\mathrm{\acute{e}t}}, \mathcal{F}).$$</div>
+    <p>Passing to the colimit over covers gives the same statement with $\check{H}^{r}(X_{\mathrm{\acute{e}t}}, \underline{H}^{s}(\mathcal{F}))$ on the $E_2$ page.</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">How to use it</div>
+    <p>The bottom row $s = 0$ is &#268;ech cohomology of $\mathcal{F}$ itself. <strong>If the higher cohomology of $\mathcal{F}$ vanishes on every term $U^{\times_X(r+1)}$ of the cover, the spectral sequence collapses onto that row, and &#268;ech cohomology of the cover computes $H^{\ast}(X_{\mathrm{\acute{e}t}}, \mathcal{F})$.</strong> This is Leray's acyclic-cover principle, and it is how the computations below go.</p>
+  </div>
+
+  <p>Litt uses the spectral sequence to prove a claim from the previous lecture: if $\check{C}^{\bullet}(X_{\mathrm{\acute{e}t}}, -)$ is exact on $\mathrm{Sh}^{\mathrm{ab}}(X_{\mathrm{\acute{e}t}})$, then $\check{H}^{\ast} = H^{\ast}$. This is Exercise 1 in &sect;6.</p>
+</section>
+
+<!-- ===== §3 ===== -->
+<section class="sec" id="s3">
+  <div class="sh"><span class="sh-num">&sect; 3</span><h2>Mayer&ndash;Vietoris</h2></div>
+  <hr class="sh-rule">
+
+  <p>Let $U = U_0 \cup U_1$, where $U_0, U_1 \subseteq U$ are <strong>Zariski</strong>-open subsets, and let $\mathcal{F}$ be a sheaf on $U_{\mathrm{\acute{e}t}}$.</p>
+
+  <div class="env thm">
+    <div class="env-lb">Proposition &mdash; Mayer&ndash;Vietoris</div>
+    <p>There is a functorial long exact sequence of &eacute;tale cohomology groups</p>
+    <div class="dm">$$\cdots \to H^{s}(U, \mathcal{F}) \xrightarrow{\ \mathrm{res}\ } H^{s}(U_0, \mathcal{F}) \oplus H^{s}(U_1, \mathcal{F}) \xrightarrow{\ \mathrm{res}\ } H^{s}(U_0 \cap U_1, \mathcal{F}) \xrightarrow{\ \delta\ } H^{s+1}(U, \mathcal{F}) \to \cdots$$</div>
+    <p>where the second map is the difference of the two restrictions.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Proof</div>
+    <p>Apply the &#268;ech-to-derived spectral sequence to the cover $U_0 \sqcup U_1 \to U$. For any sheaf $\mathcal{G}$ its &#268;ech complex is</p>
+    <div class="dm">$$\mathcal{G}(U_0 \sqcup U_1) \longrightarrow \mathcal{G}\big((U_0 \sqcup U_1)^{\times 2}\big) \longrightarrow \mathcal{G}\big((U_0 \sqcup U_1)^{\times 3}\big) \longrightarrow \cdots$$</div>
+    <p><strong>Claim</strong> (exercise): this is quasi-isomorphic to the two-term complex</p>
+    <div class="dm">$$\mathcal{G}(U_0) \times \mathcal{G}(U_1) \longrightarrow \mathcal{G}(U_0 \cap U_1).$$</div>
+    <p>This uses that the cover is Zariski: $U_i \times_U U_j = U_i \cap U_j$ and $U_i \times_U U_i = U_i$, so $(U_0 \sqcup U_1)^{\times(r+1)}$ is a disjoint union of intersections $U_{i_0} \cap \cdots \cap U_{i_r}$, and the complex is the full &#268;ech complex of a two-set open cover, which is quasi-isomorphic to its alternating part.</p>
+    <p>Hence the $E_2$ page vanishes outside the two columns $r = 0, 1$. A two-column spectral sequence degenerates at $E_2$ and gives short exact sequences</p>
+    <div class="dm">$$0 \to E_2^{1,s-1} \to H^{s}(U, \mathcal{F}) \to E_2^{0,s} \to 0,$$</div>
+    <p>with $E_2^{0,s} = \ker\big(H^s(U_0) \oplus H^s(U_1) \to H^s(U_0 \cap U_1)\big)$ and $E_2^{1,s-1} = \operatorname{coker}\big(H^{s-1}(U_0) \oplus H^{s-1}(U_1) \to H^{s-1}(U_0 \cap U_1)\big)$. Splicing these short exact sequences gives the long exact sequence.</p>
+    <p class="qed">&#9633;</p>
+  </div>
+</section>
+
+<!-- ===== §4 ===== -->
+<section class="sec" id="s4">
+  <div class="sh"><span class="sh-num">&sect; 4</span><h2>Cohomology of Quasi-coherent Sheaves</h2></div>
+  <hr class="sh-rule">
+
+  <p>Recall that a quasi-coherent sheaf $\mathcal{F}$ on $X$ gives a sheaf $\mathcal{F}^{\mathrm{\acute{e}t}}$ on $X_{\mathrm{\acute{e}t}}$ (and $\mathcal{F}^{\mathrm{fppf}}$ on $X_{\mathrm{fppf}}$) by $(V \xrightarrow{g} X) \mapsto \Gamma(V, g^{\ast}\mathcal{F})$; that this is a sheaf is fppf descent (Meetings 4&ndash;5). For $\mathcal{F} = \mathcal{O}_X$ this is the sheaf $\mathbb{G}_a$.</p>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; Quasi-coherent Cohomology Does Not See the Topology</div>
+    <p>Let $X$ be a scheme and $\mathcal{F} \in \mathbf{QCoh}(X)$. Then</p>
+    <div class="dm">$$H^{i}(X, \mathcal{F}) \;=\; H^{i}(X_{\mathrm{\acute{e}t}}, \mathcal{F}^{\mathrm{\acute{e}t}}) \;=\; H^{i}(X_{\mathrm{fppf}}, \mathcal{F}^{\mathrm{fppf}}),$$</div>
+    <p>where the left side is the usual (Zariski) cohomology of $\mathcal{F}$.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Three descriptions of the same groups</div>
+    <p>Litt adds that, for $X$ quasi-compact and quasi-separated,</p>
+    <div class="dm">$$H^{i}(X_{\mathrm{Zar}}, \mathcal{F}) \;=\; \operatorname{Ext}^{i}_{\mathrm{Sh}(X_{\mathrm{Zar}})}(\underline{\mathbb{Z}}, \mathcal{F}) \;=\; \operatorname{Ext}^{i}_{\mathbf{QCoh}(X)}(\mathcal{O}_X, \mathcal{F}).$$</div>
+    <p>The theorem says that the &eacute;tale and fppf topologies add nothing new for these coefficients: the new information in &eacute;tale cohomology comes from sheaves that are not quasi-coherent, such as $\mathbb{F}_p$, $\mu_n$ and $\mathbb{G}_m$.</p>
+  </div>
+
+  <p>The proof below, following Litt, is for $X$ quasi-compact and separated, where &#268;ech cohomology can be used directly. We write it for the fppf topology; the &eacute;tale case is the same.</p>
+
+  <div class="proof">
+    <div class="proof-lb">Step 1 &mdash; Finite affine covers are cofinal</div>
+    <p>If $X$ is quasi-compact, every fppf (or &eacute;tale) cover of $X$ can be refined by a cover $U = \bigsqcup_{j=1}^{n} U_j \to X$ with each $U_j$ affine: fppf maps are open, so finitely many affine opens of the source already cover $X$. If $X$ is moreover affine, then $U$ is affine.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Step 2 &mdash; The Amitsur complex is exact</div>
+    <p>Let $X = \operatorname{Spec} A$ and $U = \operatorname{Spec} B$ with $A \to B$ faithfully flat, and let $\mathcal{F} = \widetilde{M}$ for an $A$-module $M$. Then $U \times_X U = \operatorname{Spec}(B \otimes_A B)$, and so on, and the augmented &#268;ech complex is the <strong>Amitsur complex</strong></p>
+    <div class="dm">$$0 \to M \longrightarrow M \otimes_A B \longrightarrow M \otimes_A B \otimes_A B \longrightarrow M \otimes_A B^{\otimes 3} \longrightarrow \cdots$$</div>
+    <p><strong>Claim:</strong> it is exact. This is the same argument as in the proof of fppf descent: by faithful flatness it is enough to check exactness after $- \otimes_A B$, and after this base change the map $A \to B$ acquires a section (the multiplication $B \otimes_A B \to B$), which can be used to write down a null-homotopy. Hence</p>
+    <div class="dm">$$\check{H}^{i}(U/X, \mathcal{F}) \;=\; \begin{cases} \mathcal{F}(X) & i = 0,\\ 0 & i > 0, \end{cases} \qquad \text{for } \mathcal{F} \text{ quasi-coherent and } U, X \text{ affine.}$$</div>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Step 3 &mdash; &#268;ech cohomology of an affine scheme</div>
+    <p>If $X$ is affine and $\mathcal{F} \in \mathbf{QCoh}(X)$, then $\check{H}^{i}(X_{\mathrm{fppf}}, \mathcal{F})$ is $\mathcal{F}(X)$ for $i = 0$ and $0$ for $i > 0$: by Step 1 affine covers are cofinal among all covers, and by Step 2 each of them has vanishing higher &#268;ech cohomology.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Step 4 &mdash; &#268;ech cohomology computes derived functor cohomology</div>
+    <p>First, $H^{s}(V, \mathcal{F}) = 0$ for every affine $V$ and every $s > 0$. Induct on $s$. A class $c \in H^{s}(V, \mathcal{F})$ dies on some cover, which by Step 1 we may take to be affine, $W \to V$. All the $W^{\times_V (r+1)}$ are affine, so by induction $E_2^{r,t} = 0$ for $0 < t < s$ in the &#268;ech-to-derived spectral sequence of $W/V$, and $E_2^{r,0} = 0$ for $r > 0$ by Step 2. So $H^{s}(V, \mathcal{F})$ injects into $E_2^{0,s} \subseteq H^{s}(W, \mathcal{F})$, and since $c|_W = 0$ we get $c = 0$.</p>
+    <p>Now let $X$ be quasi-compact and separated, and take a finite Zariski cover by affines $U_1, \dots, U_n$. Their intersections are affine because $X$ is separated, so in the spectral sequence of this cover $E_2^{r,s} = 0$ for $s > 0$, and</p>
+    <div class="dm">$$H^{i}(X_{\mathrm{fppf}}, \mathcal{F}) \;=\; \check{H}^{i}(\{U_j\}, \mathcal{F}) \;=\; H^{i}(X_{\mathrm{Zar}}, \mathcal{F}),$$</div>
+    <p>the second equality being the classical computation of Zariski cohomology of a quasi-coherent sheaf by an affine cover. (This step is Litt's &ldquo;take an affine cover $U \to X$ and use the &#268;ech-to-derived spectral sequence&rdquo;, left as an exercise.)</p>
+    <p class="qed">&#9633;</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Projective space</div>
+    <p>For $X = \mathbb{P}^n_k$ and $\mathcal{F} = \mathcal{O}_X$, the classical computation of Zariski cohomology gives</p>
+    <div class="dm">$$H^{i}(\mathbb{P}^n_{k,\mathrm{\acute{e}t}}, \mathcal{O}_X) \;=\; \begin{cases} k & i = 0,\\ 0 & i > 0. \end{cases}$$</div>
+  </div>
+</section>
+
+<!-- ===== §5 ===== -->
+<section class="sec" id="s5">
+  <div class="sh"><span class="sh-num">&sect; 5</span><h2>The Artin&ndash;Schreier Sequence and $H^i(X_{\mathrm{\acute{e}t}}, \mathbb{F}_p)$</h2></div>
+  <hr class="sh-rule">
+
+  <p>Let $X$ be a scheme over $\mathbb{F}_p$, for instance a quasi-projective variety. Litt's question is</p>
+  <div class="dm">$$H^{i}(X_{\mathrm{\acute{e}t}}, \mathbb{F}_p) \;=\; \;???$$</div>
+  <p>Here $\mathbb{F}_p$ is the constant sheaf. The tool is the additive group $\mathbb{G}_a = \operatorname{Hom}(-, \mathbb{A}^1)$, with $\mathbb{G}_a(U) = \mathcal{O}_U(U)$, together with the Artin&ndash;Schreier map $x \mapsto x^p - x$, which is additive in characteristic $p$.</p>
+
+  <div class="env thm">
+    <div class="env-lb">Proposition &mdash; The Artin&ndash;Schreier Sequence</div>
+    <p>On $X_{\mathrm{\acute{e}t}}$ the sequence</p>
+    <div class="dm">$$0 \longrightarrow \mathbb{F}_p \longrightarrow \mathbb{G}_a \xrightarrow{\ x^p - x\ } \mathbb{G}_a \longrightarrow 0$$</div>
+    <p>is exact.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Proof</div>
+    <p><strong>Left exactness</strong> holds at the level of the representing objects: if $f \in \mathcal{O}(U)$ satisfies $f^p - f = 0$, then, since $x^p - x = \prod_{a \in \mathbb{F}_p}(x - a)$, $f$ is locally constant with values in $\mathbb{F}_p$, i.e.&nbsp;a section of the constant sheaf.</p>
+    <p><strong>Surjectivity:</strong> we need $x^p - x : \mathbb{G}_a \to \mathbb{G}_a$ to be an epimorphism of &eacute;tale sheaves. Given $f \in \mathcal{O}_U(U) = \mathbb{G}_a(U)$, we must solve $x^p - x = f$ &eacute;tale-locally on $U$. Form the fiber product</p>
+    <div class="dm">$$U' \;=\; U \times_{f,\,\mathbb{G}_a,\,x^p - x} \mathbb{G}_a \;=\; \operatorname{Spec}_U \mathcal{O}_U[x]/(x^p - x - f).$$</div>
+    <p>It is finite and free of rank $p$ over $U$, hence surjective, and it is &eacute;tale because the derivative of $x^p - x - f$ in $x$ is $-1$, a unit. So $U' \to U$ is an &eacute;tale cover, and on it $f$ acquires the root $x$.</p>
+    <p class="qed">&#9633;</p>
+  </div>
+
+  <p>By the theorem of &sect;4, $H^{i}(X_{\mathrm{\acute{e}t}}, \mathbb{G}_a) = H^{i}(X, \mathcal{O}_X)$. So the long exact sequence of the Artin&ndash;Schreier sequence is written in coherent cohomology:</p>
+
+  <div class="env thm">
+    <div class="env-lb">Corollary &mdash; The Long Exact Sequence</div>
+    <div class="dm">$$\begin{aligned} 0 &\to H^{0}(X_{\mathrm{\acute{e}t}}, \mathbb{F}_p) \to H^{0}(X, \mathcal{O}_X) \xrightarrow{\ x^p - x\ } H^{0}(X, \mathcal{O}_X) \\ &\to H^{1}(X_{\mathrm{\acute{e}t}}, \mathbb{F}_p) \to H^{1}(X, \mathcal{O}_X) \xrightarrow{\ x^p - x\ } H^{1}(X, \mathcal{O}_X) \\ &\to H^{2}(X_{\mathrm{\acute{e}t}}, \mathbb{F}_p) \to \cdots \end{aligned}$$</div>
+    <p>In particular, if $X$ is a quasi-projective variety, then $H^{i}(X_{\mathrm{\acute{e}t}}, \mathbb{F}_p) = 0$ for $i > \dim X + 1$, because coherent cohomology vanishes above the dimension.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; The affine line</div>
+    <p>Let $X = \mathbb{A}^1 = \operatorname{Spec} \mathbb{F}_p[t]$. Since $X$ is affine, $H^{i}(X, \mathcal{O}_X) = 0$ for $i > 0$, and the long exact sequence becomes</p>
+    <div class="dm">$$0 \to H^{0}(\mathbb{A}^1_{\mathrm{\acute{e}t}}, \mathbb{F}_p) \to \mathbb{F}_p[t] \xrightarrow{\ g \mapsto g^p - g\ } \mathbb{F}_p[t] \to H^{1}(\mathbb{A}^1_{\mathrm{\acute{e}t}}, \mathbb{F}_p) \to 0.$$</div>
+    <p>So $H^0 = \mathbb{F}_p$, $H^i = 0$ for $i \geq 2$, and</p>
+    <div class="dm">$$H^{1}(\mathbb{A}^1_{\mathrm{\acute{e}t}}, \mathbb{F}_p) \;=\; \mathbb{F}_p[t] \,/\, \{\, g^p - g : g \in \mathbb{F}_p[t] \,\},$$</div>
+    <p>which is <strong>huge</strong>: infinite-dimensional over $\mathbb{F}_p$ (Exercise 5). A class represented by $h(t)$ corresponds to the Artin&ndash;Schreier cover $y^p - y = h(t)$ of the line.</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Moral</div>
+    <p>Over $\mathbb{C}$ the affine line is contractible. In characteristic $p$, <strong>$\mathbb{F}_p$-coefficients see wild ramification at infinity</strong>, and $H^1(\mathbb{A}^1, \mathbb{F}_p)$ is infinite. This is why the Weil conjectures are approached with $\mathbb{Z}/\ell$ and $\mathbb{Q}_\ell$ coefficients for $\ell \neq p$, where the Kummer sequence (Litt's Lecture 10) takes the place of Artin&ndash;Schreier.</p>
+  </div>
+</section>
+
+<!-- ===== §6 ===== -->
+<section class="sec" id="s6">
+  <div class="sh"><span class="sh-num">&sect; 6</span><h2>Exercises</h2></div>
+  <hr class="sh-rule">
+
+  <p>Exercises 1&ndash;4 are the ones Litt leaves in Lecture 8. Exercises 5&ndash;6 are seminar additions.</p>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 1 &mdash; Exact &#268;ech functor implies &#268;ech = derived (Litt)</div>
+    <p>Suppose $\check{C}^{\bullet}(X_{\mathrm{\acute{e}t}}, -)$ is exact on $\mathrm{Sh}^{\mathrm{ab}}(X_{\mathrm{\acute{e}t}})$, i.e.&nbsp;takes short exact sequences of sheaves to short exact sequences of complexes. Prove that $\check{H}^{\ast}(X_{\mathrm{\acute{e}t}}, -) = H^{\ast}(X_{\mathrm{\acute{e}t}}, -)$ using the &#268;ech-to-derived spectral sequence.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 2 &mdash; The Mayer&ndash;Vietoris quasi-isomorphism (Litt)</div>
+    <p>Let $U = U_0 \cup U_1$ be a Zariski open cover. Show that the &#268;ech complex of $U_0 \sqcup U_1 \to U$ with coefficients in a sheaf $\mathcal{G}$ is quasi-isomorphic to $\mathcal{G}(U_0) \times \mathcal{G}(U_1) \to \mathcal{G}(U_0 \cap U_1)$. Where is it used that the $U_i$ are Zariski open rather than merely &eacute;tale over $U$?</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 3 &mdash; The Amitsur complex (Litt)</div>
+    <p>Let $A \to B$ be faithfully flat and $M$ an $A$-module. Show that $0 \to M \to M \otimes_A B \to M \otimes_A B^{\otimes 2} \to \cdots$ is exact. <em>Hint (Litt):</em> base change to $B$ and write down a null-homotopy using a section.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 4 &mdash; &#268;ech computes derived for quasi-coherent sheaves (Litt)</div>
+    <p>Let $X$ be quasi-compact and separated and $\mathcal{F}$ quasi-coherent. Take an affine cover $U \to X$ and use the &#268;ech-to-derived spectral sequence to show that $H^{i}(X_{\mathrm{\acute{e}t}}, \mathcal{F}^{\mathrm{\acute{e}t}}) = H^{i}(X, \mathcal{F})$, filling in the details of Step 4 of &sect;4.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 5 &mdash; $H^1(\mathbb{A}^1, \mathbb{F}_p)$ is infinite (seminar addition)</div>
+    <p>Show that the classes of $t^n$, for $n \geq 1$ prime to $p$, are linearly independent in $\mathbb{F}_p[t] / \{g^p - g\}$. Conclude that $H^{1}(\mathbb{A}^1_{\mathbb{F}_p,\mathrm{\acute{e}t}}, \mathbb{F}_p)$ is infinite-dimensional. What changes over $\overline{\mathbb{F}}_p$?</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 6 &mdash; Projective space (seminar addition)</div>
+    <p>Let $k$ be an algebraically closed field of characteristic $p$. Use the Artin&ndash;Schreier sequence and the example of &sect;4 to compute $H^{i}(\mathbb{P}^n_{k,\mathrm{\acute{e}t}}, \mathbb{F}_p)$ for all $i$. Compare with $H^{i}(\mathbb{CP}^n, \mathbb{F}_p)$, and explain why $\mathbb{F}_p$-coefficients cannot give a Weil cohomology theory.</p>
+  </div>
+</section>
+
+<nav class="mnav" aria-label="Meeting navigation">
+  <a class="mn-prev" href="../05-fppf-descent-ii/">
+    <span class="mn-dir">&larr; Previous notes</span>
+    <span>Meeting 5: fppf Descent, Part II, and the Category of Sheaves</span>
+  </a>
+  <a class="mn-next" href="../../index.html#pilot">
+    <span class="mn-dir">Back to &rarr;</span>
+    <span>All meetings &amp; the full schedule</span>
+  </a>
+</nav>
+
+<footer class="foot">
+  <span>&Eacute;tale Cohomology Seminar 2026 &middot; Lecture 8 &middot; November 6, 2026</span>
+  <span>Notes based on Daniel Litt's Lecture 8</span>
+</footer>
+
+</div>
+</body>
+</html>
