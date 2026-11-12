@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meeting 6 Notes | Étale Cohomology Seminar 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,macros:{'\\\\CH':'\\\\operatorname{CH}','\\\\Spec':'\\\\operatorname{Spec}'}})">
+</script>
+<style>
+:root {
+  --bg:#F5F2EB; --card:#FEFCF5; --text:#1C1929; --muted:#6E6882; --border:#DDD8CC;
+  --blue:#1A5FA3; --blue-lt:#EAF2FB;
+  --green:#146840; --green-lt:#E8F5EE;
+  --amber:#875010; --amber-lt:#FBF2E5;
+  --violet:#5B338E; --violet-lt:#F1EBFA;
+  --inv:#1C1929; --inv-tx:#EDE8DB; --inv-hi:#5FDFAA;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.82;}
+.wrap{max-width:840px;margin:0 auto;padding:60px 32px 100px;}
+a{color:var(--blue);}
+
+/* Header */
+.lh{margin-bottom:40px;}
+.lh-tag{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);border-radius:20px;padding:3px 12px;margin-bottom:18px;}
+.lh h1{font-size:34px;font-weight:700;line-height:1.18;letter-spacing:0;margin-bottom:18px;}
+.lh-meta{display:flex;flex-wrap:wrap;gap:18px 28px;font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px;}
+
+/* Logistics */
+.notice{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:13px 18px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--muted);margin-bottom:38px;line-height:1.6;}
+.notice b{color:var(--text);}
+
+/* TOC */
+.toc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 26px;margin-bottom:54px;}
+.toc-hd{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.toc ol{list-style:none;counter-reset:toc;}
+.toc li{counter-increment:toc;font-family:'Inter',sans-serif;font-size:14px;padding:4px 0;}
+.toc li::before{content:counter(toc)". ";color:var(--muted);font-size:12px;font-weight:600;}
+.toc a{color:var(--blue);text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+
+/* Sections */
+.sec{margin-bottom:64px;}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.sh-num{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.05em;color:#fff;background:var(--muted);border-radius:5px;padding:3px 9px;white-space:nowrap;}
+.sh h2{font-size:23px;font-weight:700;letter-spacing:0;line-height:1.2;}
+.sh-rule{border:none;border-top:1px solid var(--border);margin:8px 0 26px;}
+h3{font-size:17px;font-weight:700;margin:34px 0 10px;}
+p{margin-bottom:14px;}
+p:last-child{margin-bottom:0;}
+ul.bl,ol.bl{margin:8px 0 14px 24px;line-height:2.1;}
+
+/* Math environments */
+.env{border-left:4px solid;border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.env-lb{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;}
+.def{border-color:var(--blue);background:var(--blue-lt);}
+.def .env-lb{color:var(--blue);}
+.thm{border-color:var(--green);background:var(--green-lt);}
+.thm .env-lb{color:var(--green);}
+.ex{border-color:var(--amber);background:var(--amber-lt);}
+.ex .env-lb{color:var(--amber);}
+.rmk{border-color:var(--violet);background:var(--violet-lt);}
+.rmk .env-lb{color:var(--violet);}
+
+/* Slogan */
+.slogan{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:18px 24px;margin:22px 0;}
+.slogan-lb{font-family:'Inter',sans-serif;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--inv-hi);margin-bottom:7px;}
+.slogan p{color:var(--inv-tx);font-style:italic;margin:0;}
+.slogan strong{color:#fff;font-style:normal;}
+
+/* Proof */
+.proof{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:16px 0;font-size:15.5px;line-height:1.78;}
+.proof-lb{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--muted);font-style:italic;margin-bottom:8px;}
+.qed{text-align:right;color:var(--muted);margin-top:8px;}
+
+/* Prop list */
+.pl{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:16px 0;}
+.pi{display:flex;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border);align-items:flex-start;font-size:15.5px;line-height:1.72;}
+.pi:last-child{border-bottom:none;}
+.pn{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;color:var(--blue);min-width:22px;padding-top:4px;flex-shrink:0;}
+
+/* Example cards */
+.eg-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.eg-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--amber);border-radius:8px;padding:14px 16px;font-size:15.5px;line-height:1.68;}
+.eg-card.bad{border-top-color:#a33;}
+.ec-t{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:7px;}
+.eg-card.bad .ec-t{color:#a33;}
+
+/* Comparison table */
+.ctbl{width:100%;border-collapse:collapse;font-family:'Inter',sans-serif;font-size:13px;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.ctbl thead th{background:var(--inv);color:var(--inv-tx);padding:11px 14px;text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.04em;}
+.ctbl td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55;background:var(--card);}
+.ctbl tr:last-child td{border-bottom:none;}
+.ctbl tr:nth-child(even) td{background:#F9F6EF;}
+
+/* Display math */
+.dm{overflow-x:auto;text-align:center;margin:12px 0;padding:4px 0;}
+
+/* Footer */
+.foot{border-top:1px solid var(--border);margin-top:60px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);}
+
+@media(max-width:620px){
+  .wrap{padding:36px 18px 72px;}
+  body{font-size:16px;}
+  .lh h1{font-size:26px;}
+  .sh h2{font-size:20px;}
+  .eg-grid{grid-template-columns:1fr;}
+  .ctbl{font-size:12px;}
+  .ctbl td,.ctbl thead th{padding:9px 10px;}
+}
+.back-link{display:inline-flex;margin-bottom:24px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--blue);text-decoration:none;}
+.back-link:hover{text-decoration:underline;}
+.seminar-note{background:var(--inv);color:var(--inv-tx);border-radius:10px;padding:16px 20px;margin:0 0 26px;font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;}
+.seminar-note b{color:#fff;}
+.seminar-note a{color:var(--inv-hi);}
+/* Prev / next meeting navigation */
+.mnav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:52px;padding-top:22px;border-top:1px solid var(--border);font-family:'Inter',sans-serif;font-size:13.5px;}
+.mnav a{display:flex;flex-direction:column;gap:2px;color:var(--blue);text-decoration:none;max-width:48%;}
+.mnav a:hover{text-decoration:underline;}
+.mnav .mn-dir{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.mnav .mn-next{text-align:right;margin-left:auto;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back-link" href="../../index.html#pilot">&larr; Back to seminar site</a>
+
+<header class="lh">
+  <div class="lh-tag">&Eacute;tale Seminar 2026 &middot; Meeting 6</div>
+  <h1>Pushforwards, Stalks, Sheafification,<br>and the Abelian Category of Sheaves</h1>
+  <div class="lh-meta">
+    <span>Based on Daniel Litt's Lecture 6 (September 8, 2020)</span>
+    <span>Seminar meeting: Friday, November 6, 2026</span>
+    <span>17:00-18:30 Lima / 19:00-20:30 Bras&iacute;lia</span>
+  </div>
+</header>
+
+<div class="seminar-note">
+  <b>Seminar context:</b> These notes are adapted for Meeting 6 of the &Eacute;tale Cohomology Seminar 2026. The mathematical content follows <a href="https://www.daniellitt.com/tale-cohomology/">Daniel Litt's course</a>, Lecture 6 (<a href="https://www.daniellitt.com/s/Etale-cohomology-9-8-2020.pdf">handwritten notes</a>, <a href="https://www.youtube.com/watch?v=KXDrfsEZAig">video</a>). Proof sketches have been expanded where Litt's notes are brief; the exercise marked <em>seminar addition</em> is ours, not Litt's. Google Meet details are sent privately to confirmed participants.
+</div>
+
+<div class="notice">
+  <b>Last time:</b> fppf descent, examples of descent, and a first look at the category of sheaves.&emsp;
+  <b>This meeting:</b> the tools needed to show that abelian sheaves on $X_{\mathrm{\acute{e}t}}$ form an abelian category &mdash; pushforward, skyscraper sheaves, stalks at geometric points, the stalkwise criteria for epimorphisms and exactness, and an explicit construction of sheafification.
+</div>
+
+<div class="toc">
+  <div class="toc-hd">Contents</div>
+  <ol>
+    <li><a href="#s1">Two Remarks and the Goal</a></li>
+    <li><a href="#s2">Pushforward and Skyscraper Sheaves</a></li>
+    <li><a href="#s3">Stalks at Geometric Points</a></li>
+    <li><a href="#s4">Epimorphisms and Exactness Are Checked on Stalks</a></li>
+    <li><a href="#s5">Sheafification via the Espace &Eacute;tal&eacute;</a></li>
+    <li><a href="#s6">$\mathrm{Sh}^{\mathrm{ab}}(X_{\mathrm{\acute{e}t}})$ Is Abelian</a></li>
+    <li><a href="#s7">Exercises</a></li>
+  </ol>
+</div>
+
+<!-- ===== §1 ===== -->
+<section class="sec" id="s1">
+  <div class="sh"><span class="sh-num">&sect; 1</span><h2>Two Remarks and the Goal</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Quasi-coherent sheaves in three topologies</div>
+    <p>For a scheme $X$, fppf descent gives equivalences of categories</p>
+    <div class="dm">$$\mathbf{QCoh}(X_{\mathrm{Zar}}) \;\simeq\; \mathbf{QCoh}(X_{\mathrm{\acute{e}t}}) \;\simeq\; \mathbf{QCoh}(X_{\mathrm{fppf}}).$$</div>
+    <p>A quasi-coherent sheaf does not care which of these topologies we use.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; A correction</div>
+    <p>&Eacute;tale descent data for <em>schemes</em> need not be effective: descending a scheme along an &eacute;tale cover can produce an object that is not a scheme. What one gets in general is an <strong>algebraic space</strong>.</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Goal</div>
+    <p>Show that <strong>the category of abelian sheaves on $X_{\mathrm{\acute{e}t}}$ is abelian, with enough injectives</strong>. Then cohomology can be defined as a derived functor, for example
+    $$H^{i}(X_{\mathrm{\acute{e}t}}, \mathbb{Z}/\ell\mathbb{Z}) \;:=\; R^{i}\Gamma(X_{\mathrm{\acute{e}t}}, \underline{\mathbb{Z}/\ell\mathbb{Z}}).$$</p>
+  </div>
+
+  <div class="env thm">
+    <div class="env-lb">Theorem &mdash; The crucial ingredient</div>
+    <p>Let $\tau$ be a site. The forgetful functor $\mathrm{Sh}(\tau) \to \mathrm{PreSh}(\tau)$ has a left adjoint, <strong>sheafification</strong>. Litt proves this for $X_{\mathrm{\acute{e}t}}$ (&sect;5).</p>
+  </div>
+</section>
+
+<!-- ===== §2 ===== -->
+<section class="sec" id="s2">
+  <div class="sh"><span class="sh-num">&sect; 2</span><h2>Pushforward and Skyscraper Sheaves</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Pushforward</div>
+    <p>Let $f : \tau_1 \to \tau_2$ be a continuous map of sites, given by a functor $f^{-1}$ from the underlying category of $\tau_2$ to that of $\tau_1$. For $\mathcal{G} \in \mathrm{Sh}(\tau_1)$ define</p>
+    <div class="dm">$$f_{\ast}\mathcal{G} \;:\; U \longmapsto \mathcal{G}\big(f^{-1}(U)\big), \qquad U \in \tau_2 .$$</div>
+    <p>It is a sheaf on $\tau_2$ (Exercise 1).</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Maps of schemes</div>
+    <p>A morphism of schemes $f : X \to Y$ gives a continuous map of sites $X_{\mathrm{\acute{e}t}} \to Y_{\mathrm{\acute{e}t}}$, with $f^{-1}(U/Y) = U \times_Y X$. Hence a functor $f_{\ast} : \mathrm{Sh}(X_{\mathrm{\acute{e}t}}) \to \mathrm{Sh}(Y_{\mathrm{\acute{e}t}})$, with $(f_\ast\mathcal{G})(U) = \mathcal{G}(U \times_Y X)$.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Example &mdash; Skyscraper sheaves</div>
+    <p>Let $k$ be an algebraically closed field and $\iota_{\bar{x}} : \operatorname{Spec} k \to X$ a geometric point. Every &eacute;tale cover of $\operatorname{Spec} k$ is a disjoint union of copies of $\operatorname{Spec} k$, so</p>
+    <div class="dm">$$\mathrm{Sh}\big((\operatorname{Spec} k)_{\mathrm{\acute{e}t}}\big) \;\simeq\; \mathbf{Sets}, \qquad \mathcal{F} \longmapsto \mathcal{F}(\operatorname{Spec} k)$$</div>
+    <p>(Exercise 2). Given $\mathcal{F} \in \mathrm{Sh}((\operatorname{Spec} k)_{\mathrm{\acute{e}t}})$, i.e.&nbsp;a set, and $U \to X$ &eacute;tale,</p>
+    <div class="dm">$$(\iota_{\bar{x}})_{\ast}\mathcal{F}\,(U \to X) \;=\; \mathcal{F}(U \times_X \bar{x}) \;=\; \mathcal{F}\Big(\bigsqcup \operatorname{Spec} k\Big) \;=\; \prod_{\text{preimages of } \bar{x} \text{ in } U} \mathcal{F}(\operatorname{Spec} k).$$</div>
+    <p>Here $U \times_X \bar{x}$ is a disjoint union of copies of $\operatorname{Spec} k$, one for each geometric point of $U$ lying over $\bar{x}$.</p>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Skyscraper sheaf</div>
+    <p>$(\iota_{\bar{x}})_{\ast}\mathcal{F}$ is called a <strong>skyscraper sheaf</strong> at $\bar{x}$.</p>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Global sections as a pushforward</div>
+    <p>If $X$ lies over an algebraically closed field $k$ and $\pi : X \to \operatorname{Spec} k$ is the structure map, then $\Gamma(\operatorname{Spec} k, \pi_{\ast}\mathcal{F}) = \Gamma(X, \mathcal{F})$. So under $\mathrm{Sh}((\operatorname{Spec} k)_{\mathrm{\acute{e}t}}) \simeq \mathbf{Sets}$, $\pi_\ast = \Gamma$.</p>
+  </div>
+</section>
+
+<!-- ===== §3 ===== -->
+<section class="sec" id="s3">
+  <div class="sh"><span class="sh-num">&sect; 3</span><h2>Stalks at Geometric Points</h2></div>
+  <hr class="sh-rule">
+
+  <p>In the Zariski topology a stalk is taken at a point. In the &eacute;tale topology points are replaced by <strong>geometric points</strong> $\iota_{\bar{x}} : \operatorname{Spec} k \to X$ with $k = \bar{k}$.</p>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; Stalk</div>
+    <p>For $\mathcal{F} \in \mathrm{Sh}(X_{\mathrm{\acute{e}t}})$, the <strong>stalk</strong> of $\mathcal{F}$ at $\bar{x}$ is the set $\mathcal{F}_{\bar{x}} = \iota_{\bar{x}}^{\ast}\mathcal{F}$, a sheaf on $(\operatorname{Spec} k)_{\mathrm{\acute{e}t}}$. Concretely,</p>
+    <div class="dm">$$\mathcal{F}_{\bar{x}} \;=\; \varinjlim_{(U, \bar{u})} \mathcal{F}(U),$$</div>
+    <p>where the colimit runs over <strong>&eacute;tale neighbourhoods</strong> of $\bar{x}$: &eacute;tale maps $U \to X$ together with a geometric point $\bar{u} : \bar{x} \to U$ lifting $\iota_{\bar{x}}$.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Examples</div>
+    <ul class="bl">
+      <li>For the constant sheaf, $(\underline{\mathbb{Z}/\ell\mathbb{Z}})_{\bar{x}} = \iota_{\bar{x}}^{\ast}\underline{\mathbb{Z}/\ell\mathbb{Z}} = \mathbb{Z}/\ell\mathbb{Z}$.</li>
+      <li>For the structure sheaf, $(\mathcal{O}_X^{\mathrm{\acute{e}t}})_{\bar{x}} = \mathcal{O}_{X,\bar{x}}^{\mathrm{sh}}$, the <strong>strict henselization</strong> of the local ring $\mathcal{O}_{X,x}$ (with respect to the separable closure of $\kappa(x)$ in $k$).</li>
+    </ul>
+  </div>
+
+  <p>The adjunction between $\iota_{\bar{x}}^{\ast}$ and $(\iota_{\bar{x}})_{\ast}$ reads $\operatorname{Hom}(\mathcal{G}, (\iota_{\bar{x}})_{\ast}\Lambda) = \operatorname{Hom}(\mathcal{G}_{\bar{x}}, \Lambda)$. Every map from a sheaf to a skyscraper sheaf factors through the stalk; this is used in &sect;4.</p>
+</section>
+
+<!-- ===== §4 ===== -->
+<section class="sec" id="s4">
+  <div class="sh"><span class="sh-num">&sect; 4</span><h2>Epimorphisms and Exactness Are Checked on Stalks</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env thm">
+    <div class="env-lb">Lemma &mdash; Epimorphisms</div>
+    <p>Let $\varphi : \mathcal{F} \to \mathcal{G}$ be a map of sheaves of abelian groups on $X_{\mathrm{\acute{e}t}}$. The following are equivalent:</p>
+    <div class="pl">
+      <div class="pi"><span class="pn">(i)</span><span>$\varphi$ is an epimorphism;</span></div>
+      <div class="pi"><span class="pn">(ii)</span><span>$\varphi$ is <strong>locally surjective</strong>: for every $s \in \mathcal{G}(U)$ there is a cover $U' \to U$ such that $s|_{U'}$ is in the image of some $s' \in \mathcal{F}(U')$;</span></div>
+      <div class="pi"><span class="pn">(iii)</span><span>$\mathcal{F}_{\bar{x}} \to \mathcal{G}_{\bar{x}}$ is surjective for every geometric point $\bar{x} \to X$.</span></div>
+    </div>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Proof</div>
+    <p><strong>(ii) &rArr; (i).</strong> Let $a, b : \mathcal{G} \rightrightarrows \mathcal{H}$ with $a \circ \varphi = b \circ \varphi$; we want $a = b$. Given $s \in \mathcal{G}(U)$, choose a cover $U' \to U$ with $s|_{U'} = \varphi(s')$. Then $a(s)|_{U'} = a\varphi(s') = b\varphi(s') = b(s)|_{U'}$, and since $\mathcal{H}$ is a sheaf, $a(s) = b(s)$.</p>
+    <p><strong>(i) &rArr; (iii).</strong> Suppose $\mathcal{F}_{\bar{x}} \to \mathcal{G}_{\bar{x}}$ is not surjective for some $\bar{x}$, with cokernel $\Lambda \neq 0$. Consider the two maps</p>
+    <div class="dm">$$\mathcal{F} \longrightarrow \mathcal{G} \;\rightrightarrows\; (\iota_{\bar{x}})_{\ast}\Lambda,$$</div>
+    <p>namely $0$ and &ldquo;the natural map&rdquo; $\mathcal{G} \to (\iota_{\bar{x}})_\ast\mathcal{G}_{\bar{x}} \to (\iota_{\bar{x}})_\ast\Lambda$, which corresponds under adjunction to $\mathcal{G}_{\bar{x}} \to \Lambda$. Both composites with $\varphi$ are $0$, but the two maps differ. So $\varphi$ is not an epimorphism, a contradiction.</p>
+    <p><strong>(iii) &rArr; (ii).</strong> Given $s \in \mathcal{G}(U)$, we want a cover $U' \to U$ on which $s$ comes from $\mathcal{F}$. Choose a geometric point $\bar{x}$ of $U$. Since $\mathcal{F}_{\bar{x}} \to \mathcal{G}_{\bar{x}}$ is surjective, there is an &eacute;tale neighbourhood $(V, \bar{v})$ of $\bar{x}$ such that $s|_V$ is in the image of $\mathcal{F}(V)$. Now choose a geometric point $\bar{x}'$ not in the image of $V$ and keep going. The disjoint union of all the $V$'s obtained is an &eacute;tale cover $U' \to U$ with the required property.</p>
+    <p class="qed">&#9633;</p>
+  </div>
+
+  <div class="env thm">
+    <div class="env-lb">Lemma &mdash; Left exactness</div>
+    <p>Let $0 \to \mathcal{F} \to \mathcal{G} \xrightarrow{f} \mathcal{H}$ be a sequence of abelian sheaves on $X_{\mathrm{\acute{e}t}}$. The following are equivalent:</p>
+    <div class="pl">
+      <div class="pi"><span class="pn">(i)</span><span>the sequence is exact, i.e.&nbsp;$\mathcal{F} = \operatorname{eq}\big(\mathcal{G} \overset{f}{\underset{0}{\rightrightarrows}} \mathcal{H}\big)$;</span></div>
+      <div class="pi"><span class="pn">(ii)</span><span>$0 \to \mathcal{F}(U) \to \mathcal{G}(U) \to \mathcal{H}(U)$ is exact for all $U$;</span></div>
+      <div class="pi"><span class="pn">(iii)</span><span>$0 \to \mathcal{F}_{\bar{x}} \to \mathcal{G}_{\bar{x}} \to \mathcal{H}_{\bar{x}}$ is exact for all geometric points $\bar{x}$.</span></div>
+    </div>
+    <p><em>Proof:</em> Exercise 3. It is the same proof as for topological spaces; for (ii) &rArr; (iii), use that filtered colimits preserve exactness.</p>
+  </div>
+</section>
+
+<!-- ===== §5 ===== -->
+<section class="sec" id="s5">
+  <div class="sh"><span class="sh-num">&sect; 5</span><h2>Sheafification via the Espace &Eacute;tal&eacute;</h2></div>
+  <hr class="sh-rule">
+
+  <p>We now prove that sheafification exists for $\mathrm{PreSh}(X_{\mathrm{\acute{e}t}})$. The construction imitates the espace &eacute;tal&eacute; of a presheaf on a topological space: a sheaf is determined by its stalks, so we put the stalks together first and then cut down.</p>
+
+  <div class="proof">
+    <div class="proof-lb">Step 1 &mdash; The espace &eacute;tal&eacute;</div>
+    <p>For each point $x \in X$ choose a geometric point $\bar{x}$ lying over $x$. Given $\mathcal{F} \in \mathrm{PreSh}(X_{\mathrm{\acute{e}t}})$, define</p>
+    <div class="dm">$$\mathrm{Esp}(\mathcal{F}) \;=\; \prod_{x \in X} (\iota_{\bar{x}})_{\ast}\mathcal{F}_{\bar{x}} .$$</div>
+    <p>This is a sheaf, being a product of skyscraper sheaves, and there is a natural map of presheaves $\mathcal{F} \to \mathrm{Esp}(\mathcal{F})$. (The stalk $\mathcal{F}_{\bar{x}}$ of a presheaf is defined by the same colimit as in &sect;3.)</p>
+  </div>
+
+  <div class="env def">
+    <div class="env-lb">Definition &mdash; The associated sheaf</div>
+    <p>$\mathcal{F}^{a}$ is the subsheaf of $\mathrm{Esp}(\mathcal{F})$ <strong>generated by</strong> $\mathcal{F}$:</p>
+    <div class="dm">$$\mathcal{F}^{a}(U) \;=\; \big\{\, s \in \mathrm{Esp}(\mathcal{F})(U) \;:\; s \text{ is locally in the image of } \mathcal{F} \,\big\} \;\subseteq\; \mathrm{Esp}(\mathcal{F})(U).$$</div>
+  </div>
+
+  <div class="env thm">
+    <div class="env-lb">Claim</div>
+    <ol class="bl">
+      <li>$\mathcal{F}^{a}$ is a sheaf.</li>
+      <li>$\mathcal{F} \mapsto \mathcal{F}^{a}$ is left adjoint to the forgetful functor $\mathrm{Sh}(X_{\mathrm{\acute{e}t}}) \to \mathrm{PreSh}(X_{\mathrm{\acute{e}t}})$ (Exercise 4).</li>
+    </ol>
+  </div>
+
+  <div class="env rmk">
+    <div class="env-lb">Remark &mdash; Notation</div>
+    <p>The Meeting 5 notes wrote $\mathcal{F}^{+}$ (or $\mathcal{F}^{++}$) for the sheafification built from covers. Litt's $\mathcal{F}^{a}$ is built from stalks instead. By the universal property the two constructions agree.</p>
+  </div>
+</section>
+
+<!-- ===== §6 ===== -->
+<section class="sec" id="s6">
+  <div class="sh"><span class="sh-num">&sect; 6</span><h2>$\mathrm{Sh}^{\mathrm{ab}}(X_{\mathrm{\acute{e}t}})$ Is Abelian</h2></div>
+  <hr class="sh-rule">
+
+  <div class="env thm">
+    <div class="env-lb">Corollary &mdash; Colimits</div>
+    <p>Colimits exist in $\mathrm{Sh}(X_{\mathrm{\acute{e}t}})$, and</p>
+    <div class="dm">$$\varinjlim_{i \in I} \mathcal{F}_i \;=\; \Big(\varinjlim_{\mathrm{PreSh}} \mathcal{F}_i\Big)^{a}.$$</div>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Proof</div>
+    <p>Colimits exist for presheaves (computed objectwise), and left adjoints send colimits to colimits.</p>
+    <p class="qed">&#9633;</p>
+  </div>
+
+  <div class="env thm">
+    <div class="env-lb">Corollary &mdash; Abelian</div>
+    <p>$\mathrm{Sh}^{\mathrm{ab}}(X_{\mathrm{\acute{e}t}})$ is an abelian category.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-lb">Proof</div>
+    <ul class="bl">
+      <li><strong>Limits exist</strong>, because they can be computed objectwise: a limit of sheaves, taken in presheaves, is a sheaf. In particular kernels are computed objectwise.</li>
+      <li><strong>Cokernels exist</strong>, because colimits exist: $\operatorname{coker}(\mathcal{F} \xrightarrow{f} \mathcal{G}) = \operatorname{coeq}\big(\mathcal{F} \overset{f}{\underset{0}{\rightrightarrows}} \mathcal{G}\big)$, the sheafification of the presheaf cokernel.</li>
+      <li><strong>Image equals coimage</strong>: check on stalks (Exercise 5), where it is the corresponding fact for abelian groups. Stalks commute with kernels by &sect;4 and with cokernels because $\iota_{\bar{x}}^{\ast}$ is a left adjoint.</li>
+    </ul>
+    <p class="qed">&#9633;</p>
+  </div>
+
+  <div class="slogan">
+    <div class="slogan-lb">Next time</div>
+    <p>Enough injectives, derived functor cohomology, &#268;ech cohomology &mdash; and then <strong>start computing!</strong></p>
+  </div>
+</section>
+
+<!-- ===== §7 ===== -->
+<section class="sec" id="s7">
+  <div class="sh"><span class="sh-num">&sect; 7</span><h2>Exercises</h2></div>
+  <hr class="sh-rule">
+
+  <p>Exercises 1&ndash;5 are the ones Litt leaves in Lecture 6. Exercise 6 is a seminar addition.</p>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 1 &mdash; Pushforward is a sheaf (Litt)</div>
+    <p>Let $f : \tau_1 \to \tau_2$ be a continuous map of sites and $\mathcal{G} \in \mathrm{Sh}(\tau_1)$. Show that $U \mapsto \mathcal{G}(f^{-1}(U))$ is a sheaf on $\tau_2$. Which properties of a continuous map of sites do you use?</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 2 &mdash; Sheaves on a geometric point (Litt)</div>
+    <p>Let $k$ be an algebraically closed field. Show that $\mathcal{F} \mapsto \mathcal{F}(\operatorname{Spec} k)$ is an equivalence $\mathrm{Sh}((\operatorname{Spec} k)_{\mathrm{\acute{e}t}}) \simeq \mathbf{Sets}$.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 3 &mdash; Exactness on sections and on stalks (Litt)</div>
+    <p>Prove the left-exactness lemma of &sect;4, following the proof for sheaves on a topological space.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 4 &mdash; Sheafification is a left adjoint (Litt)</div>
+    <p>Show that $\mathcal{F}^{a}$ is a sheaf, and that for every presheaf $\mathcal{F}$ and sheaf $\mathcal{G}$, composing with $\mathcal{F} \to \mathcal{F}^{a}$ gives a bijection $\operatorname{Hom}_{\mathrm{Sh}}(\mathcal{F}^{a}, \mathcal{G}) \cong \operatorname{Hom}_{\mathrm{PreSh}}(\mathcal{F}, \mathcal{G})$.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 5 &mdash; Image equals coimage (Litt)</div>
+    <p>For a map $f : \mathcal{F} \to \mathcal{G}$ in $\mathrm{Sh}^{\mathrm{ab}}(X_{\mathrm{\acute{e}t}})$, show that the natural map $\operatorname{coim} f \to \operatorname{im} f$ is an isomorphism by checking it on stalks.</p>
+  </div>
+
+  <div class="env ex">
+    <div class="env-lb">Exercise 6 &mdash; Sheaves on the spectrum of a field (seminar addition)</div>
+    <p>Let $K$ be any field, with separable closure $K^{s}$ and $G = \operatorname{Gal}(K^{s}/K)$. Show that $\mathcal{F} \mapsto \varinjlim_{L} \mathcal{F}(\operatorname{Spec} L)$, over finite separable extensions $K \subseteq L \subseteq K^{s}$, is an equivalence between $\mathrm{Sh}((\operatorname{Spec} K)_{\mathrm{\acute{e}t}})$ and sets with a continuous $G$-action. What does Exercise 2 become in this language?</p>
+  </div>
+</section>
+
+<nav class="mnav" aria-label="Meeting navigation">
+  <a class="mn-prev" href="../05-fppf-descent-ii/">
+    <span class="mn-dir">&larr; Previous meeting</span>
+    <span>Meeting 5: fppf Descent, Part II, and the Category of Sheaves</span>
+  </a>
+  <a class="mn-next" href="../08-cech-cohomology-and-artin-schreier/">
+    <span class="mn-dir">Next notes &rarr;</span>
+    <span>Meeting 8: &#268;ech Cohomology, Quasi-coherent Sheaves, and Artin&ndash;Schreier</span>
+  </a>
+</nav>
+
+<footer class="foot">
+  <span>&Eacute;tale Cohomology Seminar 2026 &middot; Meeting 6 &middot; November 6, 2026</span>
+  <span>Notes based on Daniel Litt's Lecture 6</span>
+</footer>
+
+</div>
+</body>
+</html>
